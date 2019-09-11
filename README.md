@@ -6,11 +6,11 @@ Sistema de análise de indicadores econômico-financeiros baseado em índices pa
 
 ## Tecnologias utilizadas
 
-Banco de dados -> MySql
-Linguagem de programação -> PHP
+Banco de dados -> MySql <br/>
+Linguagem de programação -> PHP <br/>
 Framework -> CodeIgniter 3.1.10.
 
 ### Tarefas desenvolvidas
 
-- [] Autenticação de usuário (login)
-- [] Painel administrativo
+- [ ] Autenticação de usuário (login)
+- [ ] Painel administrativo
