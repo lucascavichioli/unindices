@@ -3,12 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
 <html lang="en">
 
-<?php 
- 	$form = new Form_helper();
-	print $form->start('i') . "Versão 0.1. Start" . $form->end('i'); 
-?> 
 <head>
-	<title>Login V1</title>
+	<title>SISTEMA DE ANÁLISE DE INDICADORES</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -31,26 +27,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 	
 	<div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100">
+		<div class="container-background100">
+			<div class="wrap-center100">
 				<div class="login100-pic js-tilt" data-tilt>
 					<img src="<?=base_url("public/images/img-01.png")?>" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form">
+				<form method="post" class="login100-form validate-form" action="<?=base_url("painel")?>">
 					<span class="login100-form-title">
-						Sistema Contábil
+						BContábil
 					</span>
 
-					<div class="wrap-input100 validate-input" data-validate = "Preencha um e-mail válido">
-						<input class="input100" type="text" name="email" placeholder="Email / Código / CPF">
+					<div class="wrap-input100 validate-input" data-validate = "Preencha seu e-mail, código ou CPF">
+						<input class="input100" type="text" name="usuario" placeholder="Email / Código / CPF">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
 						</span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+					<div class="wrap-input100 validate-input" data-validate = "Preencha sua senha">
 						<input class="input100" type="password" name="pass" placeholder="Senha">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
@@ -60,7 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
-							Login
+							ENTRAR
 						</button>
 					</div>
 
@@ -68,14 +64,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<span class="txt1">
 							Esqueci meu
 						</span>
-						<a class="txt2" href="#">
+						<a class="txt2" href="<?=base_url("novasenha")?>">
 							usuário ou senha?
 						</a>
 					</div>
 
-					<div class="text-center p-t-136">
-						<a class="txt2" href="#">
-							Create your Account
+					<div class="text-center p-t-60">
+						<a class="txt2" href="<?=base_url("novaconta")?>">
+							Criar sua conta
 							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
 						</a>
 					</div>
@@ -106,3 +102,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 </body>
 </html>
+<?php 
+ 	$form = new Form_helper();
+	print $form->start('i') . "Versão 0.1. Start" . $form->end('i'); 
+?> 

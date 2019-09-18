@@ -156,7 +156,7 @@ iframe {
   margin: 0 auto;
 }
 
-.container-login100 {
+.container-background100 {
   width: 100%;  
   min-height: 100vh;
   display: -webkit-box;
@@ -171,7 +171,7 @@ iframe {
   background: black;
 }
 
-.wrap-login100 {
+.wrap-center100 {
   width: 960px;
   background: #fff;
   border-radius: 10px;
@@ -349,10 +349,86 @@ iframe {
 }
 
 
+/*------------------------------------------------------------------
+[ Cadastros ]*/
+.cadastro100-form-btn {
+  font-family: Montserrat-Bold;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #fff;
+  text-transform: uppercase;
+  margin: 0 20px;
+  margin-top: 8px;
+  
+  height: 160%;
+  width: 45%;
+  border-radius: 25px;
+  background: #494746;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center; 
+  padding: 0 25px;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.cadastro100-form-btn:hover {
+  background: #57b846;
+}
+
+
+
+.container-cadastro100-form-btn {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.cadastro100-form {
+  text-align: center;
+  width: 980px;
+  background: #fff;
+  border-radius: 5px;
+  overflow: auto;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 110px 50px 180px 50px;
+  
+}
+
+.cadastro100-form-title {
+  font-family: Poppins-Bold;
+  font-size: 28px;
+  color: #333333;
+  line-height: 1.2;
+  text-align: center;
+
+  width: 100%;
+  display: inline-block;
+  padding-bottom: 54px;
+}
 
 /*------------------------------------------------------------------
 [ Responsive ]*/
-
 
 
 @media (max-width: 992px) {
