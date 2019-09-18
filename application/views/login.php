@@ -25,7 +25,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!--===============================================================================================-->
 </head>
 <body>
-	
 	<div class="limiter">
 		<div class="container-background100">
 			<div class="wrap-center100">
@@ -35,7 +34,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 				<form method="post" class="login100-form validate-form" action="<?=base_url("painel")?>">
 					<span class="login100-form-title">
-						BContábil
+						UnIndices
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Preencha seu e-mail, código ou CPF">
@@ -79,7 +78,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
 		</div>
 	</div>
-	
 	
 
 	

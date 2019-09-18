@@ -33,10 +33,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             NOVA CONTA
                         </span>
                         <div class="container-cadastro100-form-btn">
-                                <button type="submit" class="cadastro100-form-btn" onclick="location.href='<?=base_url('novaconta/cadastrocontabilidade');?>'">
+                                <button type="submit" class="cadastro100-form-btn" onclick="location.href='<?=base_url('novaconta/contabilidade');?>'">
                                     CONTABILIDADE
                                 </button>
-                                <button class="cadastro100-form-btn" onclick="location.href='<?=base_url('novaconta/cadastrocontador');?>'">
+                                <button class="cadastro100-form-btn" onclick="location.href='<?=base_url('novaconta/contador');?>'">
                                     CONTADOR
                                 </button>
                         </div>

@@ -8,7 +8,7 @@ class NovaConta extends CI_Controller {
 		$this->load->view('nova-conta');
 	}
 
-	public function cadastroContabilidade(){
+	public function contabilidade(){
 		if(strcmp($_SERVER['REQUEST_METHOD'], 'POST') !== 0){
 			$this->load->view('cadastro-contabilidade');
 		}else{
@@ -16,7 +16,7 @@ class NovaConta extends CI_Controller {
 		}
 	}
 
-	public function cadastroContador(){
+	public function contador(){
 		$this->load->view('cadastro-contador');
 	}
 }

@@ -30,57 +30,76 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="container-background100">
             <div class="cadastro100-form">
                 <span class="cadastro100-form-title">
-                <h1>CADASTRO > CONTABILIDADE</h1>
+                    <h1>CADASTRO > CONTABILIDADE</h1>
                 </span>
 
-                <form id="regForm" action="">
-                    <!-- One "tab" for each step in the form: -->
-                    <div class="tab">
-                        <div class="wrap-input100 validate-input" data-validate = "Preencha sua senha">
+                    <form id="formulario" method='post' action=''>
+                        <ul id="progress">
+                            <li class="ativo">Identificação</li>
+                            <li>Dados cadastrais</li>
+                            <li>Login</li>
+                        </ul>
+                        <fieldset>
+                            <h2>Identificação da empresa</h2>
+                            <h3>Preencha com seu cnpj</h3>
+                            <div class="wrap-input100 validate-input" data-validate = "Preencha sua senha">
+                                <input class="input100" type="text" name="cnpj" placeholder="CNPJ">
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+                                    <i class="fa fa-building" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <input class="next acao cadastro100-form-btn" type="submit" name="next" value="PRÓXIMO">
+                        </fieldset>
+
+                        <fieldset>
+                            <h2>Dados cadastrais</h2>
+                            <h3>Dados para contato</h3>
+                            <div class="wrap-input100 validate-input" data-validate = "Preencha sua senha">
+                                <input class="input100" type="text" name="cnpj" placeholder="CNPJ">
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+                                    <i class="fa fa-building" aria-hidden="true"></i>
+                                </span>
+                            </div>                  
+                            <input class="prev acao cadastro100-form-btn" type="submit" name="prev" value="ANTERIOR">
+                            <input class="next acao cadastro100-form-btn" type="submit" name="next" value="PRÓXIMO">
+                        </fieldset>
+
+                        <fieldset>
+                            <h2>Dados de Login</h2>
+                            <h3>Acesso a conta</h3>
+                            <div class="wrap-input100 validate-input" data-validate = "Preencha sua senha">
+                                <input class="input100" type="text" name="cnpj" placeholder="CNPJ">
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+                                    <i class="fa fa-building" aria-hidden="true"></i>
+                                </span>
+                            </div>                  
+                            <input class="prev acao cadastro100-form-btn" type="submit" name="prev" value="ANTERIOR">
+                            <button class="acao cadastro100-form-btn" type='submit'>
+                                    CADASTRAR
+                            </button>
+                        </fieldset>
+
+                    </form>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!--<div class="wrap-input100 validate-input" data-validate = "Preencha sua senha">
                             <input class="input100" type="text" name="cnpj" placeholder="CNPJ" oninput="this.className = ''">
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class="fa fa-building" aria-hidden="true"></i>
                             </span>
-                        </div>
-                    </div>
-
-                    <div class="tab">Contact Info:
-                    <p><input placeholder="E-mail..." oninput="this.className = ''"></p>
-                    <p><input placeholder="Phone..." oninput="this.className = ''"></p>
-                    </div>
-
-                    <div class="tab">Birthday:
-                    <p><input placeholder="dd" oninput="this.className = ''"></p>
-                    <p><input placeholder="mm" oninput="this.className = ''"></p>
-                    <p><input placeholder="yyyy" oninput="this.className = ''"></p>
-                    </div>
-
-                    <div class="tab">Login Info:
-                    <p><input placeholder="Username..." oninput="this.className = ''"></p>
-                    <p><input placeholder="Password..." oninput="this.className = ''"></p>
-                    </div>
-
-                    <div style="overflow:auto;">
-                    <div style="float:right;">
-                        <button type="button" id="prevBtn" onclick="nextPrev(-1)">Anterior</button>
-                        <button type="button" id="nextBtn" onclick="nextPrev(1)">Próximo</button>
-                    </div>
-                    </div>
-
-                    <!-- Circles which indicates the steps of the form: -->
-                    <div style="text-align:center;margin-top:40px;">
-                    <span class="step"></span>
-                    <span class="step"></span>
-                    <span class="step"></span>
-                    <span class="step"></span>
-                    </div>
-
-                </form>
+                        </div>-->
             </div>
         </div>
     </div>
-
+    <script src="<?=base_url("public/js/jquery.js")?>"></script>
     <script src="<?=base_url("public/js/steps.js")?>"></script>
     </body>
 </html>
