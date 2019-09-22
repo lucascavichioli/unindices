@@ -82,6 +82,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 	
 
+
 	
 <!--===============================================================================================-->	
 	<script src="<?=base_url("public/vendor/jquery/jquery-3.2.1.min.js")?>"></script>

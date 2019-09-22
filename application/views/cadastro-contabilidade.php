@@ -34,8 +34,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <span class="cadastro100-form-title">
                     <h1>CADASTRO > CONTABILIDADE</h1>
                 </span>
-
-                    <form id="formulario" name='formulario'class="login100-form validate-form" method='post' action=''>
+                 <form id="formulario" name='formulario'class="login100-form validate-form" method='post' action=''>
                         <ul id="progress">
                             <li class="ativo">Identificação</li>
                             <li>Dados cadastrais</li>
@@ -45,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <h2>Identificação da empresa</h2>
                             <h3>Preencha com seu CNPJ</h3>
                             <div id="divCnpj" class="wrap-input100 validate-input" data-validate = "Preencha um CNPJ válido">
-                                <input id="cnpj" class="input100" type="text" name="cnpj" placeholder="CNPJ" onkeypress="MascaraCNPJ(formulario.cnpj);" maxlength="18">
+                                <input id="cnpj" class="input100" type="text" name="cnpj" placeholder="CNPJ" onkeypress="MascaraCNPJ(formulario.cnpj);" maxlength="18" required>
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
                                     <i class="fa fa-building" aria-hidden="true"></i>
@@ -72,7 +71,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </span>
                             </div>
                             <div id="divTelefone" class="wrap-input100 validate-input" data-validate = "Preencha um telefone válido">
-                                <input id="telefone" class="input100" type="tel" name="telefone" placeholder="(DDD)####-##### ou (DDD)####-####">
+                                <input id="telefone" class="input100" type="text" name="telefone" placeholder="(DDD)####-##### ou (DDD)####-####">
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
                                     <i class="fa fa-phone" aria-hidden="true"></i>
@@ -93,14 +92,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </span>
                             </div>
                             <div id="senha1" class="wrap-input100 validate-input" data-validate = "Preencha uma senha">
-                                <input class="input100" type="password" name="senha" placeholder="Senha">
+                                <input class="input100" type="password" name="senha" placeholder="Senha - Mínimo 6 dígitos" minlength=6>
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
                                     <i class="fa fa-building" aria-hidden="true"></i>
                                 </span>
                             </div>
                             <div id="senha2" class="wrap-input100 validate-input" data-validate = "Preencha uma senha">
-                                <input id="senhaConfirmada" class="input100" type="password" name="senhaConfirmada" placeholder="Confirmar senha">
+                                <input id="senhaConfirmada" class="input100" type="password" name="senhaConfirmada" placeholder="Confirmar senha" minlength=6>
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
                                     <i class="fa fa-building" aria-hidden="true"></i>
