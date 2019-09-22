@@ -12,11 +12,19 @@ class NovaConta extends CI_Controller {
 		if(strcmp($_SERVER['REQUEST_METHOD'], 'POST') !== 0){
 			$this->load->view('cadastro-contabilidade');
 		}else{
-			print "deu";
+			if($this->input->post("cnpj") == '' || $this->input->post("cnpj") == null){
+				$alert = array("alert-validate");
+				$this->load->view('cadastro-contabilidade', $alert);
+			}
 		}
 	}
 
 	public function contador(){
 		$this->load->view('cadastro-contador');
+	}
+
+	public function listaTeste(){
+		$this->load->model("usuarios");
+		print_r($this->usuarios->teste());
 	}
 }

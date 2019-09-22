@@ -23,6 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<link rel="stylesheet" type="text/css" href="<?=base_url("public/css/util.css")?>">
     <link rel="stylesheet" type="text/css" href="<?=base_url("public/css/main.css")?>">
     <link rel="stylesheet" type="text/css" href="<?=base_url("public/css/steps.css")?>">
+    
 <!--===============================================================================================-->
 </head>
 <body>
@@ -33,7 +34,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <h1>CADASTRO > CONTABILIDADE</h1>
                 </span>
 
-                    <form id="formulario" method='post' action=''>
+                    <form id="formulario" name='formulario'class="login100-form validate-form" method='post' action=''>
                         <ul id="progress">
                             <li class="ativo">Identificação</li>
                             <li>Dados cadastrais</li>
@@ -41,53 +42,76 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </ul>
                         <fieldset>
                             <h2>Identificação da empresa</h2>
-                            <h3>Preencha com seu cnpj</h3>
-                            <div class="wrap-input100 validate-input" data-validate = "Preencha sua senha">
-                                <input class="input100" type="text" name="cnpj" placeholder="CNPJ">
+                            <h3>Preencha com seu CNPJ</h3>
+                            <div id="divCnpj" class="wrap-input100 validate-input" data-validate = "Preencha um CNPJ válido">
+                                <input id="cnpj" class="input100" type="text" name="cnpj" placeholder="CNPJ" onkeypress="MascaraCNPJ(formulario.cnpj);" maxlength="18">
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
                                     <i class="fa fa-building" aria-hidden="true"></i>
                                 </span>
                             </div>
-                            <input class="next acao cadastro100-form-btn" type="submit" name="next" value="PRÓXIMO">
+                            <input id="cnpjApi" class="nextFirst cadastro100-form-btn" type="submit" name="next" value="PRÓXIMO">
                         </fieldset>
 
                         <fieldset>
                             <h2>Dados cadastrais</h2>
                             <h3>Dados para contato</h3>
-                            <div class="wrap-input100 validate-input" data-validate = "Preencha sua senha">
-                                <input class="input100" type="text" name="cnpj" placeholder="CNPJ">
+                            <div class="wrap-input100 validate-input" data-validate = "Nome da empresa">
+                                <input id="nomeEmpresa" class="input100" type="text" name="nomeEmpresa" placeholder="Nome">
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
                                     <i class="fa fa-building" aria-hidden="true"></i>
                                 </span>
-                            </div>                  
-                            <input class="prev acao cadastro100-form-btn" type="submit" name="prev" value="ANTERIOR">
-                            <input class="next acao cadastro100-form-btn" type="submit" name="next" value="PRÓXIMO">
+                            </div>
+                            <div class="wrap-input100 validate-input" data-validate = "Atividade da empresa">
+                                <input id="atvPrincipal" class="input100" type="text" name="atvEmpresa" placeholder="Atividade principal">
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+                                    <i class="fa fa-credit-card" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <div class="wrap-input100 validate-input" data-validate = "Telefone">
+                                <input class="input100" type="text" name="telefone" placeholder="Telefone">
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                </span>
+                            </div>            
+                            <input class="prev  cadastro100-form-btn" type="submit" name="prev" value="VOLTAR">
+                            <input class="next  cadastro100-form-btn" type="submit" name="next" value="PRÓXIMO">
                         </fieldset>
 
                         <fieldset>
                             <h2>Dados de Login</h2>
                             <h3>Acesso a conta</h3>
-                            <div class="wrap-input100 validate-input" data-validate = "Preencha sua senha">
-                                <input class="input100" type="text" name="cnpj" placeholder="CNPJ">
+                            <div class="wrap-input100 validate-input" data-validate = "Preencha um e-mail válido">
+                                <input class="input100" type="text" name="email" placeholder="E-mail">
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
                                     <i class="fa fa-building" aria-hidden="true"></i>
                                 </span>
-                            </div>                  
-                            <input class="prev acao cadastro100-form-btn" type="submit" name="prev" value="ANTERIOR">
-                            <button class="acao cadastro100-form-btn" type='submit'>
+                            </div>
+                            <div id="senha1" class="wrap-input100 validate-input" data-validate = "Preencha uma senha">
+                                <input class="input100" type="password" name="senha" placeholder="Senha">
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+                                    <i class="fa fa-building" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <div id="senha2" class="wrap-input100 validate-input" data-validate = "Preencha uma senha">
+                                <input id="senhaConfirmada" class="input100" type="password" name="senhaConfirmada" placeholder="Confirmar senha">
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+                                    <i class="fa fa-building" aria-hidden="true"></i>
+                                </span>
+                            </div>         
+                            <input class="prev  cadastro100-form-btn" type="submit" name="prev" value="VOLTAR">
+                            <button class=" cadastro100-form-btn" type='submit'>
                                     CADASTRAR
                             </button>
                         </fieldset>
 
                     </form>
-                        
-                        
-                        
-                        
-                        
                         
                         <!--<div class="wrap-input100 validate-input" data-validate = "Preencha sua senha">
                             <input class="input100" type="text" name="cnpj" placeholder="CNPJ" oninput="this.className = ''">
@@ -101,5 +125,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
     <script src="<?=base_url("public/js/jquery.js")?>"></script>
     <script src="<?=base_url("public/js/steps.js")?>"></script>
+    <script src="<?=base_url("public/js/main.js")?>"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     </body>
 </html>
