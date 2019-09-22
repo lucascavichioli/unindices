@@ -35,6 +35,14 @@
             check = false;
         }
 
+            if(check){
+                Swal.fire({
+                    type: 'success',
+                    title: 'Dados enviados com sucesso!',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+            }
             return check;
 
         

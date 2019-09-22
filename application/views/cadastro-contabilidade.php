@@ -107,20 +107,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </span>
                             </div>         
                             <input class="prev  cadastro100-form-btn" type="submit" name="prev" value="VOLTAR">
-                            <button onclick="aviso()" class=" cadastro100-form-btn" type='submit'>
+                            <button  class="cadastro100-form-btn" type='submit'>
                                     CADASTRAR
                             </button>
                         </fieldset>
 
                     </form>
-                        
-                        <!--<div class="wrap-input100 validate-input" data-validate = "Preencha sua senha">
-                            <input class="input100" type="text" name="cnpj" placeholder="CNPJ" oninput="this.className = ''">
-                            <span class="focus-input100"></span>
-                            <span class="symbol-input100">
-                                <i class="fa fa-building" aria-hidden="true"></i>
-                            </span>
-                        </div>-->
             </div>
         </div>
     </div>
@@ -130,15 +122,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="<?=base_url("public/js/main.js")?>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="<?=base_url("public/js/sweetalert.js")?>"></script>
-    <script>
-    function aviso(){
-        Swal.fire({
-            type: 'success',
-            title: 'Dados enviados com sucesso!',
-            showConfirmButton: false,
-            timer: 1500
-          })
-        }
-    </script>
     </body>
 </html>
