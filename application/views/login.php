@@ -22,6 +22,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="<?=base_url("public/css/util.css")?>">
 	<link rel="stylesheet" type="text/css" href="<?=base_url("public/css/main.css")?>">
+	<link rel="stylesheet" type="text/css" href="<?=base_url("public/css/sweetalert.css")?>">
 <!--===============================================================================================-->
 </head>
 <body>
@@ -36,6 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<span class="login100-form-title">
 						UnIndices
 					</span>
+					<h2><?php echo $teste ?? null ?></h2>
 
 					<div class="wrap-input100 validate-input" data-validate = "Preencha seu e-mail, código ou CPF">
 						<input class="input100" type="text" name="usuario" placeholder="Email / Código / CPF">
@@ -97,6 +99,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</script>
 <!--===============================================================================================-->
 	<script src="<?=base_url("public/js/main.js")?>"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="<?=base_url("public/js/sweetalert.js")?>"></script>
 
 </body>
 </html>

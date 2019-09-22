@@ -1,15 +1,19 @@
-
 $(function(){
-  var request;
   var atual_fs, prox_fs, ant_fs;
 
-  $('.next').click(function(){
-    atual_fs = $(this).parent();
-    prox_fs = $(this).parent().next();
+  $('.nextTwo').click(function(){
+    var telefone = document.getElementById('telefone').value;
+    var regex = new RegExp('^\\([0-9]{2}\\)((3[0-9]{3}-[0-9]{4})|(9[0-9]{3}-[0-9]{5}))$');
+    if(!regex.test(telefone)){
+      $('#divTelefone').addClass('alert-validate');
+    }else{
+      atual_fs = $(this).parent();
+      prox_fs = $(this).parent().next();
 
-    $('#progress li').eq($('fieldset').index(prox_fs)).addClass('ativo');
-    atual_fs.hide(800);
-    prox_fs.show(800);
+      $('#progress li').eq($('fieldset').index(prox_fs)).addClass('ativo');
+      atual_fs.hide(800);
+      prox_fs.show(800);
+    }
   });
 
   $('.nextFirst').click(function(){
@@ -48,24 +52,25 @@ $(function(){
                 }, 'jsonp')
 
                 .done(function(){
-                  request = true;
+                  console.log('Consulta realizada com sucesso.');
                 })
                 
                 .fail(function(){
-                  request = false;
+                  Swal.fire({
+                    title: 'Aviso!',
+                    text: 'Erro ao buscar dados. Por favor preencha os dados corretamente',
+                    type: 'warning',
+                    confirmButtonText: 'Ok'
+                  })
                 });
 
-                console.log(request);
-
-                if(request){
                   atual_fs = $(this).parent();
                   prox_fs = $(this).parent().next();
               
                   $('#progress li').eq($('fieldset').index(prox_fs)).addClass('ativo');
                   atual_fs.hide(800);
                   prox_fs.show(800);
-                }
-                
+                            
                
             }
   });

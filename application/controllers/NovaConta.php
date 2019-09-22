@@ -12,10 +12,8 @@ class NovaConta extends CI_Controller {
 		if(strcmp($_SERVER['REQUEST_METHOD'], 'POST') !== 0){
 			$this->load->view('cadastro-contabilidade');
 		}else{
-			if($this->input->post("cnpj") == '' || $this->input->post("cnpj") == null){
-				$alert = array("alert-validate");
-				$this->load->view('cadastro-contabilidade', $alert);
-			}
+			$data['teste'] = $this->input->post("cnpj");
+			$this->load->view('login', $data);
 		}
 	}
 

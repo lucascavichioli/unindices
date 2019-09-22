@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -23,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<link rel="stylesheet" type="text/css" href="<?=base_url("public/css/util.css")?>">
     <link rel="stylesheet" type="text/css" href="<?=base_url("public/css/main.css")?>">
     <link rel="stylesheet" type="text/css" href="<?=base_url("public/css/steps.css")?>">
-    
+    <link rel="stylesheet" type="text/css" href="<?=base_url("public/css/sweetalert.css")?>">
 <!--===============================================================================================-->
 </head>
 <body>
@@ -70,15 +71,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <i class="fa fa-credit-card" aria-hidden="true"></i>
                                 </span>
                             </div>
-                            <div class="wrap-input100 validate-input" data-validate = "Telefone">
-                                <input class="input100" type="text" name="telefone" placeholder="Telefone">
+                            <div id="divTelefone" class="wrap-input100 validate-input" data-validate = "Preencha um telefone válido">
+                                <input id="telefone" class="input100" type="tel" name="telefone" placeholder="(DDD)####-##### ou (DDD)####-####">
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
                                     <i class="fa fa-phone" aria-hidden="true"></i>
                                 </span>
                             </div>            
                             <input class="prev  cadastro100-form-btn" type="submit" name="prev" value="VOLTAR">
-                            <input class="next  cadastro100-form-btn" type="submit" name="next" value="PRÓXIMO">
+                            <input class="nextTwo  cadastro100-form-btn" type="submit" name="next" value="PRÓXIMO">
                         </fieldset>
 
                         <fieldset>
@@ -106,7 +107,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </span>
                             </div>         
                             <input class="prev  cadastro100-form-btn" type="submit" name="prev" value="VOLTAR">
-                            <button class=" cadastro100-form-btn" type='submit'>
+                            <button onclick="aviso()" class=" cadastro100-form-btn" type='submit'>
                                     CADASTRAR
                             </button>
                         </fieldset>
@@ -123,9 +124,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
         </div>
     </div>
+
     <script src="<?=base_url("public/js/jquery.js")?>"></script>
     <script src="<?=base_url("public/js/steps.js")?>"></script>
     <script src="<?=base_url("public/js/main.js")?>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="<?=base_url("public/js/sweetalert.js")?>"></script>
+    <script>
+    function aviso(){
+        Swal.fire({
+            type: 'success',
+            title: 'Dados enviados com sucesso!',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
+    </script>
     </body>
 </html>
