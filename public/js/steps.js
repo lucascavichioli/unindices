@@ -2,11 +2,30 @@ $(function(){
   var atual_fs, prox_fs, ant_fs;
 
   $('.nextTwo').click(function(){
+    var check = true;
+    var nomeEmpresa = document.getElementById('nomeEmpresa').value;
+    var atvEmpresa = document.getElementById('atvPrincipal').value;
+    var responsavel = document.getElementById('responsavel').value;
     var telefone = document.getElementById('telefone').value;
     var regex = new RegExp('^\\([0-9]{2}\\)((3[0-9]{3}-[0-9]{4})|(9[0-9]{3}-[0-9]{5}))$');
+    if(nomeEmpresa.trim() == ''){
+      $('#divNomeEmpresa').addClass('alert-validate');
+      check = false;
+    }
+    if(atvEmpresa.trim() == ''){
+      $('#divAtvEmpresa').addClass('alert-validate');
+      check = false;
+    }
+    if(responsavel.trim() == ''){
+      $('#divResponsavel').addClass('alert-validate');
+      check = false;
+    } 
     if(!regex.test(telefone)){
       $('#divTelefone').addClass('alert-validate');
-    }else{
+      check = false;
+    }
+    if(check){
+    
       atual_fs = $(this).parent();
       prox_fs = $(this).parent().next();
 

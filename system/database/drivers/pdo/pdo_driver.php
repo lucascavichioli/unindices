@@ -128,6 +128,8 @@ class CI_DB_pdo_driver extends CI_DB {
 	{
 		if ($persistent === TRUE)
 		{
+			$this->options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+        	$this->options[PDO::ATTR_EMULATE_PREPARES] = FALSE;
 			$this->options[PDO::ATTR_PERSISTENT] = TRUE;
 		}
 

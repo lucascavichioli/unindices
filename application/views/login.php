@@ -37,8 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<span class="login100-form-title">
 						UnIndices
 					</span>
-					<h2><?php echo $teste ?? null ?></h2>
-
+					
 					<div class="wrap-input100 validate-input" data-validate = "Preencha seu e-mail, código ou CPF">
 						<input class="input100" type="text" name="usuario" placeholder="Email / Código / CPF">
 						<span class="focus-input100"></span>

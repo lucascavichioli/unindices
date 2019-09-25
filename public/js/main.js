@@ -86,6 +86,13 @@
 
 })(jQuery);
 
+function MascaraTelefone(telefone){
+    if(mascaraInteiro(telefone)==false){
+        event.returnValue = false;
+    }       
+    return formataCampo(telefone, '(00)0000-00000', event);
+}
+
 function MascaraCNPJ(cnpj){
     if(mascaraInteiro(cnpj)==false){
             event.returnValue = false;

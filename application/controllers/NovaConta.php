@@ -14,16 +14,17 @@ class NovaConta extends CI_Controller {
 		}else{
 
 			$ip = getenv('REMOTE_ADDR') ?? $_SERVER["REMOTE_ADDR"];
+			
 			$this->load->helper( array( 'form' ,  'url' ));
 			$this->load->library( 'form_validation' );
 
-
 			$data = array();
 
-			$cnpj = $this->input->post('cnpj');
+			$cnpjPost = $this->input->post('cnpj');
 
 			$data['nomeEmpresa'] = $this->input->post('nomeEmpresa');
 			$data['atvEmpresa'] = $this->input->post('atvEmpresa');
+			$data['responsavel'] = $this->input->post('responsavel');
 			$data['telefone'] = $this->input->post('telefone');
 
 			$data['email'] = $this->input->post('email');
@@ -31,20 +32,20 @@ class NovaConta extends CI_Controller {
 			$data['senhaConfirmada'] = $this->input->post('senhaConfirmada');
 
 
-			$cnpj = preg_replace("/[^0-9]/", "", $cnpj);
+			$cnpj = preg_replace("/[^0-9]/", "", $cnpjPost);
 			$cnpj = filter_var($cnpj, FILTER_SANITIZE_NUMBER_INT);
 
 			$data['cnpj'] = $cnpj;
 
 			$this->form_validation->set_data($data);
-
 					//dados empresa contabilidade
 					$this->form_validation->set_rules($ip, 'IP Cliente', 'trim|valid_ip');
-					$this->form_validation->set_rules('cnpj', 'CNPJ', 'trim|required|integer');
+					$this->form_validation->set_rules('cnpj', 'CNPJ', 'trim|required|is_unique[receitaws.cnpj]');
 
 					//dados para contato
 					$this->form_validation->set_rules('nomeEmpresa', 'Nome da Empresa', 'trim|required');
 					$this->form_validation->set_rules('atvEmpresa', 'CNAE Empresa', 'trim|required');
+					$this->form_validation->set_rules('responsavel', 'Responsavel da empresa', 'trim|required');
 					$this->form_validation->set_rules('telefone', 'Telefone Empresa', 'trim|required');
 
 					//dados de login
@@ -53,22 +54,29 @@ class NovaConta extends CI_Controller {
 					$this->form_validation->set_rules('senhaConfirmada', 'Confirmação de senha', 'trim|required|matches[senha]|min_length[6]');
 			
 
-			if($this->form_validation->run()){
+			//if($this->form_validation->run()){
 				$this->load->helper('cnpj');
 				$this->load->helper('receitaws');
 				if(valida_cnpj($cnpj)){
 					$json = apiReceita($cnpj);
 					if(!empty($json)){
 						$objCnpj = processaDadosCnpj($json);
-						//INSERE OBJCNPJ
-						//INSERE CONTABILIDADE
+						$this->load->model("receitaws");
+						$status = $this->receitaws->inserir($objCnpj);
+						if($status){
+							$this->load->model("usuarios");
+							$this->usuarios->inserirContabilidade($data, $ip);
+						}
+						$this->load->view('login');
 					}else{
 						die("<h1>ERRO AO BUSCAR DADOS!</h1>");
 					}
 				}else{
 					die("<h1>CNPJ INVÁLIDO!</h1>");
 				}
-			}
+			//}else{
+		//		$this->load->view('cadastro-contabilidade', $cnpjPost);
+		//	}
 			//var_dump($this->form_validation->error_array());
 		}
 	}

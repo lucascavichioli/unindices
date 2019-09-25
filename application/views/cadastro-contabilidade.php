@@ -44,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <h2>Identificação da empresa</h2>
                             <h3>Preencha com seu CNPJ</h3>
                             <div id="divCnpj" class="wrap-input100 validate-input" data-validate = "Preencha um CNPJ válido">
-                                <input id="cnpj" class="input100" type="text" name="cnpj" placeholder="CNPJ" onkeypress="MascaraCNPJ(formulario.cnpj);" maxlength="18" required>
+                                <input id="cnpj" class="input100" type="text" name="cnpj" placeholder="CNPJ" value="<?php echo $cnpjPost[0] ?? '' ?>" onkeypress="MascaraCNPJ(formulario.cnpj);" maxlength="18" required>
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
                                     <i class="fa fa-building" aria-hidden="true"></i>
@@ -56,22 +56,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <fieldset>
                             <h2>Dados cadastrais</h2>
                             <h3>Dados para contato</h3>
-                            <div class="wrap-input100 validate-input" data-validate = "Nome da empresa">
+                            <div id="divNomeEmpresa" class="wrap-input100 validate-input" data-validate = "Nome da empresa">
                                 <input id="nomeEmpresa" class="input100" type="text" name="nomeEmpresa" placeholder="Nome">
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
                                     <i class="fa fa-building" aria-hidden="true"></i>
                                 </span>
                             </div>
-                            <div class="wrap-input100 validate-input" data-validate = "Atividade da empresa">
+                            <div id="divAtvEmpresa" class="wrap-input100 validate-input" data-validate = "Atividade da empresa">
                                 <input id="atvPrincipal" class="input100" type="text" name="atvEmpresa" placeholder="Atividade principal">
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
                                     <i class="fa fa-credit-card" aria-hidden="true"></i>
                                 </span>
                             </div>
+                            <div id="divResponsavel" class="wrap-input100 validate-input" data-validate = "Nome do responsável">
+                                <input id="responsavel" class="input100" type="text" name="responsavel"  placeholder="Nome do responsável">
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                </span>
+                            </div>
                             <div id="divTelefone" class="wrap-input100 validate-input" data-validate = "Preencha um telefone válido">
-                                <input id="telefone" class="input100" type="text" name="telefone" placeholder="(DDD)####-##### ou (DDD)####-####">
+                                <input id="telefone" class="input100" type="text" name="telefone" onkeypress="MascaraTelefone(formulario.telefone);" maxlength="14" placeholder="(DDD)####-##### ou (DDD)####-####">
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
                                     <i class="fa fa-phone" aria-hidden="true"></i>
