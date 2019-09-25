@@ -17,6 +17,7 @@ class NovaConta extends CI_Controller {
 			
 			$this->load->helper( array( 'form' ,  'url' ));
 			$this->load->library( 'form_validation' );
+			$this->load->database();
 
 			$data = array();
 
@@ -40,7 +41,7 @@ class NovaConta extends CI_Controller {
 			$this->form_validation->set_data($data);
 					//dados empresa contabilidade
 					$this->form_validation->set_rules($ip, 'IP Cliente', 'trim|valid_ip');
-					$this->form_validation->set_rules('cnpj', 'CNPJ', 'trim|required|is_unique[receitaws.cnpj]');
+					$this->form_validation->set_rules('cnpj', 'CNPJ', 'trim|required|is_unique[receitaws.rec_cnpj]');
 
 					//dados para contato
 					$this->form_validation->set_rules('nomeEmpresa', 'Nome da Empresa', 'trim|required');
@@ -49,12 +50,12 @@ class NovaConta extends CI_Controller {
 					$this->form_validation->set_rules('telefone', 'Telefone Empresa', 'trim|required');
 
 					//dados de login
-					$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+					$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[usuarios.cont_email]');
 					$this->form_validation->set_rules('senha', 'Senha', 'trim|required|min_length[6]');
 					$this->form_validation->set_rules('senhaConfirmada', 'Confirmação de senha', 'trim|required|matches[senha]|min_length[6]');
 			
-
-			//if($this->form_validation->run()){
+				
+			if($this->form_validation->run()){
 				$this->load->helper('cnpj');
 				$this->load->helper('receitaws');
 				if(valida_cnpj($cnpj)){
@@ -69,14 +70,21 @@ class NovaConta extends CI_Controller {
 						}
 						$this->load->view('login');
 					}else{
-						die("<h1>ERRO AO BUSCAR DADOS!</h1>");
+						$data['cnpj'] = $cnpjPost;
+						$data['erro'] = "alert-validate";
+						$data['mensagem'] = "Erro ao consultar os dados. Tente novamente mais tarde!";
+						$this->load->view('cadastro-contabilidade', $data);
 					}
 				}else{
-					die("<h1>CNPJ INVÁLIDO!</h1>");
+					$data['mensagem'] = "CNPJ inválido!";
+					$this->load->view('cadastro-contabilidade', $data);
 				}
-			//}else{
-		//		$this->load->view('cadastro-contabilidade', $cnpjPost);
-		//	}
+			}else{
+				$data['cnpj'] = $cnpjPost;
+				$data['erro'] = "alert-validate";
+				$data['mensagem'] = "Este CNPJ já existe.";
+				$this->load->view('cadastro-contabilidade', $data);
+			}
 			//var_dump($this->form_validation->error_array());
 		}
 	}

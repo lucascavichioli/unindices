@@ -18,13 +18,15 @@ class Usuarios extends CI_Model {
           $contabilidade['cont_telefone2'] = null;
           $contabilidade['cont_crc'] = null;
           $contabilidade['cont_email'] = $data['email'];
-          $contabilidade['cont_senha'] = $data['senha'];
+          $contabilidade['cont_senha'] = password_hash($data['senha'], CRYPT_BLOWFISH, ['cost' => 12]);
           $contabilidade['cont_rec_cnpj'] = $data['cnpj'];
           $contabilidade['cont_responsavel'] = $data['responsavel'];
 
           $this->db->insert('usuarios', $contabilidade);
           
-            $log = array('ip_cliente' => $ip, 'operacao' => 'insert', 'data' => time(), 'usuario' => null, 'id_afetado' => $data['cnpj']);
+          $date =  date("d-m-Y H:i:s");
+          
+          $log = array('ip_cliente' => $ip, 'operacao' => 'insert', 'usuario' => null, 'id_afetado' => $data['cnpj']);
 
             $this->db->insert('logs', $log);
           
@@ -34,11 +36,5 @@ class Usuarios extends CI_Model {
             log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
             return false;
         }
-
-
-
-
-        //return $this->db->get("anos")->result_array();
     }
-
 }

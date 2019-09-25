@@ -15,8 +15,7 @@ function apiReceita($cnpj){
        
 
     if($json === false){
-        echo "Error #" . curl_errno($ch) . "</br>";
-        die("<h2>".curl_error($ch) . "</h2>");
+       log_message('error', curl_errno($ch) . " -> " . curl_error($ch));
     } else {
 
     $var = json_decode($json);

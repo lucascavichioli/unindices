@@ -43,8 +43,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <fieldset>
                             <h2>Identificação da empresa</h2>
                             <h3>Preencha com seu CNPJ</h3>
-                            <div id="divCnpj" class="wrap-input100 validate-input" data-validate = "Preencha um CNPJ válido">
-                                <input id="cnpj" class="input100" type="text" name="cnpj" placeholder="CNPJ" value="<?php echo $cnpjPost[0] ?? '' ?>" onkeypress="MascaraCNPJ(formulario.cnpj);" maxlength="18" required>
+                            <div id="divCnpj" class="wrap-input100 validate-input <?= $erro ?? '' ?>" data-validate = "<?= $mensagem ?? "Preencha um CNPJ válido"?>">
+                                <input id="cnpj" class="input100" type="text" name="cnpj" placeholder="CNPJ" value="<?= $cnpj ?? '' ?>" onkeypress="MascaraCNPJ(formulario.cnpj);" maxlength="18" required>
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
                                     <i class="fa fa-building" aria-hidden="true"></i>
@@ -122,7 +122,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
         </div>
     </div>
-
     <script src="<?=base_url("public/js/jquery.js")?>"></script>
     <script src="<?=base_url("public/js/steps.js")?>"></script>
     <script src="<?=base_url("public/js/main.js")?>"></script>
