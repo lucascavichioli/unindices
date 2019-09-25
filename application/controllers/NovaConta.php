@@ -68,6 +68,7 @@ class NovaConta extends CI_Controller {
 							$this->load->model("usuarios");
 							$this->usuarios->inserirContabilidade($data, $ip);
 						}
+						//envia e-mail
 						$this->load->view('login');
 					}else{
 						$data['cnpj'] = $cnpjPost;
@@ -90,11 +91,11 @@ class NovaConta extends CI_Controller {
 	}
 
 	public function contador(){
-		$this->load->view('cadastro-contador');
-	}
+		if(strcmp($_SERVER['REQUEST_METHOD'], 'POST') !== 0){
+			$this->load->view('cadastro-contador');
+		}else{
 
-	public function listaTeste(){
-		$this->load->model("usuarios");
-		print_r($this->usuarios->teste());
+		}
+		//$this->load->view('cadastro-contador');
 	}
 }

@@ -21,12 +21,13 @@ class Usuarios extends CI_Model {
           $contabilidade['cont_senha'] = password_hash($data['senha'], CRYPT_BLOWFISH, ['cost' => 12]);
           $contabilidade['cont_rec_cnpj'] = $data['cnpj'];
           $contabilidade['cont_responsavel'] = $data['responsavel'];
+          $contabilidade['cont_cpf'] = null;
 
           $this->db->insert('usuarios', $contabilidade);
           
           $date =  date("d-m-Y H:i:s");
           
-          $log = array('ip_cliente' => $ip, 'operacao' => 'insert', 'usuario' => null, 'id_afetado' => $data['cnpj']);
+          $log = array('ip_cliente' => $ip, 'operacao' => 'insert', 'usuario' => null, 'id_afetado' => $data['cnpj'], 'tabela_afetada' => 'receitaws; usuarios');
 
             $this->db->insert('logs', $log);
           

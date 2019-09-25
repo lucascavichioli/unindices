@@ -41,8 +41,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <li>Login</li>
                         </ul>
                         <fieldset>
-                            <h2>Identificação da empresa</h2>
-                            <h3>Preencha com seu CNPJ</h3>
+                            <h2>Identificação da empresa</h2><br>
+                            <!--<h3>Preencha com seu CNPJ</h3>-->
                             <div id="divCnpj" class="wrap-input100 validate-input <?= $erro ?? '' ?>" data-validate = "<?= $mensagem ?? "Preencha um CNPJ válido"?>">
                                 <input id="cnpj" class="input100" type="text" name="cnpj" placeholder="CNPJ" value="<?= $cnpj ?? '' ?>" onkeypress="MascaraCNPJ(formulario.cnpj);" maxlength="18" required>
                                 <span class="focus-input100"></span>
@@ -50,12 +50,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <i class="fa fa-building" aria-hidden="true"></i>
                                 </span>
                             </div>
-                            <input id="cnpjApi" class="nextFirst cadastro100-form-btn" type="submit" name="next" value="PRÓXIMO">
+                            <input id="cnpjApi" class="nextCnpj cadastro100-form-btn" type="submit" name="next" value="PRÓXIMO">
                         </fieldset>
 
                         <fieldset>
-                            <h2>Dados cadastrais</h2>
-                            <h3>Dados para contato</h3>
+                            <h2>Dados cadastrais</h2><br>
+                            <!--<h3>Dados para contato</h3>-->
                             <div id="divNomeEmpresa" class="wrap-input100 validate-input" data-validate = "Nome da empresa">
                                 <input id="nomeEmpresa" class="input100" type="text" name="nomeEmpresa" placeholder="Nome">
                                 <span class="focus-input100"></span>
@@ -67,14 +67,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <input id="atvPrincipal" class="input100" type="text" name="atvEmpresa" placeholder="Atividade principal">
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
-                                    <i class="fa fa-credit-card" aria-hidden="true"></i>
+                                    <i class="fa fa-briefcase" aria-hidden="true"></i>
                                 </span>
                             </div>
                             <div id="divResponsavel" class="wrap-input100 validate-input" data-validate = "Nome do responsável">
                                 <input id="responsavel" class="input100" type="text" name="responsavel"  placeholder="Nome do responsável">
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
-                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                    <i class="fa fa-user" aria-hidden="true"></i>
                                 </span>
                             </div>
                             <div id="divTelefone" class="wrap-input100 validate-input" data-validate = "Preencha um telefone válido">
@@ -89,27 +89,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </fieldset>
 
                         <fieldset>
-                            <h2>Dados de Login</h2>
-                            <h3>Acesso a conta</h3>
+                            <h2>Dados de Login</h2><br>
+                            <!--<h3>Acesso a conta</h3>-->
                             <div class="wrap-input100 validate-input" data-validate = "Preencha um e-mail válido">
                                 <input class="input100" type="text" name="email" placeholder="E-mail">
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
-                                    <i class="fa fa-building" aria-hidden="true"></i>
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>
                                 </span>
                             </div>
                             <div id="senha1" class="wrap-input100 validate-input" data-validate = "Preencha uma senha">
                                 <input class="input100" type="password" name="senha" placeholder="Senha - Mínimo 6 dígitos" minlength=6>
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
-                                    <i class="fa fa-building" aria-hidden="true"></i>
+                                    <i class="fa fa-lock" aria-hidden="true"></i>
                                 </span>
                             </div>
                             <div id="senha2" class="wrap-input100 validate-input" data-validate = "Preencha uma senha">
                                 <input id="senhaConfirmada" class="input100" type="password" name="senhaConfirmada" placeholder="Confirmar senha" minlength=6>
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
-                                    <i class="fa fa-building" aria-hidden="true"></i>
+                                    <i class="fa fa-lock" aria-hidden="true"></i>
                                 </span>
                             </div>         
                             <input class="prev  cadastro100-form-btn" type="submit" name="prev" value="VOLTAR">
