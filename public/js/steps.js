@@ -53,7 +53,7 @@ $('.nextCont').click(function(){
     $('#divNomeCompleto').addClass('alert-validate');
     check = false;
   }
-  if(cep.trim() == ''){
+  if(cep.trim() == '' || !validaCEP(cep)){
     $('#divCep').addClass('alert-validate');
     check = false;
   }

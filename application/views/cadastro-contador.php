@@ -51,8 +51,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <i class="fa fa-id-card" aria-hidden="true"></i>
                                 </span>
                             </div>
-                            <div id="divCrc" class="wrap-input100 validate-input <?= $erro ?? '' ?>" data-validate = "<?= $mensagem ?? "Preencha seu Registro de Contabilidade"?>">
-                                <input id="crc" class="input100" type="text" name="crc" placeholder="CRC/UF" value="<?= $crc ?? '' ?>"  maxlength="20" required>
+                            <div id="divCrc" class="wrap-input100 validate-input <?= $erro ?? '' ?>" data-validate = "Preencha seu Registro de Contabilidade">
+                                <input id="crc" class="input100" type="text" name="crc" placeholder="CRC/UF" value=""  maxlength="20" required>
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
                                     <i class="fa fa-id-badge" aria-hidden="true"></i>
@@ -72,7 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </span>
                             </div>
                             <div id="divCep" class="wrap-input100 validate-input" data-validate = "Preencha um CEP">
-                                <input id="cep" class="input100" type="text" name="cep" placeholder="CEP">
+                                <input id="cep" class="input100" type="text" name="cep" onkeypress="MascaraCEP(formulario.cep)" placeholder="CEP">
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
                                     <i class="fa fa-map-pin" aria-hidden="true"></i>

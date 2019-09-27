@@ -204,3 +204,21 @@ function localidade(){
     }, 'json');  
 
 } 
+
+function validaCEP(cep){
+    var validacep = /^[0-9]{8}$/;
+
+    if(validacep.test(cep)){
+        return true;
+    }else{
+        return false;
+    }
+
+}
+
+function MascaraCEP(cep){
+    if(mascaraInteiro(cep)==false){
+            event.returnValue = false;
+    }       
+    return formataCampo(cep, '00000000', event);
+}

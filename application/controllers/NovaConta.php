@@ -122,12 +122,30 @@ class NovaConta extends CI_Controller {
 
 			$this->form_validation->set_data($data);
 
+			//dados empresa contabilidade
+			$this->form_validation->set_rules($ip, 'IP Cliente', 'trim|valid_ip');
+			$this->form_validation->set_rules('cpf', 'CPF', 'trim|required|is_unique[usuarios.cont_cpf]');
+			$this->form_validation->set_rules('crc', 'CRC', 'trim|required|is_unique[usuarios.cont_crc]');
+
+			//dados para contato
+			$this->form_validation->set_rules('nomeContador', 'Nome completo', 'trim|required');
+			$this->form_validation->set_rules('cep', 'CEP', 'trim|required');
+			$this->form_validation->set_rules('logradouro', 'Rua (Endereço)', 'trim|required');
+			$this->form_validation->set_rules('cidade', 'Cidade', 'trim|required');
+			$this->form_validation->set_rules('uf', 'uf', 'trim|required');
+			$this->form_validation->set_rules('telefone', 'Telefone Empresa', 'trim|required');
+
+			//dados de login
+			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[usuarios.cont_email]');
+			$this->form_validation->set_rules('senha', 'Senha', 'trim|required|min_length[6]');
+			$this->form_validation->set_rules('senhaConfirmada', 'Confirmação de senha', 'trim|required|matches[senha]|min_length[6]');
 
 			if($this->form_validation->run()){
+				
 				$this->load->helper('cpf');
 				if(validaCpf($cpf)){
 						$this->load->model("usuarios");
-						$status = $this->usuarios->inserirContador($data);
+						$status = $this->usuarios->inserirContador($data, $ip);
 						//envia e-mail
 						$this->load->view('login');
 					}else{
@@ -141,8 +159,9 @@ class NovaConta extends CI_Controller {
 					$data['erro'] = "alert-validate";
 					$data['mensagem'] = "Este CPF já existe.";
 					$this->load->view('cadastro-contador', $data);
-			}
+				}
 		}
+		//var_dump($this->form_validation->error_array());
 		//$this->load->view('cadastro-contador');
 	}
 }
