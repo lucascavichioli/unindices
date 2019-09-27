@@ -22,6 +22,11 @@ class Usuarios extends CI_Model {
           $contabilidade['cont_rec_cnpj'] = $data['cnpj'];
           $contabilidade['cont_responsavel'] = $data['responsavel'];
           $contabilidade['cont_cpf'] = null;
+          $contabilidade['cont_uf'] = null;
+          $contabilidade['cont_logradouro'] = null;
+          $contabilidade['cont_localidade'] = null;
+          $contabilidade['cont_cep'] = $data['cep'];
+
 
           $this->db->insert('usuarios', $contabilidade);
           
@@ -37,5 +42,9 @@ class Usuarios extends CI_Model {
             log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
             return false;
         }
+    }
+
+    public function inserirContador(){
+        
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-    function valida_cnpj($cnpj){
+    function validaCnpj($cnpj){
         //Etapa 1: Cria um array com apenas os digitos numéricos, isso permite receber o cnpj em diferentes formatos como "00.000.000/0000-00", "00000000000000", "00 000 000 0000 00" etc...
 		if(strlen($cnpj) >= 14) {
 			$j=0;

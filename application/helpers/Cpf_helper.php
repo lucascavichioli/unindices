@@ -1,6 +1,6 @@
 <?php
 
-function validaCPF($cpf = null) {
+function validaCpf($cpf = null) {
 
     // Verifica se um número foi informado
     if(empty($cpf)) {

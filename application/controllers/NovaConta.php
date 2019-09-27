@@ -21,14 +21,14 @@ class NovaConta extends CI_Controller {
 
 			$data = array();
 
-			$cnpjPost = $this->input->post('cnpj');
+			$cnpjPost = $this->input->post('cnpj', true);
 
-			$data['nomeEmpresa'] = $this->input->post('nomeEmpresa');
-			$data['atvEmpresa'] = $this->input->post('atvEmpresa');
-			$data['responsavel'] = $this->input->post('responsavel');
-			$data['telefone'] = $this->input->post('telefone');
+			$data['nomeEmpresa'] = $this->input->post('nomeEmpresa', true);
+			$data['atvEmpresa'] = $this->input->post('atvEmpresa', true);
+			$data['responsavel'] = $this->input->post('responsavel', true);
+			$data['telefone'] = $this->input->post('telefone', true);
 
-			$data['email'] = $this->input->post('email');
+			$data['email'] = $this->input->post('email', true);
 			$data['senha'] = $this->input->post('senha');
 			$data['senhaConfirmada'] = $this->input->post('senhaConfirmada');
 
@@ -58,10 +58,11 @@ class NovaConta extends CI_Controller {
 			if($this->form_validation->run()){
 				$this->load->helper('cnpj');
 				$this->load->helper('receitaws');
-				if(valida_cnpj($cnpj)){
+				if(validaCnpj($cnpj)){
 					$json = apiReceita($cnpj);
 					if(!empty($json)){
 						$objCnpj = processaDadosCnpj($json);
+						$data['cep'] = $objCnpj['rec_cep'];
 						$this->load->model("receitaws");
 						$status = $this->receitaws->inserir($objCnpj);
 						if($status){
@@ -94,7 +95,53 @@ class NovaConta extends CI_Controller {
 		if(strcmp($_SERVER['REQUEST_METHOD'], 'POST') !== 0){
 			$this->load->view('cadastro-contador');
 		}else{
+			$ip = getenv('REMOTE_ADDR') ?? $_SERVER["REMOTE_ADDR"];
+			
+			$this->load->helper( array( 'form' ,  'url' ));
+			$this->load->library( 'form_validation' );
+			$this->load->database();
 
+			$data = array();
+
+			$cpfPost = $this->input->post('cpf', true);
+			$cpf = preg_replace("/[^0-9]/", "", $cpfPost);
+			$cpf = filter_var($cpf, FILTER_SANITIZE_NUMBER_INT);
+			$data['cpf'] = $cpf;
+			$data['crc'] = $this->input->post('crc', true);
+
+			$data['nomeContador'] = $this->input->post('nomeContador', true);
+			$data['cep'] = $this->input->post('cep', true);
+			$data['logradouro'] = $this->input->post('logradouro', true);
+			$data['cidade'] = $this->input->post('cidade', true);
+			$data['uf'] = $this->input->post('uf', true);
+			$data['telefone'] = $this->input->post('telefone', true);
+
+			$data['email'] = $this->input->post('email', true);
+			$data['senha'] = $this->input->post('senha');
+			$data['senhaConfirmada'] = $this->input->post('senhaConfirmada');
+
+			$this->form_validation->set_data($data);
+
+
+			if($this->form_validation->run()){
+				$this->load->helper('cpf');
+				if(validaCpf($cpf)){
+						$this->load->model("usuarios");
+						$status = $this->usuarios->inserirContador($data);
+						//envia e-mail
+						$this->load->view('login');
+					}else{
+						$data['cpf'] = $cpfPost;
+						$data['erro'] = "alert-validate";
+						$data['mensagem'] = "Cpf inválido! Tente outro!";
+						$this->load->view('cadastro-contador', $data);
+					}
+				}else{
+					$data['cpf'] = $cpfPost;
+					$data['erro'] = "alert-validate";
+					$data['mensagem'] = "Este CPF já existe.";
+					$this->load->view('cadastro-contador', $data);
+			}
 		}
 		//$this->load->view('cadastro-contador');
 	}

@@ -35,48 +35,72 @@ $(function(){
     }
   });
 
-  $('.nextCrc').click(function(){
-    var strCPF = "10320501963";
-alert(TestaCPF(strCPF));
 
-            if(((dig1*10)+dig2) != digito){
-              $('#divCnpj').addClass('alert-validate');
-            
+$(document).ready(function() {  
+    $('#cep').focusout(function(){
+      localidade();
+    });
+});
+
+$('.nextCont').click(function(){
+  var check = true;
+  var nomeContador = document.getElementById('nomeContador').value;
+  var cep = document.getElementById('cep').value;
+  var telefone = document.getElementById('telefone').value;
+  var regex = new RegExp('^\\([0-9]{2}\\)((3[0-9]{3}-[0-9]{4})|(9[0-9]{3}-[0-9]{5}))$');
+
+  if(nomeContador.trim() == ''){
+    $('#divNomeCompleto').addClass('alert-validate');
+    check = false;
+  }
+  if(cep.trim() == ''){
+    $('#divCep').addClass('alert-validate');
+    check = false;
+  }
+  if(!regex.test(telefone)){
+    $('#divTelefone').addClass('alert-validate');
+    check = false;
+  }
+
+  if(check){ 
+    atual_fs = $(this).parent();
+    prox_fs = $(this).parent().next();
+
+    $('#progress li').eq($('fieldset').index(prox_fs)).addClass('ativo');
+    atual_fs.hide(800);
+    prox_fs.show(800);
+  }
+});
+
+
+  $('.nextCpf').click(function(){
+    var crc = document.getElementById('crc').value;
+    var strCPF = document.getElementById('cpf').value.replace(".", "").replace(".", "").replace("-", "");
+            if(!validaCPF(strCPF)){
+              $('#divCpf').addClass('alert-validate');
             }else{
-              $.get("https://www.receitaws.com.br/v1/cnpj/"+ cnpj, function(data, status){ 
-                if(status == 'success'){
-                      if(data.status !== "ERROR"){
-                            if(data.situacao === "ATIVA"){
-                                document.getElementById('nomeEmpresa').value = data.nome;
-                                document.getElementById('atvPrincipal').value = data.atividade_principal[0]["code"];
-                                document.getElementById('atvPrincipal').setAttribute("readonly","readonly");
-                                document.getElementById('nomeEmpresa').setAttribute("readonly","readonly");
-                            }
-                      }
-                  
-                  }                  
-                }, 'jsonp')
-
-                .done(function(){
-                  console.log('Consulta realizada com sucesso.');
-                })
-                
-                .fail(function(){
-                  Swal.fire({
-                    title: 'Aviso!',
-                    text: 'Erro ao buscar dados. Por favor preencha os dados corretamente',
-                    type: 'warning',
-                    confirmButtonText: 'Ok'
-                  })
-                });
-
+              if(crc.trim() != ""){
                   atual_fs = $(this).parent();
-                  prox_fs = $(this).parent().next();
+                  prox_fs  = $(this).parent().next();
               
                   $('#progress li').eq($('fieldset').index(prox_fs)).addClass('ativo');
                   atual_fs.hide(800);
                   prox_fs.show(800);
-                            
+              }else{
+                $('#divCrc').addClass('alert-validate');
+              }
+                  
+                  /*const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                  })
+                  
+                  Toast.fire({
+                    type: 'success',
+                    title: 'Signed in successfully'
+                  })*/
                
             }
   });

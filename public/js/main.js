@@ -140,6 +140,13 @@ function formataCampo(campo, Mascara, evento) {
     }
 }
 
+function MascaraCPF(cpf){
+    if(mascaraInteiro(cpf)==false){
+            event.returnValue = false;
+    }       
+    return formataCampo(cpf, '000.000.000-00', event);
+}
+
 function validaCPF(strCPF) {
     var Soma;
     var Resto;
@@ -184,3 +191,16 @@ function validaCNPJ(cnpj){
         return true;
     
 }
+
+function localidade(){  
+
+    var cep = $('#cep').val().trim();  
+
+    $.get("https://viacep.com.br/ws/" + cep + "/json/", function(data, status){
+        document.getElementById("logradouro").value = data.logradouro;
+        document.getElementById("cidade").value = data.localidade;
+        document.getElementById("uf").value = data.uf;
+
+    }, 'json');  
+
+} 

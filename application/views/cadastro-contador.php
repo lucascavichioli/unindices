@@ -43,41 +43,62 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </ul>
                         <fieldset>
                             <h2>Identificação</h2><br>
-                            <!--<h3>Preencha com seu CNPJ</h3>-->
-                            <div id="divCnpj" class="wrap-input100 validate-input <?= $erro ?? '' ?>" data-validate = "<?= $mensagem ?? "Preencha seu código CRC válido"?>">
-                                <input id="crc" class="input100" type="text" name="crc" placeholder="CRC" value="<?= $crc ?? '' ?>" onkeypress="" maxlength="" required>
+                            <!--<h3>Preencha com seu CPF</h3>-->
+                            <div id="divCpf" class="wrap-input100 validate-input <?= $erro ?? '' ?>" data-validate = "<?= $mensagem ?? "Preencha seu CPF"?>">
+                                <input id="cpf" class="input100" type="text" name="cpf" placeholder="CPF" value="<?= $cpf ?? '' ?>" onkeypress="MascaraCPF(formulario.cpf)" maxlength="14" required>
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
                                     <i class="fa fa-id-card" aria-hidden="true"></i>
                                 </span>
                             </div>
-                            <input id="crcBtn" class="nextCrc cadastro100-form-btn" type="submit" name="next" value="PRÓXIMO">
+                            <div id="divCrc" class="wrap-input100 validate-input <?= $erro ?? '' ?>" data-validate = "<?= $mensagem ?? "Preencha seu Registro de Contabilidade"?>">
+                                <input id="crc" class="input100" type="text" name="crc" placeholder="CRC/UF" value="<?= $crc ?? '' ?>"  maxlength="20" required>
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+                                    <i class="fa fa-id-badge" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <input id="cpfBtn" class="nextCpf cadastro100-form-btn" type="submit" name="next" value="PRÓXIMO">
                         </fieldset>
 
                         <fieldset>
                             <h2>Dados cadastrais</h2><br>
                             <!--<h3>Dados para contato</h3>-->
-                            <div id="divNomeEmpresa" class="wrap-input100 validate-input" data-validate = "Nome da empresa">
-                                <input id="nomeEmpresa" class="input100" type="text" name="nomeEmpresa" placeholder="Nome">
+                            <div id="divNomeCompleto" class="wrap-input100 validate-input" data-validate = "Preencha seu nome completo">
+                                <input id="nomeContador" class="input100" type="text" name="nomeContador" placeholder="Nome Completo">
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
                                     <i class="fa fa-building" aria-hidden="true"></i>
                                 </span>
                             </div>
-                            <div id="divAtvEmpresa" class="wrap-input100 validate-input" data-validate = "Atividade da empresa">
-                                <input id="atvPrincipal" class="input100" type="text" name="atvEmpresa" placeholder="Atividade principal">
+                            <div id="divCep" class="wrap-input100 validate-input" data-validate = "Preencha um CEP">
+                                <input id="cep" class="input100" type="text" name="cep" placeholder="CEP">
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
-                                    <i class="fa fa-id-card" aria-hidden="true"></i>
+                                    <i class="fa fa-map-pin" aria-hidden="true"></i>
                                 </span>
                             </div>
-                            <div id="divResponsavel" class="wrap-input100 validate-input" data-validate = "Nome do responsável">
-                                <input id="responsavel" class="input100" type="text" name="responsavel"  placeholder="Nome do responsável">
+                            <div id="divLogradouro" class="wrap-input100 validate-input" data-validate = "Digite o nome da sua rua">
+                                <input id="logradouro" class="input100" type="text" name="logradouro"  placeholder="Nome da rua">
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
-                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    <i class="fa fa-road" aria-hidden="true"></i>
                                 </span>
                             </div>
+                            <div id="divCidade" class="wrap-input100 validate-input" data-validate = "Digite sua cidade">
+                                <input id="cidade" class="input100" type="text" name="cidade"  placeholder="Cidade">
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+                                    <i class="fa fa-university" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <div id="divUf" class="wrap-input100 validate-input" data-validate = "Digite um estado">
+                                <input id="uf" class="input100" type="text" name="uf" placeholder="Estado">
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+                                    <i class="fa fa-flag" aria-hidden="true"></i>
+                                </span>
+                            </div>       
                             <div id="divTelefone" class="wrap-input100 validate-input" data-validate = "Preencha um telefone válido">
                                 <input id="telefone" class="input100" type="text" name="telefone" onkeypress="MascaraTelefone(formulario.telefone);" maxlength="14" placeholder="(DDD)####-##### ou (DDD)####-####">
                                 <span class="focus-input100"></span>
@@ -86,7 +107,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </span>
                             </div>            
                             <input class="prev  cadastro100-form-btn" type="submit" name="prev" value="VOLTAR">
-                            <input class="nextTwo  cadastro100-form-btn" type="submit" name="next" value="PRÓXIMO">
+                            <input class="nextCont cadastro100-form-btn" type="submit" name="next" value="PRÓXIMO">
                         </fieldset>
 
                         <fieldset>
