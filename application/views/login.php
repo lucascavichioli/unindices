@@ -38,15 +38,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						UnIndices
 					</span>
 					
-					<div class="wrap-input100 validate-input" data-validate = "Preencha seu e-mail, código ou CPF">
-						<input class="input100" type="text" name="usuario" placeholder="Email / Código / CPF">
+					<div class="wrap-input100 validate-input <?= $alert ?? ''?>" data-validate = "<?= $mensagem ?? 'Preencha sua e-mail'?>">
+						<input class="input100" type="text" name="usuario" placeholder="Email">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
 						</span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Preencha sua senha">
+					<div class="wrap-input100 validate-input  <?= $alert ?? ''?>" data-validate = "<?= $mensagem ?? 'Preencha sua senha'?>">
 						<input class="input100" type="password" name="pass" placeholder="Senha">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
