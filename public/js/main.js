@@ -200,8 +200,22 @@ function localidade(){
         document.getElementById("logradouro").value = data.logradouro;
         document.getElementById("cidade").value = data.localidade;
         document.getElementById("uf").value = data.uf;
+        var elt = document.getElementById("uf");
+        var opt = elt.getElementsByTagName("option");
+        for(var i = 0; i < opt.length; i++) {
+          if(opt[i].value == data.uf) {
+            elt.value = data.uf;
+            $("#uf").addClass("selectReadonly");
+          }
+        }
 
-    }, 'json');  
+    }, 'json')
+    .fail(function(){
+        $("#uf").removeClass("selectReadonly");
+        document.getElementById("logradouro").value = "";
+        document.getElementById("cidade").value = "";
+        document.getElementById("uf").value = "";
+    });
 
 } 
 

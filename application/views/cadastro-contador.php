@@ -93,12 +93,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </span>
                             </div>
                             <div id="divUf" class="wrap-input100 validate-input" data-validate = "Digite um estado">
+                            <select id="uf" class="input100">
+                            <span class="focus-input100"></span>
+                                <option value=""></option>
+                                <option value="SP">SP</option>
+                                <option value="RJ">RJ</option>
+                                <option value="PR">PR</option>
+                                <option value="SC">SC</option>
+                            </select>
+                            </div>
+                            <!--<div id="divUf" class="wrap-input100 validate-input" data-validate = "Digite um estado">
                                 <input id="uf" class="input100" type="text" name="uf" placeholder="Estado">
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
                                     <i class="fa fa-flag" aria-hidden="true"></i>
                                 </span>
-                            </div>       
+                            </div>-->
                             <div id="divTelefone" class="wrap-input100 validate-input" data-validate = "Preencha um telefone válido">
                                 <input id="telefone" class="input100" type="text" name="telefone" onkeypress="MascaraTelefone(formulario.telefone);" maxlength="14" placeholder="(DDD)####-##### ou (DDD)####-####">
                                 <span class="focus-input100"></span>

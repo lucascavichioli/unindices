@@ -79,7 +79,11 @@ ul, li {
 	list-style-type: none;
 }
 
-
+.selectReadonly {
+  background: #eee; /*Simular campo inativo - Sugestão @GabrielRodrigues*/
+  pointer-events: none;
+  touch-action: none;
+}
 /*---------------------------------------------*/
 input {
 	outline: none;
