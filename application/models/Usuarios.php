@@ -80,18 +80,10 @@ class Usuarios extends CI_Model {
           }
     }
 
-    public function getUser($email, $senha){
+    public function getUser($email){
         $this->db->select('cont_email, cont_senha');
-        $consulta = $this->db->get_where('usuarios', array( 'cont_email'  => $email));
+        $consulta = $this->db->get_where('usuarios', array( 'cont_email'  => $email ));
         
-        foreach ($consulta->result() as $campo)
-        {
-            $email = $campo->cont_email;
-            $hash = $campo->cont_senha;
-        }
-
-        if(password_verify($senha, $hash ?? null)){
-            return true;
-        }
+        return $consulta->result();
     }
 }

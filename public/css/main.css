@@ -20,10 +20,6 @@
   src: url('../fonts/poppins/Poppins-Medium.ttf'); 
 }
 
-@font-face {
-  font-family: Montserrat-Bold;
-  src: url('../fonts/montserrat/Montserrat-Bold.ttf'); 
-}
 
 /*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
@@ -357,7 +353,7 @@ iframe {
 }
 
 .login100-form-btn {
-  font-family: Montserrat-Bold;
+  font-family: Poppins-Bold;
   font-size: 15px;
   line-height: 1.5;
   color: #fff;
@@ -390,7 +386,7 @@ iframe {
 /*------------------------------------------------------------------
 [ Cadastros ]*/
 .cadastro100-form-btn {
-  font-family: Montserrat-Bold;
+  font-family: Poppins-Bold;
   font-size: 15px;
   line-height: 1.5;
   color: #fff;

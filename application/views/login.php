@@ -33,7 +33,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<img src="<?=base_url("public/images/img-01.png")?>" alt="IMG">
 				</div>
 
-				<form method="post" class="login100-form validate-form" action="<?=base_url("painel")?>">
+				<form method="post" class="login100-form validate-form" action="<?=base_url("painel/login")?>">
 					<span class="login100-form-title">
 						UnIndices
 					</span>
