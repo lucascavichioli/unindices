@@ -40,7 +40,8 @@
                     type: 'success',
                     title: 'Dados enviados com sucesso!',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 1500,
+                    font: Poppins
                   })
             }
             return check;

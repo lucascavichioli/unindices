@@ -59,11 +59,18 @@ class Painel extends CI_Controller {
 
 	public function dashboard(){
 		if($this->session->userdata('usuario') != '' && $this->session->userdata('logado') === true){
-			$this->load->view('painel-de-controle');
+			$this->load->view('dashboard');
 		}else{
 			redirect(base_url() . "painel");
 		}
-		
+	}
+
+	public function adicionarEmpresa(){
+		if($this->session->userdata('usuario') != '' && $this->session->userdata('logado') === true){
+			$this->load->view('adicionar-empresa.php');
+		}else{
+			redirect(base_url() . "painel");
+		}
 	}
 
 	public function sair(){
