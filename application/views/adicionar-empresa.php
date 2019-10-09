@@ -19,17 +19,9 @@
           </button>
           <div class="collapse navbar-collapse justify-content-end" id="navigation">
             <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="#pablo">
-                  <i class="now-ui-icons media-2_sound-wave"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Stats</span>
-                  </p>
-                </a>
-              </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="now-ui-icons location_world"></i>
+                  <i class="now-ui-icons users_single-02"></i>
                   <p>
                     <span class="d-lg-none d-md-block">Some Actions</span>
                   </p>
@@ -39,14 +31,6 @@
                   <a class="dropdown-item" href="#">Another action</a>
                   <a class="dropdown-item" href="#">Something else here</a>
                 </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#pablo">
-                  <i class="now-ui-icons users_single-02"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Account</span>
-                  </p>
-                </a>
               </li>
             </ul>
           </div>
@@ -65,19 +49,19 @@
               <div class="card-body">
                 <form>
                   <div class="row">
-                    <div class="col-md-5 pr-1">
+                    <div class="col-md-6 pr-1">
                       <div class="form-group">
-                        <label>Company (disabled)</label>
-                        <input type="text" class="form-control" disabled="" placeholder="Company" value="Creative Code Inc.">
+                        <label>Nome fantasia</label>
+                        <input type="text" class="form-control" placeholder="Company" value="Creative Code Inc.">
                       </div>
                     </div>
-                    <div class="col-md-3 px-1">
+                    <!--<div class="col-md-3 px-1">
                       <div class="form-group">
                         <label>Username</label>
                         <input type="text" class="form-control" placeholder="Username" value="michael23">
                       </div>
-                    </div>
-                    <div class="col-md-4 pl-1">
+                    </div>-->
+                    <div class="col-md-6 pl-1">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
                         <input type="email" class="form-control" placeholder="Email">
@@ -87,50 +71,37 @@
                   <div class="row">
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
-                        <label>First Name</label>
+                        <label>CNAE - Atividade Principal</label>
                         <input type="text" class="form-control" placeholder="Company" value="Mike">
                       </div>
                     </div>
                     <div class="col-md-6 pl-1">
                       <div class="form-group">
-                        <label>Last Name</label>
+                        <label>Quantidade de empregados</label>
                         <input type="text" class="form-control" placeholder="Last Name" value="Andrew">
                       </div>
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6 pr-1">
                       <div class="form-group">
-                        <label>Address</label>
+                        <label>Telefone</label>
                         <input type="text" class="form-control" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09">
                       </div>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4 pr-1">
+                    <div class="col-md-6 pl-1">
                       <div class="form-group">
-                        <label>City</label>
+                        <label>Celular</label>
                         <input type="text" class="form-control" placeholder="City" value="Mike">
-                      </div>
-                    </div>
-                    <div class="col-md-4 px-1">
-                      <div class="form-group">
-                        <label>Country</label>
-                        <input type="text" class="form-control" placeholder="Country" value="Andrew">
-                      </div>
-                    </div>
-                    <div class="col-md-4 pl-1">
-                      <div class="form-group">
-                        <label>Postal Code</label>
-                        <input type="number" class="form-control" placeholder="ZIP Code">
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-12">
-                      <div class="form-group">
-                        <label>About Me</label>
-                        <textarea rows="4" cols="80" class="form-control" placeholder="Here can be your description" value="Mike">Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</textarea>
+                      <div class="container-login100-form-btn">
+                        <button class="login100-form-btn">
+                          CADASTRAR
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -141,20 +112,20 @@
           <div class="col-md-4">
             <div class="card card-user">
               <div class="image">
-                <img src="../assets/img/bg5.jpg" alt="...">
+                <img src="" alt="...">
               </div>
               <div class="card-body">
                 <div class="author">
                   <a href="#">
-                    <img class="avatar border-gray" src="../assets/img/mike.jpg" alt="...">
-                    <h5 class="title">Mike Andrew</h5>
+                    <img class="avatar border-gray" src="" alt="...">
+                    <h5 class="title">Ajuda</h5>
                   </a>
                   <p class="description">
-                    michael24
+                    UniIndices
                   </p>
                 </div>
                 <p class="description text-center">
-                  "Lamborghini Mercy
+                  Não nos responsabilizamos por danos morais
                   <br> Your chick she so thirsty
                   <br> I'm in that two seat Lambo"
                 </p>
