@@ -19,17 +19,9 @@
           </button>
           <div class="collapse navbar-collapse justify-content-end" id="navigation">
             <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="#pablo">
-                  <i class="now-ui-icons media-2_sound-wave"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Stats</span>
-                  </p>
-                </a>
-              </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="now-ui-icons location_world"></i>
+                  <i class="now-ui-icons users_single-02"></i>
                   <p>
                     <span class="d-lg-none d-md-block">Some Actions</span>
                   </p>
@@ -39,14 +31,6 @@
                   <a class="dropdown-item" href="#">Another action</a>
                   <a class="dropdown-item" href="#">Something else here</a>
                 </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#pablo">
-                  <i class="now-ui-icons users_single-02"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Account</span>
-                  </p>
-                </a>
               </li>
             </ul>
           </div>
@@ -61,8 +45,8 @@
           <div class="col-lg-4">
             <div class="card card-chart">
               <div class="card-header">
-                <h5 class="card-category">Global Sales</h5>
-                <h4 class="card-title">Shipped Products</h4>
+                <h5 class="card-category">Empresa 1</h5>
+                <h4 class="card-title">Empresa Têxtil X</h4>
                 <div class="dropdown">
                   <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
                   <i class="fas fa-cog"></i>
@@ -77,12 +61,12 @@
               </div>
               <div class="card-body">
                 <div class="chart-area">
-                  <canvas id="lineChartExample"></canvas>
+                  <center>Links</center>
                 </div>
               </div>
               <div class="card-footer">
                 <div class="stats">
-                  <i class="now-ui-icons arrows-1_refresh-69"></i> Just Updated
+                  <i class="now-ui-icons arrows-1_refresh-69"></i> 
                 </div>
               </div>
             </div>
@@ -90,8 +74,8 @@
           <div class="col-lg-4 col-md-6">
             <div class="card card-chart">
               <div class="card-header">
-                <h5 class="card-category">2018 Sales</h5>
-                <h4 class="card-title">All products</h4>
+                <h5 class="card-category">Empresa 2</h5>
+                <h4 class="card-title">Padaria F</h4>
                 <div class="dropdown">
                   <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
                   <i class="fas fa-cog"></i>
@@ -106,12 +90,12 @@
               </div>
               <div class="card-body">
                 <div class="chart-area">
-                  <canvas id="lineChartExampleWithNumbersAndGrid"></canvas>
+                  <center>Links</center>
                 </div>
               </div>
               <div class="card-footer">
                 <div class="stats">
-                  <i class="now-ui-icons arrows-1_refresh-69"></i> Just Updated
+                  <i class="now-ui-icons arrows-1_refresh-69"></i> 
                 </div>
               </div>
             </div>
@@ -119,23 +103,34 @@
           <div class="col-lg-4 col-md-6">
             <div class="card card-chart">
               <div class="card-header">
-                <h5 class="card-category">Email Statistics</h5>
-                <h4 class="card-title">24 Hours Performance</h4>
+                <h5 class="card-category">Empresa 3</h5>
+                <h4 class="card-title">Padaria da maria Z</h4>
+                <div class="dropdown">
+                  <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
+                  <i class="fas fa-cog"></i>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item text-danger" href="#">Remove Data</a>
+                  </div>
+                </div>
               </div>
               <div class="card-body">
                 <div class="chart-area">
-                  <canvas id="barChartSimpleGradientsNumbers"></canvas>
+                <center>Links</center>
                 </div>
               </div>
               <div class="card-footer">
                 <div class="stats">
-                  <i class="now-ui-icons ui-2_time-alarm"></i> Last 7 days
+                  <i class="now-ui-icons arrows-1_refresh-69"></i> 
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="row">
+        <!--<div class="row">
           <div class="col-md-6">
             <div class="card  card-tasks">
               <div class="card-header ">
@@ -316,7 +311,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 

@@ -7,4 +7,5 @@ class NovaSenha extends CI_Controller {
 	{
 		$this->load->view('nova-senha');
 	}
+	
 }

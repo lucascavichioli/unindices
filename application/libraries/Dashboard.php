@@ -22,6 +22,3 @@ class Dashboard {
 			$CI->load->view('scripts',$data);
 		}
 }
- 
-/* End of file Template.php */
-/* Location: ./system/application/libraries/Template.php */

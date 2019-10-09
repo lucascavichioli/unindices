@@ -30,7 +30,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div class="container-background100">
 			<div class="wrap-center100">
 				<div class="login100-pic js-tilt" data-tilt>
-					<img src="<?=base_url("public/images/img-01.png")?>" alt="IMG">
+					<img src="<?=base_url("public/images/imagem.png")?>" alt="IMG">
 				</div>
 
 				<form method="post" class="login100-form validate-form" action="<?=base_url("painel/login")?>">
