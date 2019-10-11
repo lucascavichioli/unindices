@@ -12,5 +12,5 @@ Framework -> CodeIgniter 3.1.10.
 
 ### Tarefas desenvolvidas
 
-- [ ] Autenticação de usuário (login)
-- [ ] Painel administrativo
+- [x] Autenticação de usuário (login)
+- [x] Painel administrativo
