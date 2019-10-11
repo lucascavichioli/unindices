@@ -7,6 +7,7 @@ class EmpresaCliente extends CI_Controller {
 
 	}
 
+
 	public function cadastrarBalanco(){
 
 	}

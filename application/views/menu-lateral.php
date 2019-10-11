@@ -21,7 +21,7 @@
             </a>
           </li>
           <li class="<?=$activeAddEmpresa ?? ''?>">
-            <a href="<?=base_url()?>painel/adicionarempresa">
+            <a href="<?=base_url()?>painel/novaempresa">
             <i class="fas fa-plus"></i>
               <p>Adicionar Empresa</p>
             </a>

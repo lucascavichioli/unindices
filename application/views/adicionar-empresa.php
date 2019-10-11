@@ -47,12 +47,12 @@
                 <h5 class="title">Adicionar Empresa</h5>
               </div>
               <div class="card-body">
-                <form>
+                <form method='post' action=''>
                   <div class="row">
                     <div class="col-md-6 pr-1">
-                      <div class="form-group">
+                      <div class="form-group <?=$alert ?? ''?>" data-validate = "Preencha um nome ou apelido">
                         <label>Nome fantasia</label>
-                        <input type="text" class="form-control" placeholder="Company" value="Creative Code Inc.">
+                        <input name="nomeFantasia" type="text" class="form-control" placeholder="Nome fantasia / Apelido" >
                       </div>
                     </div>
                     <!--<div class="col-md-3 px-1">
@@ -63,8 +63,8 @@
                     </div>-->
                     <div class="col-md-6 pl-1">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" placeholder="Email">
+                        <label for="exampleInputEmail1">E-mail</label>
+                        <input name="email" type="email" class="form-control" placeholder="E-mail">
                       </div>
                     </div>
                   </div>
@@ -72,13 +72,13 @@
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>CNAE - Atividade Principal</label>
-                        <input type="text" class="form-control" placeholder="Company" value="Mike">
+                        <input name="cnae" type="text" class="form-control" placeholder="CNAE">
                       </div>
                     </div>
                     <div class="col-md-6 pl-1">
                       <div class="form-group">
-                        <label>Quantidade de empregados</label>
-                        <input type="text" class="form-control" placeholder="Last Name" value="Andrew">
+                        <label>Quantidade de colaboradores</label>
+                        <input name="qtdColaboradores" type="number" class="form-control" placeholder="Quantidade de empregados" >
                       </div>
                     </div>
                   </div>
@@ -86,13 +86,13 @@
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Telefone</label>
-                        <input type="text" class="form-control" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09">
+                        <input name="telefone" type="phone" class="form-control" placeholder="Telefone">
                       </div>
                     </div>
                     <div class="col-md-6 pl-1">
                       <div class="form-group">
                         <label>Celular</label>
-                        <input type="text" class="form-control" placeholder="City" value="Mike">
+                        <input name="celular" type="phone" class="form-control" placeholder="Celular" >
                       </div>
                     </div>
                   </div>
@@ -112,12 +112,12 @@
           <div class="col-md-4">
             <div class="card card-user">
               <div class="image">
-                <img src="" alt="...">
-              </div>
+                <!--<img src="" alt="...">-->
+              </div> 
               <div class="card-body">
                 <div class="author">
                   <a href="#">
-                    <img class="avatar border-gray" src="" alt="...">
+                    <!--<img class="avatar border-gray" src="" alt="...">-->
                     <h5 class="title">Ajuda</h5>
                   </a>
                   <p class="description">
@@ -125,22 +125,14 @@
                   </p>
                 </div>
                 <p class="description text-center">
-                  Não nos responsabilizamos por danos morais
-                  <br> Your chick she so thirsty
-                  <br> I'm in that two seat Lambo"
+                  Escolha um nome fantasia ou apelido para lembrar da empresa-cliente
+                  <br> Não estamos interessados em saber qual é a empresa
+                  <br> Ao preencha todos os dados
                 </p>
               </div>
               <hr>
               <div class="button-container">
-                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-                  <i class="fab fa-facebook-f"></i>
-                </button>
-                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-                  <i class="fab fa-twitter"></i>
-                </button>
-                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-                  <i class="fab fa-google-plus-g"></i>
-                </button>
+                <a href="<?=base_url("dokuwiki")?>">Acesse a documentação</a>
               </div>
             </div>
           </div>

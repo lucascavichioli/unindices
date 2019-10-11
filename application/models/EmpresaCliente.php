@@ -9,7 +9,9 @@ class EmpresaCliente extends CI_Model {
     }
 
     public function adicionarEmpresaCliente($empresa){
-
+		print "<pre>";
+		print_r($empresa);
+		print "</pre>";
 	}
 
 	public function removerEmpresaCliente($empresa){
