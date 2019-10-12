@@ -8,10 +8,11 @@ class EmpresaCliente extends CI_Model {
         $this->load->database();
     }
 
-    public function adicionarEmpresaCliente($empresa){
-		print "<pre>";
-		print_r($empresa);
-		print "</pre>";
+    public function adicionarEmpresaCliente($empresa, $ip){
+		$this->db->insert('empresa', $empresa);
+		$log = array('ip_cliente' => $ip, 'operacao' => 'insert', 'usuario' => $this->session->userdata('usuario'), 'id_afetado' => $empresa['nomeFantasia'], 'tabela_afetada' => 'empresa');
+		$this->db->insert('logs', $log);
+		return true;
 	}
 
 	public function removerEmpresaCliente($empresa){

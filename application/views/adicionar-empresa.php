@@ -47,7 +47,7 @@
                 <h5 class="title">Adicionar Empresa</h5>
               </div>
               <div class="card-body">
-                <form method='post' action=''>
+                <form method='post' action='' class="validate-form">
                   <div class="row">
                     <div class="col-md-6 pr-1">
                       <div class="form-group <?=$alert ?? ''?>" data-validate = "Preencha um nome ou apelido">
@@ -70,17 +70,58 @@
                   </div>
                   <div class="row">
                     <div class="col-md-6 pr-1">
-                      <div class="form-group">
+                      <div class="form-group <?=$alert ?? ''?>" data-validate = "Preencha o CNAE da empresa">
                         <label>CNAE - Atividade Principal</label>
                         <input name="cnae" type="text" class="form-control" placeholder="CNAE">
                       </div>
                     </div>
                     <div class="col-md-6 pl-1">
                       <div class="form-group">
+                        <label>Atividades secundárias (CNAES)</label>
+                        <input name="cnaeSec" type="text" class="form-control" placeholder="CNAES separados por ;" >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 pr-1">
+                      <div class="form-group <?=$alert ?? ''?>" data-validate = "Preencha a quantidade de empregados">
                         <label>Quantidade de colaboradores</label>
                         <input name="qtdColaboradores" type="number" class="form-control" placeholder="Quantidade de empregados" >
                       </div>
                     </div>
+                    <div class="form-group col-md-6 pl-1">
+                    <label for="inputState">Estado</label>
+                    <select id="uf" name="uf" class="form-control">
+                    <option value=""></option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                    </select>
+                  </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6 pr-1">
@@ -132,7 +173,7 @@
               </div>
               <hr>
               <div class="button-container">
-                <a href="<?=base_url("dokuwiki")?>">Acesse a documentação</a>
+                <a href="<?=base_url("dokuwiki")?>" target="_blank">Acesse a documentação</a>
               </div>
             </div>
           </div>
