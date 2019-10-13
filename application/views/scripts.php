@@ -1,3 +1,13 @@
+<footer class="footer">
+            <div class="container-fluid">
+            
+              <div class="copyright" id="copyright">
+              Sistema desenvolvido por <a href="https://github.com/lucascavichioli" target="_blank"><u>Lucas Cavichioli</u></a> © 2019
+              </div>
+            </div>
+</footer>
+</div>
+<div class="ps__rail-x" style="left: 0px; bottom: -624px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 624px; right: 0px; height: 657px;"><div class="ps__thumb-y" tabindex="0" style="top: 321px; height: 336px;"></div></div></div>
 </div>
 <script src="<?=base_url()?>public/js/core/jquery.min.js"></script>
   <script src="<?=base_url()?>public/js/core/popper.min.js"></script>
@@ -21,14 +31,5 @@
 
     });
   </script>
-  <footer class="footer">
-        <div class="container-fluid">
-         
-          <div class="copyright" id="copyright">
-          Sistema desenvolvido by <a href="https://github.com/lucascavichioli">Lucas Cavichioli</a> © 2019
-          </div>
-        </div>
-</footer>
-</body>
-
+  </body>
 </html>
