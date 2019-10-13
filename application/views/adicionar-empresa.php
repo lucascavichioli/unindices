@@ -47,10 +47,10 @@
                 <h5 class="title">Adicionar Empresa</h5>
               </div>
               <div class="card-body">
-                <form method='post' action='' class="validate-form">
+                <form id="formulario" method='post' action='' class="validate-form" autocomplete="off">
                   <div class="row">
                     <div class="col-md-6 pr-1">
-                      <div class="form-group <?=$alert ?? ''?>" data-validate = "Preencha um nome ou apelido">
+                      <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
                         <label>Nome fantasia</label>
                         <input name="nomeFantasia" type="text" class="form-control" placeholder="Nome fantasia / Apelido" >
                       </div>
@@ -64,13 +64,13 @@
                     <div class="col-md-6 pl-1">
                       <div class="form-group">
                         <label for="exampleInputEmail1">E-mail</label>
-                        <input name="email" type="email" class="form-control" placeholder="E-mail">
+                        <input name="email" type="text" class="form-control" placeholder="E-mail">
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6 pr-1">
-                      <div class="form-group <?=$alert ?? ''?>" data-validate = "Preencha o CNAE da empresa">
+                      <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
                         <label>CNAE - Atividade Principal</label>
                         <input name="cnae" type="text" class="form-control" placeholder="CNAE">
                       </div>
@@ -84,7 +84,7 @@
                   </div>
                   <div class="row">
                     <div class="col-md-6 pr-1">
-                      <div class="form-group <?=$alert ?? ''?>" data-validate = "Preencha a quantidade de empregados">
+                      <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
                         <label>Quantidade de colaboradores</label>
                         <input name="qtdColaboradores" type="number" class="form-control" placeholder="Quantidade de empregados" >
                       </div>
@@ -92,7 +92,6 @@
                     <div class="form-group col-md-6 pl-1">
                     <label for="inputState">Estado</label>
                     <select id="uf" name="uf" class="form-control">
-                    <option value=""></option>
                                 <option value="AC">Acre</option>
                                 <option value="AL">Alagoas</option>
                                 <option value="AP">Amapá</option>
@@ -127,13 +126,13 @@
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Telefone</label>
-                        <input name="telefone" type="phone" class="form-control" placeholder="Telefone">
+                        <input name="telefone" type="text" class="form-control" onkeypress="MascaraTelefone(formulario.telefone);" maxlength="14" placeholder="(DDD)####-####">
                       </div>
                     </div>
                     <div class="col-md-6 pl-1">
                       <div class="form-group">
                         <label>Celular</label>
-                        <input name="celular" type="phone" class="form-control" placeholder="Celular" >
+                        <input name="celular" type="text" class="form-control" onkeypress="MascaraTelefone(formulario.celular);" maxlength="14" placeholder="(DDD)####-#####">
                       </div>
                     </div>
                   </div>

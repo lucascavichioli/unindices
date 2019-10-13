@@ -93,7 +93,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </span>
                             </div>
                             <div id="divUf" class="wrap-input100 validate-input" data-validate = "Digite um estado">
-                            <select id="uf" class="input100">
+                            <select id="uf" name="uf" class="input100">
                             <span class="focus-input100"></span>
                                 <option value=""></option>
                                 <option value="AC">Acre</option>

@@ -63,6 +63,10 @@ class Painel extends CI_Controller {
 		if($this->session->userdata('usuario') != '' && $this->session->userdata('logado') === true){
 			$data['title'] = "Dashboard";
 			$data['activeDashboard'] = "active ";
+			
+			$this->load->model("empresacliente");
+			$getEmp = $this->empresacliente->listaEmpresaCliente($this->session->userdata('cont_id'));
+			$data['empresas'] = $getEmp;
 			//carrega empresas e atribui a variavel data
 			$this->dashboard->show('dashboard', $data);
 		}else{
@@ -106,7 +110,12 @@ class Painel extends CI_Controller {
 
 				if($this->form_validation->run()){
 					$this->load->model("EmpresaCliente");
-					$this->EmpresaCliente->adicionarEmpresaCliente($data, $ip);
+					$inseriu = $this->EmpresaCliente->adicionarEmpresaCliente($data, $ip);
+					if($inseriu){
+						redirect(base_url() . "painel/dashboard");
+					}else{
+						redirect(base_url() . "painel/novaEmpresa");
+					}
 				}else{
 					$data['title'] = "Adicionar Empresa";
 					$data['activeAddEmpresa'] = "active ";
@@ -126,6 +135,7 @@ class Painel extends CI_Controller {
 	}
 
 	public function sair(){
+		$this->session->unset_userdata('cont_id');
 		$this->session->unset_userdata('usuario');
 		$this->session->unset_userdata('logado');
 		$this->session->sess_destroy();

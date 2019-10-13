@@ -141,25 +141,24 @@ class NovaConta extends CI_Controller {
 			$this->form_validation->set_rules('senhaConfirmada', 'Confirmação de senha', 'trim|required|matches[senha]|min_length[6]');
 
 			if($this->form_validation->run()){
-				
 				$this->load->helper('cpf');
 				if(validaCpf($cpf)){
-						$this->load->model("usuarios");
-						$status = $this->usuarios->inserirContador($data, $ip);
-						//envia e-mail
-						$this->load->view('login');
-					}else{
-						$data['cpf'] = $cpfPost;
-						$data['erro'] = "alert-validate";
-						$data['mensagem'] = "Cpf inválido! Tente outro!";
-						$this->load->view('cadastro-contador', $data);
-					}
+					$this->load->model("usuarios");
+					$status = $this->usuarios->inserirContador($data, $ip);
+					//envia e-mail
+					$this->load->view('login');
 				}else{
 					$data['cpf'] = $cpfPost;
 					$data['erro'] = "alert-validate";
-					$data['mensagem'] = "Este CPF já existe.";
+					$data['mensagem'] = "Cpf inválido! Tente outro!";
 					$this->load->view('cadastro-contador', $data);
 				}
+			}else{
+				$data['cpf'] = $cpfPost;
+				$data['erro'] = "alert-validate";
+				$data['mensagem'] = "Erro ao submeter formulário";
+				$this->load->view('cadastro-contador', $data);
+			}
 		}
 		//var_dump($this->form_validation->error_array());
 		//$this->load->view('cadastro-contador');
