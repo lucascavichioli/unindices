@@ -63,6 +63,8 @@ class Painel extends CI_Controller {
 		if($this->session->userdata('usuario') != '' && $this->session->userdata('logado') === true){
 			$data['title'] = "Dashboard";
 			$data['activeDashboard'] = "active ";
+			$data['tituloGrafico'] = "EMPRESAS CONTRIBUINTES";
+			$data['grafico'] = "<canvas id='bigDashboardChart'></canvas>";
 			
 			$this->load->model("empresacliente");
 			$getEmp = $this->empresacliente->listaEmpresaCliente($this->session->userdata('cont_id'));

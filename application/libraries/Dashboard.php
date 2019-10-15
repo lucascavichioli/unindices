@@ -14,6 +14,9 @@ class Dashboard {
 
 			// carrega menu lateral esquerdo
 			$CI->load->view('menu-lateral',$data);
+			
+			//carrega main panel nav bar
+			$CI->load->view('main-panel-nav-bar',$data);
  
 			// carrega corpo da página
 			$CI->load->view($view,$data);
