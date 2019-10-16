@@ -143,4 +143,5 @@ class Painel extends CI_Controller {
 		$this->session->sess_destroy();
 		$this->load->view('sair');
 	}
+
 }
