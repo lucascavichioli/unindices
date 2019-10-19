@@ -13,15 +13,19 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th class="text-left"><h6>Ativos</h6></th>
+                        <th class="text-left">
+                          <h6>Ativos</h6>
+                        </th>
                         <th class="text-center">
                           <select id="anoAnteriorMenosUm" name="anoAnteriorMenosUm" class="form-control" required>
-                                    <option value="2018">2018</option>
+                              <?php foreach($anoAnteriorMenosUm as $ano_id => $attr){?>
+                              <option value="<?=$attr->ano_id?>"><?=$attr->ano_ref?></option> <?php }?>
                           </select>
                         </th>
                         <th class="text-center">
                           <select id="anoAnterior" name="anoAnterior" class="form-control" required>
-                                    <option value="2019">2019</option>
+                              <?php foreach($anoAnterior as $ano_id => $attr){?>
+                              <option value="<?=$attr->ano_id?>"><?=$attr->ano_ref?></option> <?php }?>
                           </select>
                         </th>
                     </tr>

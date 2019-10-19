@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class EmpresaCliente extends CI_Model {   
+class EmpresaClienteModel extends CI_Model {   
 
     public function __construct(){
         parent::__construct();
@@ -31,7 +31,14 @@ class EmpresaCliente extends CI_Model {
 	public function listaEmpresaCliente($contId){
 		$this->db->select('emp_id, emp_cont_id, emp_nome, emp_cnae, emp_cnae_secundario, emp_uf, emp_qtd_emp');
         $consulta = $this->db->get_where('empresa', array( 'emp_cont_id'  => $contId ));
-        
+		
         return $consulta->result();
+	}
+
+	public function listaEmpresasDeUmUsuario($contId, $empId){
+		$sql = "SELECT emp_id, emp_nome, cont_nome, cont_id FROM empresa INNER JOIN usuarios ON cont_id = emp_cont_id WHERE emp_cont_id = ? AND emp_id = ?";
+		$consulta = $this->db->query($sql, array($contId, $empId));
+
+		return $consulta->result();
 	}
 }

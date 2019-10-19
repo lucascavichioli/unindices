@@ -66,8 +66,8 @@ class Painel extends CI_Controller {
 			$data['tituloGrafico'] = "EMPRESAS CONTRIBUINTES";
 			$data['grafico'] = "<canvas id='bigDashboardChart'></canvas>";
 			
-			$this->load->model("empresacliente");
-			$getEmp = $this->empresacliente->listaEmpresaCliente($this->session->userdata('cont_id'));
+			$this->load->model("empresaclientemodel");
+			$getEmp = $this->empresaclientemodel->listaEmpresaCliente($this->session->userdata('cont_id'));
 			$data['empresas'] = $getEmp;
 			//carrega empresas e atribui a variavel data
 			$this->dashboard->show('dashboard', $data);
@@ -111,8 +111,8 @@ class Painel extends CI_Controller {
 				$this->form_validation->set_rules('EMP_TELEFONE2', 'Celular', 'trim');
 
 				if($this->form_validation->run()){
-					$this->load->model("EmpresaCliente");
-					$inseriu = $this->EmpresaCliente->adicionarEmpresaCliente($data, $ip);
+					$this->load->model("EmpresaClienteModel");
+					$inseriu = $this->EmpresaClienteModel->adicionarEmpresaCliente($data, $ip);
 					if($inseriu){
 						redirect(base_url() . "painel/dashboard");
 					}else{
