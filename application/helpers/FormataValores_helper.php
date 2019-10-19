@@ -2,7 +2,7 @@
 
 function formataValores($valores){
         //procedimento para verificar se todos os valores são float e cria variaveis com o mesmo nome dos campos
-        //vindo do cadastroBalanco(forms)
+        //vindo do array(valores)
         $erros = array();
         $array = array();
         foreach($valores as $chave => $valorIni){

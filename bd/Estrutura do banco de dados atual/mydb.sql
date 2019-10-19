@@ -1,0 +1,456 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.0.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Tempo de geração: 19-Out-2019 às 20:26
+-- Versão do servidor: 5.6.45
+-- versão do PHP: 7.3.7
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Banco de dados: `mydb`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `anos`
+--
+
+CREATE TABLE `anos` (
+  `ANO_ID` int(10) NOT NULL,
+  `ANO_REF` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `balanco_ativos`
+--
+
+CREATE TABLE `balanco_ativos` (
+  `BATIV_ID` int(10) NOT NULL,
+  `BATIV_ATIVO_CIRCULANTE` decimal(14,2) DEFAULT NULL,
+  `BATIV_ESTOQUE` decimal(14,2) DEFAULT NULL,
+  `BATIV_ATIVO_RLP` decimal(14,2) DEFAULT NULL COMMENT 'ATIVO REALIZÁVEL A LONGO PRAZO',
+  `BATIV_INVESTIMENTOS` decimal(14,2) DEFAULT NULL,
+  `BATIV_IMOB_INTANGIVEL` decimal(14,2) DEFAULT NULL COMMENT 'IMOBILIZADO INTANGÍVEL\n',
+  `BATIV_ATIVO_TOTAL` decimal(14,2) DEFAULT NULL,
+  `BATIV_ATIVO_NAO_CIRCULANTE` decimal(14,2) DEFAULT NULL,
+  `BATIV_CAIXA_EQUIV_CAIXA` decimal(14,2) DEFAULT NULL,
+  `BATIV_CLIENTES` decimal(14,2) DEFAULT NULL,
+  `BATIV_OUTROS_ATIVOS_CIRCULANTES` decimal(14,2) DEFAULT NULL,
+  `BATIV_EMP_ID` int(11) NOT NULL,
+  `BATIV_ANO_ID` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `balanco_passivos`
+--
+
+CREATE TABLE `balanco_passivos` (
+  `BPAS_ID` int(10) NOT NULL,
+  `BPAS_PASSIVO_CIRCULANTE` decimal(14,2) DEFAULT NULL,
+  `BPAS_PASSIVO_N_CIRCULANTE` decimal(14,2) DEFAULT NULL,
+  `BPAS_PATRIMONIO_LIQUIDO` decimal(14,2) DEFAULT NULL,
+  `BPAS_PASSIVO_TOTAL` decimal(14,2) DEFAULT NULL,
+  `BPAS_FORNECEDORES` decimal(14,2) DEFAULT NULL,
+  `BPAS_OUTROS_PASSIVOS_CIRCULANTES` decimal(14,2) DEFAULT NULL,
+  `BPAS_ANO_ID` int(10) NOT NULL,
+  `BPAS_EMP_ID` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `comparativos`
+--
+
+CREATE TABLE `comparativos` (
+  `COMP_ID` int(10) NOT NULL,
+  `COMP_LI` decimal(14,2) DEFAULT NULL COMMENT 'QUANTO MAIOR, MELHOR\n',
+  `COMP_LC` decimal(14,2) DEFAULT NULL COMMENT 'QUANTO MAIOR, MELHOR\n',
+  `COMP_LS` decimal(14,2) DEFAULT NULL COMMENT 'QUANTO MAIOR, MELHOR\n',
+  `COMP_LG` decimal(14,2) DEFAULT NULL COMMENT 'QUANTO MAIOR, MELHOR\n',
+  `COMP_EG` decimal(14,2) DEFAULT NULL COMMENT 'QUANTO MENOR, MELHOR\n',
+  `COMP_GE` decimal(14,2) DEFAULT NULL COMMENT 'QUANTO MENOR, MELHOR',
+  `COMP_CE` decimal(14,2) DEFAULT NULL COMMENT 'QUANTO MENOR, MELHOR',
+  `COMP_GI` decimal(14,2) DEFAULT NULL COMMENT 'QUANTO MENOR, MELHOR',
+  `COMP_IRNC` decimal(14,2) DEFAULT NULL COMMENT 'QUANTO MENOR, MELHOR',
+  `COMP_MAF` decimal(14,2) DEFAULT NULL,
+  `COMP_MB` decimal(14,2) DEFAULT NULL COMMENT 'QUANTO MAIOR, MELHOR',
+  `COMP_MO` decimal(14,2) DEFAULT NULL COMMENT 'QUANTO MAIOR, MELHOR',
+  `COMP_ML` decimal(14,2) DEFAULT NULL COMMENT 'QUANTO MAIOR, MELHOR',
+  `COMP_ANO_ID` int(10) NOT NULL,
+  `COMP_EMP_ID` int(10) NOT NULL,
+  `COMP_QUARTIL_ID` int(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `comparativos_ano_anterior`
+--
+
+CREATE TABLE `comparativos_ano_anterior` (
+  `COMPANT_ID` int(10) NOT NULL,
+  `COMPANT_PMC` decimal(14,2) DEFAULT NULL COMMENT 'QUANTO MENOR, MELHOR',
+  `COMPANT_PME` decimal(14,2) DEFAULT NULL COMMENT 'QUANTO MENOR, MELHOR',
+  `COMPANT_PMP` decimal(14,2) DEFAULT NULL COMMENT 'QUANTO MAIOR\n, MELHOR',
+  `COMPANT_CO` decimal(14,2) DEFAULT NULL COMMENT 'QUANTO MENOR, MELHOR',
+  `COMPANT_CF` decimal(14,2) DEFAULT NULL COMMENT 'QUANTO MENOR, MELHOR',
+  `COMPANT_GA` decimal(14,2) DEFAULT NULL COMMENT 'QUANTO MAIOR, MELHOR\n',
+  `COMPANT_RSA` decimal(14,2) DEFAULT NULL COMMENT 'QUANTO MAIOR, MELHOR',
+  `COMPANT_RSPL` decimal(14,2) DEFAULT NULL COMMENT 'QUANTO MAIOR, MELHOR\n',
+  `COMPANT_ANO_ID` int(10) NOT NULL,
+  `COMPANT_EMP_ID` int(10) NOT NULL,
+  `COMPANT_QUARTIL_ID` int(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='ESSA TABELA CONTÉM OS INDICES CALCULADOS SOMENTE PARA O "\nANO ANTERIOR"';
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `demonstracao_resultado`
+--
+
+CREATE TABLE `demonstracao_resultado` (
+  `DRES_ID` int(10) NOT NULL,
+  `DRES_RECEITA_LIQUIDA_VENDAS` decimal(14,2) DEFAULT NULL,
+  `DRES_CUSTO_VENDAS` decimal(14,2) DEFAULT NULL COMMENT '(-) VALOR NEGATIVO\n',
+  `DRES_DESPESAS_OPERACIONAIS` decimal(14,2) DEFAULT NULL COMMENT '(-) VALOR NEGATIVO\nEXCETO FINANCEIRAS\n',
+  `DRES_OUTRAS_RECEITAS_OP` decimal(14,2) DEFAULT NULL COMMENT 'EXCETO FINANCEIRAS\n',
+  `DRES_DESPESAS_FINANCEIRAS` decimal(14,2) DEFAULT NULL COMMENT '(-) VALOR NEGATIVO\n',
+  `DRES_RECEITAS_FINANCEIRAS` decimal(14,2) DEFAULT NULL,
+  `DRES_OUTRAS_DESPESAS` decimal(14,2) DEFAULT NULL COMMENT '(-) VALOR NEGATIVO\n',
+  `DRES_IRPJ_CSLL` decimal(14,2) DEFAULT NULL COMMENT '(-) VALOR NEGATIVO',
+  `DRES_CONTRIBUICOES_PARTICIP` decimal(14,2) DEFAULT NULL COMMENT '(-) VALOR NEGATIVO\n',
+  `DRES_LUCRO_BRUTO` decimal(14,2) DEFAULT NULL COMMENT 'RECEITA LIQUIDA + CUSTO DE VENDAS\n',
+  `DRES_RESULT_OPERACIONAL` decimal(14,2) DEFAULT NULL COMMENT 'LUCRO BRUTO + DESPESAS OPERACIONAIS + OUTRAS RECEITAS OPERACIONAIS\n',
+  `DRES_RESULT_ANTES_IRPJ_CSLL` decimal(14,2) DEFAULT NULL COMMENT 'RESULTADO OPERACIONAL + DESPESAS FINANCEIRAS + RECEITAS FINANCEIRAS + OUTRAS DESPESAS\n',
+  `DRES_RESULT_ANTES_CONT_PART` decimal(14,2) DEFAULT NULL COMMENT 'RESULTADO ANTES DOS IRPJ E CSLL + IRPJ E CSLL\n',
+  `DRES_RESULT_LIQUIDO_EXERCICIO` decimal(14,2) DEFAULT NULL COMMENT 'RESULTADO ANTES DAS CONTRIBUIÇÕES E PARTICIPAÇÕES + CONTRIBUIÇÕES E PARTICIPAÇÕES\n',
+  `DRES_ANO_ID` int(10) NOT NULL,
+  `DRES_EMP_ID` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `empresa`
+--
+
+CREATE TABLE `empresa` (
+  `EMP_ID` int(10) NOT NULL,
+  `EMP_NOME` varchar(255) DEFAULT NULL,
+  `EMP_TELEFONE` varchar(255) DEFAULT NULL,
+  `EMP_TELEFONE2` varchar(255) DEFAULT NULL,
+  `EMP_CNAE` varchar(255) DEFAULT NULL,
+  `EMP_QTD_EMP` int(10) DEFAULT NULL,
+  `EMP_EMAIL` varchar(255) DEFAULT NULL,
+  `EMP_CONT_ID` int(10) NOT NULL,
+  `EMP_UF` varchar(45) DEFAULT NULL,
+  `EMP_CNAE_SECUNDARIO` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `logs`
+--
+
+CREATE TABLE `logs` (
+  `ID` int(11) NOT NULL,
+  `IP_CLIENTE` varchar(255) DEFAULT NULL,
+  `OPERACAO` varchar(255) DEFAULT NULL,
+  `DATA` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `USUARIO` varchar(255) DEFAULT NULL,
+  `ID_AFETADO` varchar(255) DEFAULT NULL,
+  `TABELA_AFETADA` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `quartis`
+--
+
+CREATE TABLE `quartis` (
+  `Q_ID` int(10) NOT NULL,
+  `Q_1` float DEFAULT NULL,
+  `Q_2` float DEFAULT NULL,
+  `Q_3` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `receitaws`
+--
+
+CREATE TABLE `receitaws` (
+  `REC_CNPJ` varchar(255) NOT NULL,
+  `REC_STATUS` varchar(255) DEFAULT NULL,
+  `REC_MESSAGE` varchar(255) DEFAULT NULL,
+  `REC_TIPO` varchar(255) DEFAULT NULL,
+  `REC_ABERTURA` varchar(255) DEFAULT NULL,
+  `REC_NOME` varchar(255) DEFAULT NULL,
+  `REC_FANTASIA` varchar(255) DEFAULT NULL,
+  `REC_ATV_PRIN_CODE` varchar(255) DEFAULT NULL COMMENT 'ARRAY',
+  `REC_ATV_PRIN_TEXT` varchar(255) DEFAULT NULL,
+  `REC_ATIVIDADES_SECUNDARIAS` varchar(255) DEFAULT NULL,
+  `REC_NATUREZA_JURIDICA` varchar(255) DEFAULT NULL,
+  `REC_LOGRADOURO` varchar(255) DEFAULT NULL,
+  `REC_NUMERO` varchar(255) DEFAULT NULL,
+  `REC_COMPLEMENTO` varchar(255) DEFAULT NULL,
+  `REC_CEP` varchar(255) DEFAULT NULL,
+  `REC_BAIRRO` varchar(255) DEFAULT NULL,
+  `REC_MUNICIPIO` varchar(255) DEFAULT NULL,
+  `REC_UF` varchar(255) DEFAULT NULL,
+  `REC_EMAIL` varchar(255) DEFAULT NULL,
+  `REC_TELEFONE` varchar(255) DEFAULT NULL,
+  `REC_EFR` varchar(255) DEFAULT NULL,
+  `REC_SITUACAO` varchar(255) DEFAULT NULL,
+  `REC_DATA_SITUACAO` varchar(255) DEFAULT NULL,
+  `REC_MOTIVO_SITUACAO` varchar(255) DEFAULT NULL,
+  `REC_SITUACAO_ESPECIAL` varchar(255) DEFAULT NULL,
+  `REC_DATA_SITUACAO_ESPECIAL` varchar(255) DEFAULT NULL,
+  `REC_CAPITAL_SOCIAL` varchar(255) DEFAULT NULL,
+  `REC_QSA` varchar(255) DEFAULT NULL,
+  `REC_EXTRA` varchar(255) DEFAULT NULL COMMENT 'OBJETO',
+  `REC_ULTIMA_ATUALIZACAO` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `CONT_ID` int(10) NOT NULL,
+  `CONT_NOME` varchar(255) DEFAULT NULL,
+  `CONT_TELEFONE` varchar(255) DEFAULT NULL,
+  `CONT_TELEFONE2` varchar(255) DEFAULT NULL,
+  `CONT_CRC` varchar(255) DEFAULT NULL,
+  `CONT_EMAIL` varchar(255) NOT NULL,
+  `CONT_SENHA` varchar(255) DEFAULT NULL,
+  `CONT_REC_CNPJ` varchar(255) DEFAULT NULL,
+  `CONT_RESPONSAVEL` varchar(255) DEFAULT NULL,
+  `CONT_CPF` varchar(255) DEFAULT NULL,
+  `CONT_UF` varchar(10) DEFAULT NULL,
+  `CONT_LOGRADOURO` varchar(255) DEFAULT NULL,
+  `CONT_LOCALIDADE` varchar(255) DEFAULT NULL,
+  `CONT_CEP` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Índices para tabelas despejadas
+--
+
+--
+-- Índices para tabela `anos`
+--
+ALTER TABLE `anos`
+  ADD PRIMARY KEY (`ANO_ID`);
+
+--
+-- Índices para tabela `balanco_ativos`
+--
+ALTER TABLE `balanco_ativos`
+  ADD PRIMARY KEY (`BATIV_ID`,`BATIV_EMP_ID`,`BATIV_ANO_ID`),
+  ADD KEY `fk_BALANCO_PATRIMONIAL_ENTIDADE1_idx` (`BATIV_EMP_ID`),
+  ADD KEY `fk_BALANCO_PATRIMONIAL_ANOS1_idx` (`BATIV_ANO_ID`);
+
+--
+-- Índices para tabela `balanco_passivos`
+--
+ALTER TABLE `balanco_passivos`
+  ADD PRIMARY KEY (`BPAS_ID`,`BPAS_ANO_ID`,`BPAS_EMP_ID`),
+  ADD KEY `fk_BALANCO_PASSIVOS_ANOS1_idx` (`BPAS_ANO_ID`),
+  ADD KEY `fk_BALANCO_PASSIVOS_ENTIDADE1_idx` (`BPAS_EMP_ID`);
+
+--
+-- Índices para tabela `comparativos`
+--
+ALTER TABLE `comparativos`
+  ADD PRIMARY KEY (`COMP_ID`,`COMP_ANO_ID`,`COMP_EMP_ID`),
+  ADD KEY `fk_COMPARATIVOS_ANOS1_idx` (`COMP_ANO_ID`),
+  ADD KEY `fk_COMPARATIVOS_ENTIDADE1_idx` (`COMP_EMP_ID`),
+  ADD KEY `fk_COMPARATIVOS_QUARTIS1_idx` (`COMP_QUARTIL_ID`);
+
+--
+-- Índices para tabela `comparativos_ano_anterior`
+--
+ALTER TABLE `comparativos_ano_anterior`
+  ADD PRIMARY KEY (`COMPANT_ID`,`COMPANT_ANO_ID`,`COMPANT_EMP_ID`),
+  ADD KEY `fk_COMPARATIVOS_ANO_INFERIOR_ANOS1_idx` (`COMPANT_ANO_ID`),
+  ADD KEY `fk_COMPARATIVOS_ANO_INFERIOR_ENTIDADE1_idx` (`COMPANT_EMP_ID`),
+  ADD KEY `fk_COMPARATIVOS_ANO_ANTERIOR_QUARTIS1_idx` (`COMPANT_QUARTIL_ID`);
+
+--
+-- Índices para tabela `demonstracao_resultado`
+--
+ALTER TABLE `demonstracao_resultado`
+  ADD PRIMARY KEY (`DRES_ID`,`DRES_ANO_ID`,`DRES_EMP_ID`),
+  ADD KEY `fk_DEMONSTRACAO_RESULTADO_ANOS1_idx` (`DRES_ANO_ID`),
+  ADD KEY `fk_DEMONSTRACAO_RESULTADO_ENTIDADE1_idx` (`DRES_EMP_ID`);
+
+--
+-- Índices para tabela `empresa`
+--
+ALTER TABLE `empresa`
+  ADD PRIMARY KEY (`EMP_ID`,`EMP_CONT_ID`),
+  ADD KEY `fk_EMPRESA_CONTABILIDADE1_idx` (`EMP_CONT_ID`);
+
+--
+-- Índices para tabela `logs`
+--
+ALTER TABLE `logs`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Índices para tabela `quartis`
+--
+ALTER TABLE `quartis`
+  ADD PRIMARY KEY (`Q_ID`);
+
+--
+-- Índices para tabela `receitaws`
+--
+ALTER TABLE `receitaws`
+  ADD PRIMARY KEY (`REC_CNPJ`);
+
+--
+-- Índices para tabela `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`CONT_ID`,`CONT_EMAIL`),
+  ADD KEY `fk_CONTABILIDADE_RECEITAWS1_idx` (`CONT_REC_CNPJ`);
+
+--
+-- AUTO_INCREMENT de tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `anos`
+--
+ALTER TABLE `anos`
+  MODIFY `ANO_ID` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `balanco_ativos`
+--
+ALTER TABLE `balanco_ativos`
+  MODIFY `BATIV_ID` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `balanco_passivos`
+--
+ALTER TABLE `balanco_passivos`
+  MODIFY `BPAS_ID` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `comparativos`
+--
+ALTER TABLE `comparativos`
+  MODIFY `COMP_ID` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `comparativos_ano_anterior`
+--
+ALTER TABLE `comparativos_ano_anterior`
+  MODIFY `COMPANT_ID` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `demonstracao_resultado`
+--
+ALTER TABLE `demonstracao_resultado`
+  MODIFY `DRES_ID` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `empresa`
+--
+ALTER TABLE `empresa`
+  MODIFY `EMP_ID` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `logs`
+--
+ALTER TABLE `logs`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `quartis`
+--
+ALTER TABLE `quartis`
+  MODIFY `Q_ID` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `CONT_ID` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restrições para despejos de tabelas
+--
+
+--
+-- Limitadores para a tabela `balanco_passivos`
+--
+ALTER TABLE `balanco_passivos`
+  ADD CONSTRAINT `fk_BALANCO_PASSIVOS_ANOS1` FOREIGN KEY (`BPAS_ANO_ID`) REFERENCES `anos` (`ANO_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_BALANCO_PASSIVOS_ENTIDADE1` FOREIGN KEY (`BPAS_EMP_ID`) REFERENCES `empresa` (`EMP_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `comparativos`
+--
+ALTER TABLE `comparativos`
+  ADD CONSTRAINT `fk_COMPARATIVOS_ANOS1` FOREIGN KEY (`COMP_ANO_ID`) REFERENCES `anos` (`ANO_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_COMPARATIVOS_ENTIDADE1` FOREIGN KEY (`COMP_EMP_ID`) REFERENCES `empresa` (`EMP_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_COMPARATIVOS_QUARTIS1` FOREIGN KEY (`COMP_QUARTIL_ID`) REFERENCES `quartis` (`Q_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `comparativos_ano_anterior`
+--
+ALTER TABLE `comparativos_ano_anterior`
+  ADD CONSTRAINT `fk_COMPARATIVOS_ANO_ANTERIOR_QUARTIS1` FOREIGN KEY (`COMPANT_QUARTIL_ID`) REFERENCES `quartis` (`Q_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_COMPARATIVOS_ANO_INFERIOR_ANOS1` FOREIGN KEY (`COMPANT_ANO_ID`) REFERENCES `anos` (`ANO_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_COMPARATIVOS_ANO_INFERIOR_ENTIDADE1` FOREIGN KEY (`COMPANT_EMP_ID`) REFERENCES `empresa` (`EMP_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `demonstracao_resultado`
+--
+ALTER TABLE `demonstracao_resultado`
+  ADD CONSTRAINT `fk_DEMONSTRACAO_RESULTADO_ANOS1` FOREIGN KEY (`DRES_ANO_ID`) REFERENCES `anos` (`ANO_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_DEMONSTRACAO_RESULTADO_ENTIDADE1` FOREIGN KEY (`DRES_EMP_ID`) REFERENCES `empresa` (`EMP_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `empresa`
+--
+ALTER TABLE `empresa`
+  ADD CONSTRAINT `fk_EMPRESA_CONTABILIDADE1` FOREIGN KEY (`EMP_CONT_ID`) REFERENCES `usuarios` (`CONT_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD CONSTRAINT `fk_CONTABILIDADE_RECEITAWS1` FOREIGN KEY (`CONT_REC_CNPJ`) REFERENCES `receitaws` (`REC_CNPJ`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

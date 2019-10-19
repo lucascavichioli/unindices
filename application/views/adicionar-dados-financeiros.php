@@ -7,7 +7,7 @@
         </div>
         <div class="card-body">
           <form id="formulario" method='post' action='' class="validate-form" >
-          <input name="empId" type="hidden" class="form-control" value="<?=$id?>">
+          <input name="empId" type="hidden" class="form-control" value="<?=$id?>" required>
         
           <div class="table-responsive">
             <table class="table table-hover">
@@ -15,12 +15,12 @@
                     <tr>
                         <th class="text-left"><h6>Ativos</h6></th>
                         <th class="text-center">
-                          <select id="anoAnteriorMenosUm" name="anoAnteriorMenosUm" class="form-control">
+                          <select id="anoAnteriorMenosUm" name="anoAnteriorMenosUm" class="form-control" required>
                                     <option value="2018">2018</option>
                           </select>
                         </th>
                         <th class="text-center">
-                          <select id="anoAnterior" name="anoAnterior" class="form-control">
+                          <select id="anoAnterior" name="anoAnterior" class="form-control" required>
                                     <option value="2019">2019</option>
                           </select>
                         </th>
@@ -32,14 +32,14 @@
                       <td>                        
                         <div class="col-md-18">
                             <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                              <input name="caixaEquivalenteDeCaixa" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Caixa e Equivalentes de caixa" >
+                              <input name="caixaEquivalenteDeCaixa" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Caixa e Equivalentes de caixa" required>
                             </div>
                         </div>
                       </td>
                       <td>                        
                         <div class="col-md-18">
                             <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                              <input name="caixaEquivalenteDeCaixa2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Caixa e Equivalentes de caixa" >
+                              <input name="caixaEquivalenteDeCaixa2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Caixa e Equivalentes de caixa" required>
                             </div>
                         </div>
                       </td>
@@ -49,14 +49,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="clientes" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Clientes" >
+                            <input name="clientes" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Clientes" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="clientes2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Clientes" >
+                            <input name="clientes2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Clientes" required>
                           </div>
                         </div>
                       </td>
@@ -66,14 +66,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="estoques" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Estoques" >
+                            <input name="estoques" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Estoques" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="estoques2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Estoques" >
+                            <input name="estoques2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Estoques" required>
                           </div>
                         </div>
                       </td>
@@ -83,14 +83,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrosAtivosCirculantes" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Outros ativos circulantes" >
+                            <input name="outrosAtivosCirculantes" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Outros ativos circulantes" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrosAtivosCirculantes2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Outros ativos circulantes" >
+                            <input name="outrosAtivosCirculantes2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Outros ativos circulantes" required>
                           </div>
                         </div>
                       </td>
@@ -100,14 +100,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="ativoRealizavelLongoPrazo" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Ativo realizável a longo prazo" >
+                            <input name="ativoRealizavelLongoPrazo" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Ativo realizável a longo prazo" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="ativoRealizavelLongoPrazo2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Ativo realizável a longo prazo" >
+                            <input name="ativoRealizavelLongoPrazo2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Ativo realizável a longo prazo" required>
                           </div>
                         </div>
                       </td>
@@ -117,14 +117,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="investimentos" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Investimentos" >
+                            <input name="investimentos" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Investimentos" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="investimentos2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Investimentos" >
+                            <input name="investimentos2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Investimentos" required>
                           </div>
                         </div>
                       </td>
@@ -134,14 +134,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="imobilizadoIntangivel" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Imobilizado e intangível" >
+                            <input name="imobilizadoIntangivel" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Imobilizado e intangível" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="imobilizadoIntangivel2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Imobilizado e intangível" >
+                            <input name="imobilizadoIntangivel2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Imobilizado e intangível" required>
                           </div>
                         </div>
                       </td>
@@ -168,14 +168,14 @@
                       <td>                        
                         <div class="col-18">
                             <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                              <input name="fornecedores" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Fornecedores" >
+                              <input name="fornecedores" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Fornecedores" required>
                             </div>
                         </div>
                       </td>
                       <td>                        
                         <div class="col-18">
                             <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                              <input name="fornecedores2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Fornecedores" >
+                              <input name="fornecedores2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Fornecedores" required>
                             </div>
                         </div>
                       </td>
@@ -185,14 +185,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrosPassivosCirculantes" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" >
+                            <input name="outrosPassivosCirculantes" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrosPassivosCirculantes2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" >
+                            <input name="outrosPassivosCirculantes2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
                           </div>
                         </div>
                       </td>
@@ -202,14 +202,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="passivoNaoCirculante" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" >
+                            <input name="passivoNaoCirculante" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="passivoNaoCirculante2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" >
+                            <input name="passivoNaoCirculante2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
                           </div>
                         </div>
                       </td>
@@ -219,14 +219,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="patrimonioLiquido" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" >
+                            <input name="patrimonioLiquido" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="patrimonioLiquido2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" >
+                            <input name="patrimonioLiquido2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
                           </div>
                         </div>
                       </td>
@@ -253,14 +253,14 @@
                       <td>                        
                         <div class="col-18">
                             <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                              <input name="receitaLiquidaVendas" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" >
+                              <input name="receitaLiquidaVendas" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
                             </div>
                         </div>
                       </td>
                       <td>                        
                         <div class="col-18">
                             <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                              <input name="receitaLiquidaVendas2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" >
+                              <input name="receitaLiquidaVendas2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
                             </div>
                         </div>
                       </td>
@@ -270,14 +270,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="custoVendas" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" >
+                            <input name="custoVendas" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="custoVendas2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" >
+                            <input name="custoVendas2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
                           </div>
                         </div>
                       </td>
@@ -287,14 +287,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="despesasOperacionais" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" >
+                            <input name="despesasOperacionais" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="despesasOperacionais2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" >
+                            <input name="despesasOperacionais2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
                           </div>
                         </div>
                       </td>
@@ -304,14 +304,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrasReceitasOperacionais" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" >
+                            <input name="outrasReceitasOperacionais" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrasReceitasOperacionais2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" >
+                            <input name="outrasReceitasOperacionais2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
                           </div>
                         </div>
                       </td>
@@ -321,14 +321,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="despesasFinanceiras" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" >
+                            <input name="despesasFinanceiras" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="despesasFinanceiras2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" >
+                            <input name="despesasFinanceiras2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
                           </div>
                         </div>
                       </td>
@@ -338,14 +338,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="receitasFinanceiras" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" >
+                            <input name="receitasFinanceiras" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="receitasFinanceiras2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" >
+                            <input name="receitasFinanceiras2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
                           </div>
                         </div>
                       </td>
@@ -355,14 +355,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrasDespesas" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" >
+                            <input name="outrasDespesas" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrasDespesas2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" >
+                            <input name="outrasDespesas2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
                           </div>
                         </div>
                       </td>
@@ -372,14 +372,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="irpjCsll" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" >
+                            <input name="irpjCsll" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="irpjCsll2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" >
+                            <input name="irpjCsll2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
                           </div>
                         </div>
                       </td>
@@ -389,14 +389,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="contribuicoesParticipacoes" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" >
+                            <input name="contribuicoesParticipacoes" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="contribuicoesParticipacoes2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" >
+                            <input name="contribuicoesParticipacoes2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
                           </div>
                         </div>
                       </td>
