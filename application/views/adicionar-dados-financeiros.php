@@ -7,7 +7,7 @@
         </div>
         <div class="card-body">
           <form id="formulario" method='post' action='' class="validate-form" >
-          <input name="empId" type="hidden" class="form-control" value="<?=$id?>" required>
+          <input name="empId" type="hidden" class="form-control" value="<?=$id?>"  required>
         
           <div class="table-responsive">
             <table class="table table-hover">
@@ -23,7 +23,7 @@
                           </select>
                         </th>
                         <th class="text-center">
-                          <select id="anoAnterior" name="anoAnterior" class="form-control" required>
+                          <select id="anoAnterior" name="anoAnterior" class="form-control"  required>
                               <?php foreach($anoAnterior as $ano_id => $attr){?>
                               <option value="<?=$attr->ano_id?>"><?=$attr->ano_ref?></option> <?php }?>
                           </select>
@@ -36,14 +36,14 @@
                       <td>                        
                         <div class="col-md-18">
                             <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                              <input name="caixaEquivalenteDeCaixa" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Caixa e Equivalentes de caixa" required>
+                              <input name="caixaEquivalenteDeCaixa" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Caixa e Equivalentes de caixa" maxlength="20" required>
                             </div>
                         </div>
                       </td>
                       <td>                        
                         <div class="col-md-18">
                             <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                              <input name="caixaEquivalenteDeCaixa2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Caixa e Equivalentes de caixa" required>
+                              <input name="caixaEquivalenteDeCaixa2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Caixa e Equivalentes de caixa" maxlength="20" required>
                             </div>
                         </div>
                       </td>
@@ -53,14 +53,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="clientes" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Clientes" required>
+                            <input name="clientes" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Clientes" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="clientes2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Clientes" required>
+                            <input name="clientes2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Clientes" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -70,14 +70,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="estoques" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Estoques" required>
+                            <input name="estoques" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Estoques" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="estoques2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Estoques" required>
+                            <input name="estoques2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Estoques" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -87,14 +87,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrosAtivosCirculantes" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Outros ativos circulantes" required>
+                            <input name="outrosAtivosCirculantes" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Outros ativos circulantes" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrosAtivosCirculantes2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Outros ativos circulantes" required>
+                            <input name="outrosAtivosCirculantes2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Outros ativos circulantes" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -104,14 +104,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="ativoRealizavelLongoPrazo" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Ativo realizável a longo prazo" required>
+                            <input name="ativoRealizavelLongoPrazo" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Ativo realizável a longo prazo" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="ativoRealizavelLongoPrazo2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Ativo realizável a longo prazo" required>
+                            <input name="ativoRealizavelLongoPrazo2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Ativo realizável a longo prazo" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -121,14 +121,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="investimentos" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Investimentos" required>
+                            <input name="investimentos" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Investimentos" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="investimentos2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Investimentos" required>
+                            <input name="investimentos2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Investimentos" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -138,14 +138,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="imobilizadoIntangivel" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Imobilizado e intangível" required>
+                            <input name="imobilizadoIntangivel" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Imobilizado e intangível" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="imobilizadoIntangivel2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Imobilizado e intangível" required>
+                            <input name="imobilizadoIntangivel2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Imobilizado e intangível" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -154,7 +154,7 @@
             </table>
           </div>
           <div class="table-responsive">
-            <table class="table">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th class="text-left"><h6>Passivos</h6></th>
@@ -172,14 +172,14 @@
                       <td>                        
                         <div class="col-18">
                             <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                              <input name="fornecedores" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Fornecedores" required>
+                              <input name="fornecedores" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Fornecedores" maxlength="20" required>
                             </div>
                         </div>
                       </td>
                       <td>                        
                         <div class="col-18">
                             <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                              <input name="fornecedores2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="Fornecedores" required>
+                              <input name="fornecedores2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Fornecedores" maxlength="20" required>
                             </div>
                         </div>
                       </td>
@@ -189,14 +189,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrosPassivosCirculantes" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
+                            <input name="outrosPassivosCirculantes" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrosPassivosCirculantes2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
+                            <input name="outrosPassivosCirculantes2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -206,14 +206,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="passivoNaoCirculante" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
+                            <input name="passivoNaoCirculante" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="passivoNaoCirculante2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
+                            <input name="passivoNaoCirculante2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -223,14 +223,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="patrimonioLiquido" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
+                            <input name="patrimonioLiquido" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="patrimonioLiquido2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
+                            <input name="patrimonioLiquido2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -239,7 +239,7 @@
             </table>
           </div>
           <div class="table-responsive">
-            <table class="table">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th class="text-left"><h6>Demonstrativo de Resultado (DRE)</h6></th>
@@ -257,14 +257,14 @@
                       <td>                        
                         <div class="col-18">
                             <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                              <input name="receitaLiquidaVendas" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
+                              <input name="receitaLiquidaVendas" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
                             </div>
                         </div>
                       </td>
                       <td>                        
                         <div class="col-18">
                             <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                              <input name="receitaLiquidaVendas2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
+                              <input name="receitaLiquidaVendas2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
                             </div>
                         </div>
                       </td>
@@ -274,31 +274,31 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="custoVendas" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
+                            <input name="custoVendas" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="custoVendas2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
+                            <input name="custoVendas2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                     </tr>
                     <tr>
-                      <td>(-)Despesas operacionais (exceto financeiras)</td>
+                      <td>(-) Despesas operacionais (exceto financeiras)</td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="despesasOperacionais" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
+                            <input name="despesasOperacionais" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="despesasOperacionais2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
+                            <input name="despesasOperacionais2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -308,14 +308,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrasReceitasOperacionais" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
+                            <input name="outrasReceitasOperacionais" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrasReceitasOperacionais2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
+                            <input name="outrasReceitasOperacionais2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -325,14 +325,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="despesasFinanceiras" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
+                            <input name="despesasFinanceiras" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="despesasFinanceiras2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
+                            <input name="despesasFinanceiras2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -342,14 +342,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="receitasFinanceiras" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
+                            <input name="receitasFinanceiras" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="receitasFinanceiras2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
+                            <input name="receitasFinanceiras2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -359,14 +359,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrasDespesas" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
+                            <input name="outrasDespesas" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrasDespesas2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
+                            <input name="outrasDespesas2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -376,14 +376,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="irpjCsll" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
+                            <input name="irpjCsll" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="irpjCsll2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
+                            <input name="irpjCsll2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -393,14 +393,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="contribuicoesParticipacoes" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
+                            <input name="contribuicoesParticipacoes" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="contribuicoesParticipacoes2" type="text" class="form-control" onKeyUp="maskIt(this,event,'###.###.###,##',true)" placeholder="" required>
+                            <input name="contribuicoesParticipacoes2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
                           </div>
                         </div>
                       </td>

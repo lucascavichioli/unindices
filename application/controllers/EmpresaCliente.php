@@ -117,11 +117,12 @@ class EmpresaCliente extends CI_Controller {
 						$dreAnoAnterior['DRES_CONTRIBUICOES_PARTICIP'] = $this->input->post('contribuicoesParticipacoes2', true);
 						
 						//VALIDA FORMULÁRIOS
-						$validouDreAnoAnteriorMenosUm = $this->validaDre($passivosAnoAnteriorMenosUm);
+						$validouDreAnoAnteriorMenosUm = $this->validaDre($dreAnoAnteriorMenosUm);
 						$validouDreAnoAnterior = $this->validaDre($dreAnoAnterior);
 					
 						if($validouAtivosAnoAnteriorMenosUm && $validouAtivosAnoAnterior && $validouPassivosAnoAnteriorMenosUm
 						&& $validouPassivosAnoAnterior && $validouDreAnoAnteriorMenosUm && $validouDreAnoAnterior){
+							
 							
 							$this->load->helper('FormataValores');
 
@@ -146,11 +147,51 @@ class EmpresaCliente extends CI_Controller {
 							$passivosAnoAnterior['BPAS_EMP_ID']		   = (int)$passivosAnoAnterior['BPAS_EMP_ID'];	   
 							$dreAnoAnterior['DRES_EMP_ID'] 			   = (int)$dreAnoAnterior['DRES_EMP_ID'];	
 
+							
+							$ativosAnoAnteriorMenosUm['BATIV_ATIVO_CIRCULANTE'] = ($ativosAnoAnteriorMenosUm['BATIV_CLIENTES'] + $ativosAnoAnteriorMenosUm['BATIV_ESTOQUE'] + $ativosAnoAnteriorMenosUm['BATIV_OUTROS_ATIVOS_CIRCULANTES'] + $ativosAnoAnteriorMenosUm['BATIV_CAIXA_EQUIV_CAIXA']);
+							$ativosAnoAnterior['BATIV_ATIVO_CIRCULANTE'] = ($ativosAnoAnterior['BATIV_CLIENTES'] + $ativosAnoAnterior['BATIV_ESTOQUE'] + $ativosAnoAnterior['BATIV_OUTROS_ATIVOS_CIRCULANTES'] + $ativosAnoAnterior['BATIV_CAIXA_EQUIV_CAIXA']);
+
+							$ativosAnoAnteriorMenosUm['BATIV_ATIVO_NAO_CIRCULANTE'] = ($ativosAnoAnteriorMenosUm['BATIV_ATIVO_RLP'] + $ativosAnoAnteriorMenosUm['BATIV_IMOB_INTANGIVEL'] + $ativosAnoAnteriorMenosUm['BATIV_INVESTIMENTOS']);
+							$ativosAnoAnterior['BATIV_ATIVO_NAO_CIRCULANTE'] = ($ativosAnoAnterior['BATIV_ATIVO_RLP'] + $ativosAnoAnterior['BATIV_IMOB_INTANGIVEL'] + $ativosAnoAnterior['BATIV_INVESTIMENTOS']);
+
+							$ativosAnoAnteriorMenosUm['BATIV_ATIVO_TOTAL'] = ($ativosAnoAnteriorMenosUm['BATIV_ATIVO_CIRCULANTE'] + $ativosAnoAnteriorMenosUm['BATIV_ATIVO_NAO_CIRCULANTE']);
+							$ativosAnoAnterior['BATIV_ATIVO_TOTAL'] = ($ativosAnoAnterior['BATIV_ATIVO_CIRCULANTE'] + $ativosAnoAnterior['BATIV_ATIVO_NAO_CIRCULANTE']);
+
+							$passivosAnoAnteriorMenosUm['BPAS_PASSIVO_CIRCULANTE'] = ($passivosAnoAnteriorMenosUm['BPAS_FORNECEDORES'] + $passivosAnoAnteriorMenosUm['BPAS_OUTROS_PASSIVOS_CIRCULANTES']);
+							$passivosAnoAnterior['BPAS_PASSIVO_CIRCULANTE'] = ($passivosAnoAnterior['BPAS_FORNECEDORES'] + $passivosAnoAnterior['BPAS_OUTROS_PASSIVOS_CIRCULANTES']);
+							
+							$passivosAnoAnteriorMenosUm['BPAS_PASSIVO_TOTAL'] = ($passivosAnoAnteriorMenosUm['BPAS_PASSIVO_CIRCULANTE'] + $passivosAnoAnteriorMenosUm['BPAS_PASSIVO_N_CIRCULANTE'] + $passivosAnoAnteriorMenosUm['BPAS_PATRIMONIO_LIQUIDO']);
+							$passivosAnoAnterior['BPAS_PASSIVO_TOTAL'] = ($passivosAnoAnterior['BPAS_PASSIVO_CIRCULANTE'] + $passivosAnoAnterior['BPAS_PASSIVO_N_CIRCULANTE'] + $passivosAnoAnterior['BPAS_PATRIMONIO_LIQUIDO']);
+
+							$dreAnoAnteriorMenosUm['DRES_LUCRO_BRUTO'] = ($dreAnoAnteriorMenosUm['DRES_RECEITA_LIQUIDA_VENDAS'] + $dreAnoAnteriorMenosUm['DRES_CUSTO_VENDAS']); 
+							$dreAnoAnterior['DRES_LUCRO_BRUTO'] = ($dreAnoAnterior['DRES_RECEITA_LIQUIDA_VENDAS'] + $dreAnoAnterior['DRES_CUSTO_VENDAS']); 
+
+							$dreAnoAnteriorMenosUm['DRES_RESULT_OPERACIONAL'] = ($dreAnoAnteriorMenosUm['DRES_LUCRO_BRUTO'] + $dreAnoAnteriorMenosUm['DRES_DESPESAS_OPERACIONAIS'] + $dreAnoAnteriorMenosUm['DRES_OUTRAS_RECEITAS_OP']);
+							$dreAnoAnterior['DRES_RESULT_OPERACIONAL'] = ($dreAnoAnterior['DRES_LUCRO_BRUTO'] + $dreAnoAnterior['DRES_DESPESAS_OPERACIONAIS'] + $dreAnoAnterior['DRES_OUTRAS_RECEITAS_OP']);
+
+							$dreAnoAnteriorMenosUm['DRES_RESULT_ANTES_IRPJ_CSLL'] = ($dreAnoAnteriorMenosUm['DRES_RESULT_OPERACIONAL'] + $dreAnoAnteriorMenosUm['DRES_DESPESAS_FINANCEIRAS'] + $dreAnoAnteriorMenosUm['DRES_RECEITAS_FINANCEIRAS'] + $dreAnoAnteriorMenosUm['DRES_OUTRAS_DESPESAS']);
+							$dreAnoAnterior['DRES_RESULT_ANTES_IRPJ_CSLL'] = ($dreAnoAnterior['DRES_RESULT_OPERACIONAL'] + $dreAnoAnterior['DRES_DESPESAS_FINANCEIRAS'] + $dreAnoAnterior['DRES_RECEITAS_FINANCEIRAS'] + $dreAnoAnterior['DRES_OUTRAS_DESPESAS']);
+
+							$dreAnoAnteriorMenosUm['DRES_RESULT_ANTES_CONT_PART'] = ($dreAnoAnteriorMenosUm['DRES_RESULT_ANTES_IRPJ_CSLL'] + $dreAnoAnteriorMenosUm['DRES_IRPJ_CSLL']);
+							$dreAnoAnterior['DRES_RESULT_ANTES_CONT_PART'] = ($dreAnoAnterior['DRES_RESULT_ANTES_IRPJ_CSLL'] + $dreAnoAnterior['DRES_IRPJ_CSLL']);
+
+							$dreAnoAnteriorMenosUm['DRES_RESULT_LIQUIDO_EXERCICIO'] = ($dreAnoAnteriorMenosUm['DRES_RESULT_ANTES_CONT_PART'] + $dreAnoAnteriorMenosUm['DRES_CONTRIBUICOES_PARTICIP']);
+							$dreAnoAnterior['DRES_RESULT_LIQUIDO_EXERCICIO'] = ($dreAnoAnterior['DRES_RESULT_ANTES_CONT_PART'] + $dreAnoAnterior['DRES_CONTRIBUICOES_PARTICIP']);
+
+
+							$this->load->library('indiceseconomicos');
+							$indicesAnoAnteriorMenosUm['COMP_LI'] = $this->indiceseconomicos->li($ativosAnoAnteriorMenosUm['BATIV_CAIXA_EQUIV_CAIXA'], $passivosAnoAnteriorMenosUm['BPAS_PASSIVO_CIRCULANTE']);
+							$indicesAnoAnterior['COMP_LI'] = $this->indiceseconomicos->li($ativosAnoAnteriorMenosUm['BATIV_CAIXA_EQUIV_CAIXA'], $passivosAnoAnteriorMenosUm['BPAS_PASSIVO_CIRCULANTE']);
+
+							var_dump($ativosAnoAnteriorMenosUm['BATIV_CAIXA_EQUIV_CAIXA']);
+							var_Dump($indicesAnoAnteriorMenosUm['COMP_LI']);
 
 							$this->load->model('DadosFinanceiros');
 							$this->DadosFinanceiros->inserir($ativosAnoAnteriorMenosUm, $passivosAnoAnteriorMenosUm, $dreAnoAnteriorMenosUm, 
 														$ativosAnoAnterior, $passivosAnoAnterior, $dreAnoAnterior);
 							}else{
+								//retorna pra view com os alerts
+								var_dump($this->form_validation->error_array());
 								print "false";
 							}
 
@@ -209,9 +250,12 @@ class EmpresaCliente extends CI_Controller {
 
         $this->form_validation->set_data($data);
 
-        $this->form_validation->set_rules("user_email ", "Email ", "trim|required|valid_email");
-        $this->form_validation->set_rules("user_password ", "Senha ", "trim|required|min_length[6]|max_length[10]");
-
+        $this->form_validation->set_rules("BPAS_EMP_ID", "Id da empresa ", "trim|required");
+		$this->form_validation->set_rules("BPAS_ANO_ID", "Ano referente ao balanço patrimonial", "trim|required|max_length[10]");
+		$this->form_validation->set_rules("BPAS_PASSIVO_N_CIRCULANTE", "Passivo não circulante", "trim|required|max_length[20]");
+		$this->form_validation->set_rules("BPAS_FORNECEDORES", "Fornecedores", "trim|required|max_length[20]");
+		$this->form_validation->set_rules("BPAS_PATRIMONIO_LIQUIDO", "Patrimônio líquido", "trim|required|max_length[20]");
+		$this->form_validation->set_rules("BPAS_OUTROS_PASSIVOS_CIRCULANTES", "Outros passivos circulantes", "trim|required|max_length[20]");
 
         if ($this->form_validation->run()){
             return true;
@@ -226,8 +270,17 @@ class EmpresaCliente extends CI_Controller {
 
         $this->form_validation->set_data($data);
 
-        $this->form_validation->set_rules("user_email ", "Email ", "trim|required|valid_email");
-        $this->form_validation->set_rules("user_password ", "Senha ", "trim|required|min_length[6]|max_length[10]");
+        $this->form_validation->set_rules("DRES_EMP_ID", "Id da empresa ", "trim|required");
+		$this->form_validation->set_rules("DRES_ANO_ID", "Ano referente ao DRE", "trim|required|max_length[10]");
+		$this->form_validation->set_rules("DRES_RECEITA_LIQUIDA_VENDAS", "Receita líquida de vendas", "trim|required|max_length[20]");
+		$this->form_validation->set_rules("DRES_CUSTO_VENDAS", "Custo das vendas", "trim|required|max_length[20]");
+		$this->form_validation->set_rules("DRES_DESPESAS_OPERACIONAIS", "Despesas Operacionais", "trim|required|max_length[20]");
+		$this->form_validation->set_rules("DRES_OUTRAS_RECEITAS_OP", "Outras receitas operacionais", "trim|required|max_length[20]");
+		$this->form_validation->set_rules("DRES_DESPESAS_FINANCEIRAS", "Despesas Financeiras", "trim|required|max_length[10]");
+		$this->form_validation->set_rules("DRES_RECEITAS_FINANCEIRAS", "Receitas Financeiras", "trim|required|max_length[20]");
+		$this->form_validation->set_rules("DRES_OUTRAS_DESPESAS", "Outras despesas", "trim|required|max_length[20]");
+		$this->form_validation->set_rules("DRES_IRPJ_CSLL", "IRPJ e CSLL", "trim|required|max_length[20]");
+		$this->form_validation->set_rules("DRES_CONTRIBUICOES_PARTICIP", "Contribuicoes e participacoes", "trim|required|max_length[20]");
 
         if ($this->form_validation->run()){
             return true;
