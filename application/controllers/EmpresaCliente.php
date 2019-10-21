@@ -123,9 +123,10 @@ class EmpresaCliente extends CI_Controller {
 						if($validouAtivosAnoAnteriorMenosUm && $validouAtivosAnoAnterior && $validouPassivosAnoAnteriorMenosUm
 						&& $validouPassivosAnoAnterior && $validouDreAnoAnteriorMenosUm && $validouDreAnoAnterior){
 							
-							
+							//carrega helper formata valores
 							$this->load->helper('FormataValores');
 
+							//formata os valores em decimais
 							$ativosAnoAnteriorMenosUm   = formataValores($ativosAnoAnteriorMenosUm); //retunr array 
 							$passivosAnoAnteriorMenosUm = formataValores($passivosAnoAnteriorMenosUm);
 							$dreAnoAnteriorMenosUm 	    = formataValores($dreAnoAnteriorMenosUm);
@@ -133,6 +134,7 @@ class EmpresaCliente extends CI_Controller {
 							$passivosAnoAnterior 	    = formataValores($passivosAnoAnterior);
 							$dreAnoAnterior 		    = formataValores($dreAnoAnterior);
 
+							//atribui os anos e os ids da empresa correspondente
 							$ativosAnoAnteriorMenosUm['BATIV_ANO_ID']  = (int)$ativosAnoAnteriorMenosUm['BATIV_ANO_ID'];
 							$passivosAnoAnteriorMenosUm['BPAS_ANO_ID'] = (int)$passivosAnoAnteriorMenosUm['BPAS_ANO_ID'];
 							$dreAnoAnteriorMenosUm['DRES_ANO_ID'] 	   = (int)$dreAnoAnteriorMenosUm['DRES_ANO_ID'];	   
@@ -147,7 +149,7 @@ class EmpresaCliente extends CI_Controller {
 							$passivosAnoAnterior['BPAS_EMP_ID']		   = (int)$passivosAnoAnterior['BPAS_EMP_ID'];	   
 							$dreAnoAnterior['DRES_EMP_ID'] 			   = (int)$dreAnoAnterior['DRES_EMP_ID'];	
 
-							
+							//calcula contas
 							$ativosAnoAnteriorMenosUm['BATIV_ATIVO_CIRCULANTE'] = ($ativosAnoAnteriorMenosUm['BATIV_CLIENTES'] + $ativosAnoAnteriorMenosUm['BATIV_ESTOQUE'] + $ativosAnoAnteriorMenosUm['BATIV_OUTROS_ATIVOS_CIRCULANTES'] + $ativosAnoAnteriorMenosUm['BATIV_CAIXA_EQUIV_CAIXA']);
 							$ativosAnoAnterior['BATIV_ATIVO_CIRCULANTE'] = ($ativosAnoAnterior['BATIV_CLIENTES'] + $ativosAnoAnterior['BATIV_ESTOQUE'] + $ativosAnoAnterior['BATIV_OUTROS_ATIVOS_CIRCULANTES'] + $ativosAnoAnterior['BATIV_CAIXA_EQUIV_CAIXA']);
 
@@ -178,17 +180,76 @@ class EmpresaCliente extends CI_Controller {
 							$dreAnoAnteriorMenosUm['DRES_RESULT_LIQUIDO_EXERCICIO'] = ($dreAnoAnteriorMenosUm['DRES_RESULT_ANTES_CONT_PART'] + $dreAnoAnteriorMenosUm['DRES_CONTRIBUICOES_PARTICIP']);
 							$dreAnoAnterior['DRES_RESULT_LIQUIDO_EXERCICIO'] = ($dreAnoAnterior['DRES_RESULT_ANTES_CONT_PART'] + $dreAnoAnterior['DRES_CONTRIBUICOES_PARTICIP']);
 
-
+							//carrega biblioteca dos índices.
 							$this->load->library('indiceseconomicos');
+
+							//índices para ano anterior menos um e ano anterior
 							$indicesAnoAnteriorMenosUm['COMP_LI'] = $this->indiceseconomicos->li($ativosAnoAnteriorMenosUm['BATIV_CAIXA_EQUIV_CAIXA'], $passivosAnoAnteriorMenosUm['BPAS_PASSIVO_CIRCULANTE']);
-							$indicesAnoAnterior['COMP_LI'] = $this->indiceseconomicos->li($ativosAnoAnteriorMenosUm['BATIV_CAIXA_EQUIV_CAIXA'], $passivosAnoAnteriorMenosUm['BPAS_PASSIVO_CIRCULANTE']);
+							$indicesAnoAnterior['COMP_LI'] = $this->indiceseconomicos->li($ativosAnoAnterior['BATIV_CAIXA_EQUIV_CAIXA'], $passivosAnoAnterior['BPAS_PASSIVO_CIRCULANTE']);
 
-							var_dump($ativosAnoAnteriorMenosUm['BATIV_CAIXA_EQUIV_CAIXA']);
-							var_Dump($indicesAnoAnteriorMenosUm['COMP_LI']);
+							$indicesAnoAnteriorMenosUm['COMP_LC'] = $this->indiceseconomicos->lc($ativosAnoAnteriorMenosUm['BATIV_ATIVO_CIRCULANTE'], $passivosAnoAnteriorMenosUm['BPAS_PASSIVO_CIRCULANTE']);
+							$indicesAnoAnterior['COMP_LC'] = $this->indiceseconomicos->lc($ativosAnoAnterior['BATIV_ATIVO_CIRCULANTE'], $passivosAnoAnterior['BPAS_PASSIVO_CIRCULANTE']);
 
+							$indicesAnoAnteriorMenosUm['COMP_LS'] = $this->indiceseconomicos->ls($ativosAnoAnteriorMenosUm['BATIV_ATIVO_CIRCULANTE'], $ativosAnoAnteriorMenosUm['BATIV_ESTOQUE'], $passivosAnoAnteriorMenosUm['BPAS_PASSIVO_CIRCULANTE']);
+							$indicesAnoAnterior['COMP_LS'] = $this->indiceseconomicos->ls($ativosAnoAnterior['BATIV_ATIVO_CIRCULANTE'], $ativosAnoAnterior['BATIV_ESTOQUE'], $passivosAnoAnterior['BPAS_PASSIVO_CIRCULANTE']);
+
+							$indicesAnoAnteriorMenosUm['COMP_LG'] = $this->indiceseconomicos->lg($ativosAnoAnteriorMenosUm['BATIV_ATIVO_CIRCULANTE'], $ativosAnoAnteriorMenosUm['BATIV_ATIVO_RLP'], $passivosAnoAnteriorMenosUm['BPAS_PASSIVO_CIRCULANTE'], $passivosAnoAnteriorMenosUm['BPAS_PASSIVO_N_CIRCULANTE']);
+							$indicesAnoAnterior['COMP_LG'] = $this->indiceseconomicos->lg($ativosAnoAnterior['BATIV_ATIVO_CIRCULANTE'], $ativosAnoAnterior['BATIV_ATIVO_RLP'], $passivosAnoAnterior['BPAS_PASSIVO_CIRCULANTE'], $passivosAnoAnterior['BPAS_PASSIVO_N_CIRCULANTE']);
+
+							$indicesAnoAnteriorMenosUm['COMP_EG'] = $this->indiceseconomicos->eg($passivosAnoAnteriorMenosUm['BPAS_PASSIVO_CIRCULANTE'], $passivosAnoAnteriorMenosUm['BPAS_PASSIVO_N_CIRCULANTE'], $passivosAnoAnteriorMenosUm['BPAS_PASSIVO_TOTAL']);
+							$indicesAnoAnterior['COMP_EG'] = $this->indiceseconomicos->eg($passivosAnoAnterior['BPAS_PASSIVO_CIRCULANTE'], $passivosAnoAnterior['BPAS_PASSIVO_N_CIRCULANTE'], $passivosAnoAnterior['BPAS_PASSIVO_TOTAL']);
+
+							$indicesAnoAnteriorMenosUm['COMP_GE'] = $this->indiceseconomicos->ge($passivosAnoAnteriorMenosUm['BPAS_PASSIVO_CIRCULANTE'], $passivosAnoAnteriorMenosUm['BPAS_PASSIVO_N_CIRCULANTE'],$passivosAnoAnteriorMenosUm['BPAS_PATRIMONIO_LIQUIDO']);
+							$indicesAnoAnterior['COMP_GE'] = $this->indiceseconomicos->ge($passivosAnoAnterior['BPAS_PASSIVO_CIRCULANTE'], $passivosAnoAnterior['BPAS_PASSIVO_N_CIRCULANTE'],$passivosAnoAnterior['BPAS_PATRIMONIO_LIQUIDO']);
+
+							$indicesAnoAnteriorMenosUm['COMP_CE'] = $this->indiceseconomicos->ce($passivosAnoAnteriorMenosUm['BPAS_PASSIVO_CIRCULANTE'], $passivosAnoAnteriorMenosUm['BPAS_PASSIVO_N_CIRCULANTE']);
+							$indicesAnoAnterior['COMP_CE'] = $this->indiceseconomicos->ce($passivosAnoAnterior['BPAS_PASSIVO_CIRCULANTE'], $passivosAnoAnterior['BPAS_PASSIVO_N_CIRCULANTE']);
+
+							$indicesAnoAnteriorMenosUm['COMP_GI'] = $this->indiceseconomicos->gi($ativosAnoAnteriorMenosUm['BATIV_INVESTIMENTOS'], $ativosAnoAnteriorMenosUm['BATIV_IMOB_INTANGIVEL'], $passivosAnoAnteriorMenosUm['BPAS_PATRIMONIO_LIQUIDO']);
+							$indicesAnoAnterior['COMP_GI'] = $this->indiceseconomicos->gi($ativosAnoAnterior['BATIV_INVESTIMENTOS'], $ativosAnoAnterior['BATIV_IMOB_INTANGIVEL'], $passivosAnoAnterior['BPAS_PATRIMONIO_LIQUIDO']);
+
+							$indicesAnoAnteriorMenosUm['COMP_IRNC'] = $this->indiceseconomicos->irnc($ativosAnoAnteriorMenosUm['BATIV_INVESTIMENTOS'], $ativosAnoAnteriorMenosUm['BATIV_IMOB_INTANGIVEL'], $passivosAnoAnteriorMenosUm['BPAS_PASSIVO_N_CIRCULANTE'], $passivosAnoAnteriorMenosUm['BPAS_PATRIMONIO_LIQUIDO']);
+							$indicesAnoAnterior['COMP_IRNC'] = $this->indiceseconomicos->irnc($ativosAnoAnterior['BATIV_INVESTIMENTOS'], $ativosAnoAnterior['BATIV_IMOB_INTANGIVEL'], $passivosAnoAnterior['BPAS_PASSIVO_N_CIRCULANTE'], $passivosAnoAnterior['BPAS_PATRIMONIO_LIQUIDO']);
+
+							$indicesAnoAnteriorMenosUm['COMP_MAF'] = $this->indiceseconomicos->maf($passivosAnoAnteriorMenosUm['BPAS_PASSIVO_TOTAL'], $passivosAnoAnteriorMenosUm['BPAS_PATRIMONIO_LIQUIDO']);
+							$indicesAnoAnterior['COMP_MAF'] = $this->indiceseconomicos->maf($passivosAnoAnterior['BPAS_PASSIVO_TOTAL'], $passivosAnoAnterior['BPAS_PATRIMONIO_LIQUIDO']);
+							
+							$indicesAnoAnteriorMenosUm['COMP_MB'] = $this->indiceseconomicos->mb($dreAnoAnteriorMenosUm['DRES_LUCRO_BRUTO'], $dreAnoAnteriorMenosUm['DRES_RECEITA_LIQUIDA_VENDAS']);
+							$indicesAnoAnterior['COMP_MB'] = $this->indiceseconomicos->mb($dreAnoAnterior['DRES_LUCRO_BRUTO'], $dreAnoAnterior['DRES_RECEITA_LIQUIDA_VENDAS']);
+							
+							$indicesAnoAnteriorMenosUm['COMP_MO'] = $this->indiceseconomicos->mo($dreAnoAnteriorMenosUm['DRES_RESULT_OPERACIONAL'] , $dreAnoAnteriorMenosUm['DRES_RECEITA_LIQUIDA_VENDAS']);
+							$indicesAnoAnterior['COMP_MO'] = $this->indiceseconomicos->mo($dreAnoAnterior['DRES_RESULT_OPERACIONAL'], $dreAnoAnterior['DRES_RECEITA_LIQUIDA_VENDAS']);
+
+							$indicesAnoAnteriorMenosUm['COMP_ML'] = $this->indiceseconomicos->ml($dreAnoAnteriorMenosUm['DRES_RESULT_LIQUIDO_EXERCICIO'], $dreAnoAnteriorMenosUm['DRES_RECEITA_LIQUIDA_VENDAS']);
+							$indicesAnoAnterior['COMP_ML'] = $this->indiceseconomicos->ml($dreAnoAnterior['DRES_RESULT_LIQUIDO_EXERCICIO'], $dreAnoAnterior['DRES_RECEITA_LIQUIDA_VENDAS']);
+
+							$indicesAnoAnteriorMenosUm['COMP_EMP_ID'] = $this->empId;
+							$indicesAnoAnteriorMenosUm['COMP_ANO_ID'] = $this->anoAnteriorMenosUm;
+							$indicesAnoAnterior['COMP_EMP_ID'] = $this->empId;
+							$indicesAnoAnterior['COMP_ANO_ID'] = $this->anoAnterior;
+
+
+							//índices somente para ano anterior
+							$indicesSomenteAnoAnterior['COMPANT_PMC'] = $this->indiceseconomicos->pmc($ativosAnoAnteriorMenosUm['BATIV_CLIENTES'], $ativosAnoAnterior['BATIV_CLIENTES'], $dreAnoAnterior['DRES_RECEITA_LIQUIDA_VENDAS']);
+							$indicesSomenteAnoAnterior['COMPANT_PME'] = $this->indiceseconomicos->pme($ativosAnoAnteriorMenosUm['BATIV_ESTOQUE'], $ativosAnoAnterior['BATIV_ESTOQUE'], $dreAnoAnterior['DRES_CUSTO_VENDAS']);
+							$indicesSomenteAnoAnterior['COMPANT_PMP'] = $this->indiceseconomicos->pmp($passivosAnoAnteriorMenosUm['BPAS_FORNECEDORES'], $passivosAnoAnterior['BPAS_FORNECEDORES'], $dreAnoAnterior['DRES_CUSTO_VENDAS'], $ativosAnoAnteriorMenosUm['BATIV_ESTOQUE'], $ativosAnoAnterior['BATIV_ESTOQUE']);
+							$indicesSomenteAnoAnterior['COMPANT_CO'] = $this->indiceseconomicos->co($indicesSomenteAnoAnterior['COMPANT_PMC'], $indicesSomenteAnoAnterior['COMPANT_PME']);
+							$indicesSomenteAnoAnterior['COMPANT_CF'] = $this->indiceseconomicos->cf($indicesSomenteAnoAnterior['COMPANT_CO'], $indicesSomenteAnoAnterior['COMPANT_PMP']);
+							$indicesSomenteAnoAnterior['COMPANT_GA'] = $this->indiceseconomicos->ga($dreAnoAnterior['DRES_RECEITA_LIQUIDA_VENDAS'], $ativosAnoAnteriorMenosUm['BATIV_ATIVO_TOTAL'], $ativosAnoAnterior['BATIV_ATIVO_TOTAL']);
+							$indicesSomenteAnoAnterior['COMPANT_RSA'] = $this->indiceseconomicos->rsa($indicesAnoAnterior['COMP_ML'], $indicesSomenteAnoAnterior['COMPANT_GA']);
+							$indicesSomenteAnoAnterior['COMPANT_RSPL'] = $this->indiceseconomicos->rspl($indicesSomenteAnoAnterior['COMPANT_RSA'], $indicesAnoAnterior['COMP_MAF']);
+							$indicesSomenteAnoAnterior['COMPANT_EMP_ID'] = $this->empId;
+							$indicesSomenteAnoAnterior['COMPANT_ANO_ID'] = $this->anoAnterior;
+							//carrega modelo para inserir o balanço (ativos/passivos) e o dre
 							$this->load->model('DadosFinanceiros');
-							$this->DadosFinanceiros->inserir($ativosAnoAnteriorMenosUm, $passivosAnoAnteriorMenosUm, $dreAnoAnteriorMenosUm, 
-														$ativosAnoAnterior, $passivosAnoAnterior, $dreAnoAnterior);
+							//$this->DadosFinanceiros->inserir($ativosAnoAnteriorMenosUm, $passivosAnoAnteriorMenosUm, $dreAnoAnteriorMenosUm, 
+							//							$ativosAnoAnterior, $passivosAnoAnterior, $dreAnoAnterior);
+
+							//carrega modelo para inserir os comparativos
+							$this->load->model('Comparativos');
+							$this->Comparativos->inserirIndices($indicesAnoAnteriorMenosUm, $indicesAnoAnterior);
+							$this->Comparativos->inserirSomenteIndicesAnoAnterior($indicesSomenteAnoAnterior);
+							die();
 							}else{
 								//retorna pra view com os alerts
 								var_dump($this->form_validation->error_array());

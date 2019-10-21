@@ -8,13 +8,28 @@ class Comparativos extends CI_Model {
         parent::__construct();
         $this->load->database();
     }
-    
-    public function inserirIndicesAnoAnteriorMenosUm($data){
 
+    public function inserirIndices($indicesAnoAnteriorMenosUm, $indicesAnoAnterior){
+        try{
+            print "<pre>";
+            print_r($indicesAnoAnteriorMenosUm);
+            print "</pre>";
+            print "<pre>";
+            print_r($indicesAnoAnterior);
+            print "</pre>";
+        }catch(PDOException $e){
+
+        }
     }
 
-    public function inserirIndicesAnoAnterior($data){
+    public function inserirSomenteIndicesAnoAnterior($data){
+        try{
+            print "<pre>";
+            print_r($data);
+            print "</pre>";
+        }catch(PDOException $e){
 
+        }
     }
 
 }
