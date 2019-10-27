@@ -36,4 +36,27 @@ class DadosFinanceiros extends CI_Model {
 
     }
 
+    public function possuiDadosDoAno($empId, $anoAnterior, $anoAnteriorMenosUm = null){
+        try{ 
+            $sql = "SELECT 1
+            FROM balanco_ativos 
+            JOIN balanco_passivos ON bpas_emp_id = bativ_emp_id AND bpas_ano_id = bativ_ano_id
+            WHERE 
+            bativ_emp_id = ?
+            AND bativ_ano_id IN (?, ?) LIMIT 1";
+            $consulta = $this->db->query($sql, array($empId, $anoAnteriorMenosUm, $anoAnterior));
+    
+            $array = $consulta->result();
+
+            if(empty($array)){
+                return false;
+            }
+
+            return true;
+        }catch(PDOException $e){
+            log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
+            return false; 
+        }
+    }
+
 }

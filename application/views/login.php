@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 
 <head>
-	<title>SISTEMA DE ANÁLISE DE INDICADORES</title>
+	<title>SISTEMA UNINDICES</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -30,7 +30,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div class="container-background100">
 			<div class="wrap-center100">
 				<div class="login100-pic js-tilt" data-tilt>
-					<img src="<?=base_url("public/images/imagem.png")?>" alt="IMG">
+					<img src="<?=base_url("public/images/logo_unindices.jpeg")?>" alt="IMG">
 				</div>
 
 				<form method="post" class="login100-form validate-form" action="<?=base_url("painel/login")?>">

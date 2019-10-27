@@ -41,4 +41,11 @@ class EmpresaClienteModel extends CI_Model {
 
 		return $consulta->result();
 	}
+
+	public function listaIndicesEmpresaCliente($empId){
+		$sql = "SELECT comp_li FROM comparativos WHERE comp_emp_id = ?";
+		$consulta = $this->db->query($sql, array($empId));
+
+		return $consulta->result();
+	}
 }

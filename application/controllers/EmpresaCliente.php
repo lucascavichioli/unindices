@@ -19,6 +19,10 @@ class EmpresaCliente extends CI_Controller {
 			redirect(base_url() . "painel/login");
 		}else{
 				if(strcmp($_SERVER['REQUEST_METHOD'], 'POST') !== 0){
+					//buscar se empresa ja possui cadastro de dados de 2 ou mais anos.
+					//Caso sim, redirecionar para cadastro de dados financeiros único.
+
+
 					$this->load->model('Anos');
 					$anoAnteriorMenosUm = $this->Anos->getAnoAnteriorMenosUm();
 					$anoAnterior = $this->Anos->getAnoAnterior();
@@ -240,16 +244,24 @@ class EmpresaCliente extends CI_Controller {
 							$indicesSomenteAnoAnterior['COMPANT_RSPL'] = $this->indiceseconomicos->rspl($indicesSomenteAnoAnterior['COMPANT_RSA'], $indicesAnoAnterior['COMP_MAF']);
 							$indicesSomenteAnoAnterior['COMPANT_EMP_ID'] = $this->empId;
 							$indicesSomenteAnoAnterior['COMPANT_ANO_ID'] = $this->anoAnterior;
+							
+							
+							
 							//carrega modelo para inserir o balanço (ativos/passivos) e o dre
 							$this->load->model('DadosFinanceiros');
-							//$this->DadosFinanceiros->inserir($ativosAnoAnteriorMenosUm, $passivosAnoAnteriorMenosUm, $dreAnoAnteriorMenosUm, 
-							//							$ativosAnoAnterior, $passivosAnoAnterior, $dreAnoAnterior);
+							if($this->DadosFinanceiros->possuiDadosDoAno($this->empId, $this->anoAnterior)){
+								return false;
+							}
+							
+							$this->DadosFinanceiros->inserir($ativosAnoAnteriorMenosUm, $passivosAnoAnteriorMenosUm, $dreAnoAnteriorMenosUm, 
+														$ativosAnoAnterior, $passivosAnoAnterior, $dreAnoAnterior);
 
 							//carrega modelo para inserir os comparativos
 							$this->load->model('Comparativos');
 							$this->Comparativos->inserirIndices($indicesAnoAnteriorMenosUm, $indicesAnoAnterior);
 							$this->Comparativos->inserirSomenteIndicesAnoAnterior($indicesSomenteAnoAnterior);
-							die();
+
+							return true;
 							}else{
 								//retorna pra view com os alerts
 								var_dump($this->form_validation->error_array());
@@ -337,7 +349,7 @@ class EmpresaCliente extends CI_Controller {
 		$this->form_validation->set_rules("DRES_CUSTO_VENDAS", "Custo das vendas", "trim|required|max_length[20]");
 		$this->form_validation->set_rules("DRES_DESPESAS_OPERACIONAIS", "Despesas Operacionais", "trim|required|max_length[20]");
 		$this->form_validation->set_rules("DRES_OUTRAS_RECEITAS_OP", "Outras receitas operacionais", "trim|required|max_length[20]");
-		$this->form_validation->set_rules("DRES_DESPESAS_FINANCEIRAS", "Despesas Financeiras", "trim|required|max_length[10]");
+		$this->form_validation->set_rules("DRES_DESPESAS_FINANCEIRAS", "Despesas Financeiras", "trim|required|max_length[20]");
 		$this->form_validation->set_rules("DRES_RECEITAS_FINANCEIRAS", "Receitas Financeiras", "trim|required|max_length[20]");
 		$this->form_validation->set_rules("DRES_OUTRAS_DESPESAS", "Outras despesas", "trim|required|max_length[20]");
 		$this->form_validation->set_rules("DRES_IRPJ_CSLL", "IRPJ e CSLL", "trim|required|max_length[20]");

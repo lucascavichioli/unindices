@@ -19,8 +19,11 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <div class="chart-area">
-                    <center>Links</center>
+                  <div>
+                    <a href="">Relatórios</a>
+                  </div>
+                  <div>
+                    <h4><?=$attr->emp_cnae?></h4>
                   </div>
                 </div>
                 <div class="card-footer">
