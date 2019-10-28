@@ -2,7 +2,13 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Indices extends CI_Controller {
-    
+
+	private static $ruim         = 'RUIM';
+    private static $satisfatorio = 'SATISFATÓRIO';
+    private static $bom          = 'BOM';
+	private static $otimo        = 'ÓTIMO';
+	
+
     public function index(){
 		if(!empty($this->session->userdata('usuario'))){
 			redirect(base_url() . "indices/relatorio");
@@ -30,9 +36,34 @@ class Indices extends CI_Controller {
 		$uf = $dadosEmpresa[0]->emp_uf;
 		$qtdEmp = $dadosEmpresa[0]->emp_qtd_emp;
 
+		$m1 = $qtdEmp - 50;
+		$m2 = $qtdEmp + 50;
 
-		//retorna indices das empresas com o mesmo cnae e estado
-		
+		//separa anos
+		foreach($indices as $chave => $valor){
+			$anos[$valor->COMP_ANO_ID] = $valor->COMP_ANO_ID;
+		}
+
+		if(empty($anos)){
+			die("Não possui nenhum dado cadastrado");
+		}
+
+		//para cada ano lista indices da empresa com o mesmo cnae
+		foreach ($anos as $chave => $ano) {
+			$lis[$ano] = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_LI');
+			$lcs[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_LC');
+			$lss[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_LS');
+			$lgs[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_LG');
+			$egs[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_EG');
+			$ges[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_GE');
+			$ces[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_CE');
+			$gis[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_GI');
+			$irncs[$ano] = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_IRNC');
+			$mafs[$ano]  = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_MAF');
+			$mbs[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_MB');
+			$mos[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_MO');
+			$mls[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_ML');
+		}
 		//calcula o quartil
 
 		//retorna posicionamento de cada indice
@@ -41,5 +72,49 @@ class Indices extends CI_Controller {
         $data['title'] = "Índices";
         $this->dashboard->show('relatorio-indices', $data);
 	}
+
+	public function getPosicionamento($indice, $elementos, $mn){
+		if(count($elementos) < 4){
+			 die("Não há indices suficientes para calcular o quartil");
+		 }
+		 $quartil = new QuartilController($elementos);
+		 $quartilUm = $quartil->getQuartilUm();
+		 $quartilDois = $quartil->getQuartilDois();
+		 $quartilTres = $quartil->getQuartilTres();
+ 
+		 if($mn === 1){
+			 if($indice < $quartilUm){
+				 return self::$ruim;
+			 }
+ 
+			 if($indice >= $quartilUm && $indice < $quartilDois){
+				 return self::$satisfatorio;
+			 }
+ 
+			 if($indice >= $quartilDois && $indice < $quartilTres){
+				 return self::$bom;
+			 }
+ 
+			 if($indice >= $quartilTres){
+				 return self::$otimo;
+			 }
+		 }else{
+			 if($indice < $quartilUm){
+				 return self::$otimo;
+			 }
+	 
+			 if($indice >= $quartilUm && $indice < $quartilDois){
+				 return self::$bom;
+			 }
+	 
+			 if($indice >= $quartilDois && $indice < $quartilTres){
+				 return self::$satisfatorio;
+			 }
+	 
+			 if($indice >= $quartilTres){
+				 return self::$ruim;
+			 }
+		 }
+	 }
 	
 }   

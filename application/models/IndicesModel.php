@@ -45,15 +45,15 @@ class IndicesModel extends CI_Model {
         }
     }
 
-    public function selectIndices($emp, $ano, $cnae, $comp){
+    public function listaDeIndicesDoMesmoGrupo($emp, $ano, $cnae, $m1, $m2, $comp){
         try{         
             $select = "SELECT $comp FROM comparativos 
             INNER JOIN empresa ON COMP_EMP_ID = EMP_ID  
-            WHERE EMP_ID != ? AND COMP_ANO_ID = ? AND EMP_CNAE = ?";
+            WHERE EMP_ID != ? AND COMP_ANO_ID = ? AND EMP_CNAE = ? AND EMP_QTD_EMP BETWEEN ? AND ?";
             
-            $consulta = $this->db->query($select, array($emp, $ano, $cnae));
+            $consulta = $this->db->query($select, array($emp, $ano, $cnae, $m1, $m2));
 
-            return $consulta->result();
+            return $consulta->row_array();
         }catch(PDOException $e){
             log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
             return false;
@@ -65,7 +65,8 @@ class IndicesModel extends CI_Model {
             $select = 'SELECT COMP_ID, COMP_LI, COMP_LC, COMP_LS, COMP_LG, 
             COMP_EG, COMP_GE, COMP_CE, COMP_GI, COMP_IRNC, COMP_MAF, 
             COMP_MB, COMP_MO, COMP_ML, COMP_ANO_ID FROM comparativos
-            WHERE COMP_EMP_ID = ?';
+            WHERE COMP_EMP_ID = ?
+            ORDER BY COMP_ANO_ID ASC';
     
             $consulta = $this->db->query($select, array($empId));
 
