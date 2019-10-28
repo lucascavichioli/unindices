@@ -31,7 +31,7 @@
                     <div class="col-md-6 pr-1">
                       <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
                         <label>CNAE - Atividade Principal</label>
-                        <input name="cnae" type="text" class="form-control" placeholder="CNAE">
+                        <input id="cnae" name="cnae" type="text" class="form-control" placeholder="CNAE">
                       </div>
                     </div>
                     <div class="col-md-6 pl-1">
@@ -131,10 +131,9 @@
               </div>
               <hr>
               <div class="button-container">
-                <a href="<?=base_url("dokuwiki")?>" target="_blank">Acesse a documentação</a>
+                <a href="<?=base_url("documentation/cadastroempresa")?>" target="_blank">Acesse a documentação</a>
               </div>
             </div>
           </div>
         </div>
       </div>
-    

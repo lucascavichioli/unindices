@@ -14,7 +14,7 @@ class NovaConta extends CI_Controller {
 		}else{
 
 			//$cnae = substr("69212312", 0, 3);
-			//if($cnae === '692'){prossegue}
+			//if($cnae === '69.2'){prossegue}
 
 			$ip = getenv('REMOTE_ADDR') ?? $_SERVER["REMOTE_ADDR"];
 			

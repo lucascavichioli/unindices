@@ -129,6 +129,8 @@ class Painel extends CI_Controller {
 			if($this->session->userdata('usuario') != '' && $this->session->userdata('logado') === true){
 				$data['title'] = "Adicionar Empresa";
 				$data['activeAddEmpresa'] = "active ";
+				//$this->load->model('Cnae');
+				//$data['cnaes'] = $this->Cnae->get();
 				$this->dashboard->show('adicionar-empresa.php', $data);
 			}else{
 				redirect(base_url() . "painel");

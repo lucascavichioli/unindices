@@ -447,7 +447,7 @@
         </div>
         <hr>
         <div class="button-container">
-          <a href="<?=base_url("dokuwiki")?>" target="_blank">Acesse a documentação</a>
+          <a href="<?=base_url("documentation/cadastrodadosfinanceiros")?>" target="_blank">Acesse a documentação</a>
         </div>
       </div>
     </div>

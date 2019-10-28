@@ -19,11 +19,23 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <div>
-                    <a href="">Relatórios</a>
+                  <div class="row">
+                    <div class="col-4">
+                      <a href="<?=base_url("indices/relatorio/").base64_encode($attr->emp_id);?>" class="card-link"><button class="btn btn-default btn-round">Índices</button></a>
+                    </div>
+                    <div class="col-4">
+                      <a href="" class="card-link"><button class="btn btn-default btn-round">Relatórios</button></a>
+                    </div>
                   </div>
-                  <div>
-                    <h4><?=$attr->emp_cnae?></h4>
+                  <div class="row">
+                      <div class="col-md-12">
+                        <p class="card-text">CNAE: <strong><?=$attr->emp_cnae?></strong></p>
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <p class="card-text">ESTADO: <strong><?=$attr->emp_uf?></strong></p>
+                    </div>
                   </div>
                 </div>
                 <div class="card-footer">
