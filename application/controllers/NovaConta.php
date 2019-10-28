@@ -13,6 +13,9 @@ class NovaConta extends CI_Controller {
 			$this->load->view('cadastro-contabilidade');
 		}else{
 
+			//$cnae = substr("69212312", 0, 3);
+			//if($cnae === '692'){prossegue}
+
 			$ip = getenv('REMOTE_ADDR') ?? $_SERVER["REMOTE_ADDR"];
 			
 			$this->load->helper( array( 'form' ,  'url' ));

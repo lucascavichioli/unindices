@@ -59,4 +59,48 @@ class DadosFinanceiros extends CI_Model {
         }
     }
 
+    public function possuiDoisOuMaisRegistros($empId){
+        try{ 
+            $sql = "SELECT 1
+            FROM empresa emp
+            JOIN balanco_ativos atv ON atv.bativ_emp_id = emp.emp_id
+            WHERE 
+            emp.emp_id = ? AND
+            (SELECT count(bativ_ano_id) FROM balanco_ativos WHERE bativ_emp_id = emp.emp_id) >= 2
+            LIMIT 1";
+            $consulta = $this->db->query($sql, array($empId));
+    
+            $array = $consulta->result();
+
+            if(empty($array)){
+                return false;
+            }
+
+            return true;
+        }catch(PDOException $e){
+            log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
+            return false; 
+        }
+    }
+
+    public function inserirCadastroUnico($ativosAnoAnterior, $passivosAnoAnterior, $dreAnoAnterior){
+        try{ 
+            $this->db->trans_begin();
+
+            $this->db->insert('balanco_ativos', $ativosAnoAnterior);
+            $this->db->insert('balanco_passivos', $passivosAnoAnterior);
+            $this->db->insert('demonstracao_resultado', $dreAnoAnterior);
+
+            if ($this->db->trans_status() === FALSE){
+                $this->db->trans_rollback();
+            }
+            else{
+                $this->db->trans_commit();
+            }
+        }catch(PDOException $e){
+            log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
+            return false; 
+        }
+    }
+
 }

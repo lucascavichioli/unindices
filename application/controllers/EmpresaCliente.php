@@ -19,22 +19,26 @@ class EmpresaCliente extends CI_Controller {
 			redirect(base_url() . "painel/login");
 		}else{
 				if(strcmp($_SERVER['REQUEST_METHOD'], 'POST') !== 0){
+					$this->load->model('DadosFinanceiros');
+					$empId = base64_decode($id);
+					if($this->DadosFinanceiros->possuiDoisOuMaisRegistros($empId)){
+						redirect(base_url() . "empresacliente/cadastrounico/" . $id);
+					}
 					//buscar se empresa ja possui cadastro de dados de 2 ou mais anos.
 					//Caso sim, redirecionar para cadastro de dados financeiros único.
 
+						$this->load->model('Anos');
+						$anoAnteriorMenosUm = $this->Anos->getAnoAnteriorMenosUm();
+						$anoAnterior = $this->Anos->getAnoAnterior();
 
-					$this->load->model('Anos');
-					$anoAnteriorMenosUm = $this->Anos->getAnoAnteriorMenosUm();
-					$anoAnterior = $this->Anos->getAnoAnterior();
 
-
-					$id = base64_decode($id);
-					$data['title'] = "Cadastro dos dados financeiros";
-					$data['id'] = $id;
-					$data['anoAnteriorMenosUm'] = $anoAnteriorMenosUm;
-					$data['anoAnterior'] = $anoAnterior;
-					
-					$this->dashboard->show('adicionar-dados-financeiros', $data);
+						$id = base64_decode($id);
+						$data['title'] = "Cadastro dos dados financeiros";
+						$data['id'] = $id;
+						$data['anoAnteriorMenosUm'] = $anoAnteriorMenosUm;
+						$data['anoAnterior'] = $anoAnterior;
+						
+						$this->dashboard->show('adicionar-dados-financeiros', $data);
 				}else{
 					$this->load->model('EmpresaClienteModel');
 					$empresa = $this->EmpresaClienteModel->listaEmpresasDeUmUsuario($this->session->userdata('cont_id'), $this->input->post('empId', true));
@@ -245,14 +249,12 @@ class EmpresaCliente extends CI_Controller {
 							$indicesSomenteAnoAnterior['COMPANT_EMP_ID'] = $this->empId;
 							$indicesSomenteAnoAnterior['COMPANT_ANO_ID'] = $this->anoAnterior;
 							
-							
-							
-							//carrega modelo para inserir o balanço (ativos/passivos) e o dre
+												//carrega modelo para inserir o balanço (ativos/passivos) e o dre
 							$this->load->model('DadosFinanceiros');
-							if($this->DadosFinanceiros->possuiDadosDoAno($this->empId, $this->anoAnterior)){
+							if($this->DadosFinanceiros->possuiDadosDoAno($this->empId, $this->anoAnterior, $this->anoAnteriorMenosUm)){
+								die("Já possui dados financeiros para este ano");
 								return false;
 							}
-							
 							$this->DadosFinanceiros->inserir($ativosAnoAnteriorMenosUm, $passivosAnoAnteriorMenosUm, $dreAnoAnteriorMenosUm, 
 														$ativosAnoAnterior, $passivosAnoAnterior, $dreAnoAnterior);
 
@@ -271,6 +273,109 @@ class EmpresaCliente extends CI_Controller {
 						}
 					}
 		}
+	}
+
+	public function cadastroUnico($id=null){
+		if(empty($this->session->userdata('usuario'))){
+			redirect(base_url() . "painel/login");
+		}else{
+				if(strcmp($_SERVER['REQUEST_METHOD'], 'POST') !== 0){
+					$this->load->model('Anos');
+					$ano = $this->Anos->getAno();
+					$anoAtual = $ano[0]->ano;
+					if(empty($this->Anos->jaExiste($anoAtual))){
+						var_dump($anoAtual);
+						$a['ANO_ID'] = $anoAtual;
+						$a['ANO_REF'] = (string)$anoAtual;
+						$this->Anos->inserir($a);
+						$anoAnterior = $this->Anos->getAnoAnterior();
+						$data['anoAnterior'] = $anoAnterior;
+					}else{
+						$anoAnterior = $this->Anos->getAnoAnterior();
+						$data['anoAnterior'] = $anoAnterior;
+					}
+
+					$id = base64_decode($id);
+					$data['title'] = "Cadastro Único";
+					$data['id'] = $id;
+						
+					$this->dashboard->show('cadastro-unico', $data);
+				}else{
+					$this->load->model('EmpresaClienteModel');
+					$empresa = $this->EmpresaClienteModel->listaEmpresasDeUmUsuario($this->session->userdata('cont_id'), $this->input->post('empId', true));
+
+					//Se a empresa não pertence a contabilidade, volta para a dashboard
+					if(empty($empresa)){
+						redirect(base_url() . "painel/dashboard");
+					}else{
+						$this->empId 			  = $this->input->post('empId', true);
+						$this->anoAnterior		  = $this->input->post('anoAnterior', true);
+
+						//BALANÇO DOS ATIVOS (ANO ANTERIOR)
+						$ativosAnoAnterior['BATIV_EMP_ID'] = $this->empId;
+						$ativosAnoAnterior['BATIV_ANO_ID'] = $this->anoAnteriorMenosUm;
+						$ativosAnoAnterior['BATIV_CLIENTES'] = $this->input->post('clientes', true);
+						$ativosAnoAnterior['BATIV_ESTOQUE'] =  $this->input->post('estoques', true);
+						$ativosAnoAnterior['BATIV_CAIXA_EQUIV_CAIXA'] = $this->input->post('caixaEquivalenteDeCaixa', true);
+						$ativosAnoAnterior['BATIV_OUTROS_ATIVOS_CIRCULANTES'] = $this->input->post('outrosAtivosCirculantes', true);
+						$ativosAnoAnterior['BATIV_ATIVO_RLP'] = $this->input->post('ativoRealizavelLongoPrazo', true);
+						$ativosAnoAnterior['BATIV_IMOB_INTANGIVEL'] = $this->input->post('imobilizadoIntangivel', true);
+						$ativosAnoAnterior['BATIV_INVESTIMENTOS'] = $this->input->post('investimentos', true);
+
+						$validouAtivosAnoAnterior = $this->validaBalancoAtivos($ativosAnoAnterior);
+
+						//BALANÇO DOS PASSIVOS (ANO ANTERIOR)
+						$passivosAnoAnterior['BPAS_EMP_ID'] = $this->empId;
+						$passivosAnoAnterior['BPAS_ANO_ID'] = $this->anoAnteriorMenosUm;
+						$passivosAnoAnterior['BPAS_PASSIVO_N_CIRCULANTE'] = $this->input->post('passivoNaoCirculante', true);
+						$passivosAnoAnterior['BPAS_FORNECEDORES'] =  $this->input->post('fornecedores', true);
+						$passivosAnoAnterior['BPAS_PATRIMONIO_LIQUIDO'] = $this->input->post('patrimonioLiquido', true);
+						$passivosAnoAnterior['BPAS_OUTROS_PASSIVOS_CIRCULANTES'] = $this->input->post('outrosPassivosCirculantes', true);
+
+						$validouPassivosAnoAnterior = $this->validaBalancoPassivos($passivosAnoAnterior);
+
+						// DEMONSTRAÇÃO DE RESULTADO (ANO ANTERIOR)
+						$dreAnoAnterior['DRES_EMP_ID'] = $this->empId;
+						$dreAnoAnterior['DRES_ANO_ID'] = $this->anoAnteriorMenosUm;
+						$dreAnoAnterior['DRES_RECEITA_LIQUIDA_VENDAS'] = $this->input->post('receitaLiquidaVendas', true);
+						$dreAnoAnterior['DRES_CUSTO_VENDAS'] =  $this->input->post('custoVendas', true);
+						$dreAnoAnterior['DRES_DESPESAS_OPERACIONAIS'] = $this->input->post('despesasOperacionais', true);
+						$dreAnoAnterior['DRES_OUTRAS_RECEITAS_OP'] = $this->input->post('outrasReceitasOperacionais', true);
+						$dreAnoAnterior['DRES_DESPESAS_FINANCEIRAS'] = $this->input->post('despesasFinanceiras', true);
+						$dreAnoAnterior['DRES_RECEITAS_FINANCEIRAS'] = $this->input->post('receitasFinanceiras', true);
+						$dreAnoAnterior['DRES_OUTRAS_DESPESAS'] = $this->input->post('outrasDespesas', true);
+						$dreAnoAnterior['DRES_IRPJ_CSLL'] = $this->input->post('irpjCsll', true);
+						$dreAnoAnterior['DRES_CONTRIBUICOES_PARTICIP'] = $this->input->post('contribuicoesParticipacoes', true);
+
+						$validouDreAnoAnterior = $this->validaDre($dreAnoAnterior);
+
+						if($validouAtivosAnoAnterior && $validouPassivosAnoAnterior && $validouDreAnoAnterior){
+
+							//carrega helper formata valores
+							$this->load->helper('FormataValores');
+
+							//formata os valores em decimais
+							$ativosAnoAnterior 		    = formataValores($ativosAnoAnterior);
+							$passivosAnoAnterior 	    = formataValores($passivosAnoAnterior);
+							$dreAnoAnterior 		    = formataValores($dreAnoAnterior);
+
+							$ativosAnoAnterior['BATIV_ANO_ID'] 		   = (int)$ativosAnoAnterior['BATIV_ANO_ID'];
+							$passivosAnoAnterior['BPAS_ANO_ID']		   = (int)$passivosAnoAnterior['BPAS_ANO_ID'];	   
+							$dreAnoAnterior['DRES_ANO_ID'] 			   = (int)$dreAnoAnterior['DRES_ANO_ID'];	 
+							
+							$ativosAnoAnterior['BATIV_EMP_ID'] 		   = (int)$ativosAnoAnterior['BATIV_EMP_ID'];
+							$passivosAnoAnterior['BPAS_EMP_ID']		   = (int)$passivosAnoAnterior['BPAS_EMP_ID'];	   
+							$dreAnoAnterior['DRES_EMP_ID'] 			   = (int)$dreAnoAnterior['DRES_EMP_ID'];
+
+							//calcular contas
+
+							//buscar ativos,passivos e dre do ano anterior a este
+							
+						
+						}
+					}
+				}
+			}
 	}
 
 	public function cadastrarDre($id){

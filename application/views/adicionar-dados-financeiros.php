@@ -19,7 +19,7 @@
                         <th class="text-center">
                           <select id="anoAnteriorMenosUm" name="anoAnteriorMenosUm" class="form-control" required>
                               <?php foreach($anoAnteriorMenosUm as $ano_id => $attr){?>
-                              <option value="<?=$attr->ano_id?>"><?=$attr->ano_ref?></option> <?php }?>
+                              <option value="<?=$attr->ano_id?>"><?=$attr->ano_ref?></option> <?php } ?>
                           </select>
                         </th>
                         <th class="text-center">
@@ -36,14 +36,14 @@
                       <td>                        
                         <div class="col-md-18">
                             <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                              <input name="caixaEquivalenteDeCaixa" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Caixa e Equivalentes de caixa" maxlength="20" required>
+                              <input name="caixaEquivalenteDeCaixa" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Caixa e Equivalentes de caixa <?=$anoAnteriorMenosUm[0]->ano_ref;?>" maxlength="20" required>
                             </div>
                         </div>
                       </td>
                       <td>                        
                         <div class="col-md-18">
                             <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                              <input name="caixaEquivalenteDeCaixa2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Caixa e Equivalentes de caixa" maxlength="20" required>
+                              <input name="caixaEquivalenteDeCaixa2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Caixa e Equivalentes de caixa <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
                             </div>
                         </div>
                       </td>
@@ -53,14 +53,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="clientes" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Clientes" maxlength="20" required>
+                            <input name="clientes" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Clientes <?=$anoAnteriorMenosUm[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="clientes2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Clientes" maxlength="20" required>
+                            <input name="clientes2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Clientes <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -70,14 +70,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="estoques" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Estoques" maxlength="20" required>
+                            <input name="estoques" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Estoques <?=$anoAnteriorMenosUm[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="estoques2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Estoques" maxlength="20" required>
+                            <input name="estoques2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Estoques <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -87,14 +87,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrosAtivosCirculantes" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Outros ativos circulantes" maxlength="20" required>
+                            <input name="outrosAtivosCirculantes" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Outros ativos circulantes <?=$anoAnteriorMenosUm[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrosAtivosCirculantes2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Outros ativos circulantes" maxlength="20" required>
+                            <input name="outrosAtivosCirculantes2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Outros ativos circulantes <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -104,14 +104,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="ativoRealizavelLongoPrazo" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Ativo realizável a longo prazo" maxlength="20" required>
+                            <input name="ativoRealizavelLongoPrazo" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Ativo realizável a longo prazo <?=$anoAnteriorMenosUm[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="ativoRealizavelLongoPrazo2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Ativo realizável a longo prazo" maxlength="20" required>
+                            <input name="ativoRealizavelLongoPrazo2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Ativo realizável a longo prazo <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -121,14 +121,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="investimentos" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Investimentos" maxlength="20" required>
+                            <input name="investimentos" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Investimentos <?=$anoAnteriorMenosUm[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="investimentos2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Investimentos" maxlength="20" required>
+                            <input name="investimentos2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Investimentos <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -138,14 +138,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="imobilizadoIntangivel" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Imobilizado e intangível" maxlength="20" required>
+                            <input name="imobilizadoIntangivel" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Imobilizado e intangível <?=$anoAnteriorMenosUm[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="imobilizadoIntangivel2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Imobilizado e intangível" maxlength="20" required>
+                            <input name="imobilizadoIntangivel2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Imobilizado e intangível <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -172,14 +172,14 @@
                       <td>                        
                         <div class="col-18">
                             <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                              <input name="fornecedores" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Fornecedores" maxlength="20" required>
+                              <input name="fornecedores" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Fornecedores <?=$anoAnteriorMenosUm[0]->ano_ref;?>" maxlength="20" required>
                             </div>
                         </div>
                       </td>
                       <td>                        
                         <div class="col-18">
                             <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                              <input name="fornecedores2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Fornecedores" maxlength="20" required>
+                              <input name="fornecedores2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Fornecedores <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
                             </div>
                         </div>
                       </td>
@@ -189,14 +189,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrosPassivosCirculantes" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
+                            <input name="outrosPassivosCirculantes" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Outros Passivos Circulantes <?=$anoAnteriorMenosUm[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrosPassivosCirculantes2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
+                            <input name="outrosPassivosCirculantes2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Outros Passivos Circulantes <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -206,14 +206,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="passivoNaoCirculante" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
+                            <input name="passivoNaoCirculante" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Passivo Não Circulante <?=$anoAnteriorMenosUm[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="passivoNaoCirculante2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
+                            <input name="passivoNaoCirculante2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Passivo Não Circulante <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -223,14 +223,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="patrimonioLiquido" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
+                            <input name="patrimonioLiquido" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Patrimônio Líquido <?=$anoAnteriorMenosUm[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="patrimonioLiquido2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
+                            <input name="patrimonioLiquido2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Patrimônio Líquido <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -257,14 +257,14 @@
                       <td>                        
                         <div class="col-18">
                             <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                              <input name="receitaLiquidaVendas" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
+                              <input name="receitaLiquidaVendas" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Receita líquida de vendas <?=$anoAnteriorMenosUm[0]->ano_ref;?>" maxlength="20" required>
                             </div>
                         </div>
                       </td>
                       <td>                        
                         <div class="col-18">
                             <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                              <input name="receitaLiquidaVendas2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
+                              <input name="receitaLiquidaVendas2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Receita líquida de vendas <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
                             </div>
                         </div>
                       </td>
@@ -274,14 +274,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="custoVendas" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
+                            <input name="custoVendas" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Custo de vendas <?=$anoAnteriorMenosUm[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="custoVendas2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
+                            <input name="custoVendas2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Custo de vendas <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -291,14 +291,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="despesasOperacionais" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
+                            <input name="despesasOperacionais" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Despesas Operacionais <?=$anoAnteriorMenosUm[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="despesasOperacionais2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
+                            <input name="despesasOperacionais2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Despesas Operacionais <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -308,14 +308,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrasReceitasOperacionais" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
+                            <input name="outrasReceitasOperacionais" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Outras receitas peracionais <?=$anoAnteriorMenosUm[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrasReceitasOperacionais2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
+                            <input name="outrasReceitasOperacionais2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Outras receitas peracionais <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -325,14 +325,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="despesasFinanceiras" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
+                            <input name="despesasFinanceiras" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Despesas financeiras <?=$anoAnteriorMenosUm[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="despesasFinanceiras2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
+                            <input name="despesasFinanceiras2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Despesas financeiras <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -342,14 +342,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="receitasFinanceiras" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
+                            <input name="receitasFinanceiras" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Receitas financeiras <?=$anoAnteriorMenosUm[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="receitasFinanceiras2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
+                            <input name="receitasFinanceiras2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Receitas financeiras <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -359,14 +359,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrasDespesas" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
+                            <input name="outrasDespesas" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Outras despesas <?=$anoAnteriorMenosUm[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrasDespesas2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
+                            <input name="outrasDespesas2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Outras despesas <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -376,14 +376,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="irpjCsll" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
+                            <input name="irpjCsll" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="IRPJ e CSLL <?=$anoAnteriorMenosUm[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="irpjCsll2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
+                            <input name="irpjCsll2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="IRPJ e CSLL <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -393,14 +393,14 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="contribuicoesParticipacoes" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
+                            <input name="contribuicoesParticipacoes" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Contribuições e participações <?=$anoAnteriorMenosUm[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="contribuicoesParticipacoes2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="" maxlength="20" required>
+                            <input name="contribuicoesParticipacoes2" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Contribuições e participações <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -440,9 +440,9 @@
             </p>
           </div>
           <p class="description text-center">
-            Escolha um nome fantasia ou apelido para lembrar da empresa-cliente
-            <br> Não estamos interessados em saber qual é a empresa
-            <br> Ao preencha todos os dados
+            Para cadastrar os dados financeiros, 
+            <br> preencha todos os campos, caso o número for negativo,
+            <br> este deve ser preenchido com o sinal de "-" na frente
           </p>
         </div>
         <hr>

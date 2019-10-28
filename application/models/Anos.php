@@ -19,4 +19,28 @@ class Anos extends CI_Model{
         
         return $consulta->result(); //result_array
     }
+
+    public function getAno(){
+        $consulta = $this->db->query("SELECT extract(year FROM SYSDATE()) as ano FROM dual");
+        
+        return $consulta->result();
+    }
+
+    public function jaExiste($ano){
+        $sql = "SELECT ano_id as ano FROM anos WHERE ano_id = ?";
+		$consulta = $this->db->query($sql, array($ano));
+
+		return $consulta->result();
+    }
+
+    public function inserir($ano){
+        try{
+			$this->db->insert('anos', $ano);
+			return true;
+		}catch(PDOException $e){
+			log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
+			return false;
+		}
+
+    }
 }
