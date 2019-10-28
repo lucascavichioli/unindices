@@ -48,4 +48,11 @@ class EmpresaClienteModel extends CI_Model {
 
 		return $consulta->result();
 	}
+
+	public function listaCnaeEstadoQtdEmp($empId){
+		$this->db->select('emp_cnae, emp_uf, emp_qtd_emp');
+        $consulta = $this->db->get_where('empresa', array( 'emp_id'  => $empId ));
+		
+        return $consulta->result();
+	}
 }

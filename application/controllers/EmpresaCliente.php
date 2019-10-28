@@ -259,9 +259,9 @@ class EmpresaCliente extends CI_Controller {
 														$ativosAnoAnterior, $passivosAnoAnterior, $dreAnoAnterior);
 
 							//carrega modelo para inserir os comparativos
-							$this->load->model('Comparativos');
-							$this->Comparativos->inserirIndices($indicesAnoAnteriorMenosUm, $indicesAnoAnterior);
-							$this->Comparativos->inserirSomenteIndicesAnoAnterior($indicesSomenteAnoAnterior);
+							$this->load->model('IndicesModel');
+							$this->IndicesModel->inserirIndices($indicesAnoAnteriorMenosUm, $indicesAnoAnterior);
+							$this->IndicesModel->inserirSomenteIndicesAnoAnterior($indicesSomenteAnoAnterior);
 
 							return true;
 							}else{

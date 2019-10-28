@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Comparativos extends CI_Model {   
+class IndicesModel extends CI_Model {   
     
     public function __construct(){
         parent::__construct();
@@ -45,4 +45,35 @@ class Comparativos extends CI_Model {
         }
     }
 
+    public function selectIndices($emp, $ano, $cnae, $comp){
+        try{         
+            $select = "SELECT $comp FROM comparativos 
+            INNER JOIN empresa ON COMP_EMP_ID = EMP_ID  
+            WHERE EMP_ID != ? AND COMP_ANO_ID = ? AND EMP_CNAE = ?";
+            
+            $consulta = $this->db->query($select, array($emp, $ano, $cnae));
+
+            return $consulta->result();
+        }catch(PDOException $e){
+            log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function listaIndices($empId){
+        try{         
+            $select = 'SELECT COMP_ID, COMP_LI, COMP_LC, COMP_LS, COMP_LG, 
+            COMP_EG, COMP_GE, COMP_CE, COMP_GI, COMP_IRNC, COMP_MAF, 
+            COMP_MB, COMP_MO, COMP_ML, COMP_ANO_ID FROM comparativos
+            WHERE COMP_EMP_ID = ?';
+    
+            $consulta = $this->db->query($select, array($empId));
+
+            return $consulta->result();
+
+        }catch(PDOException $e){
+            log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
+            return false;
+        }
+    }   
 }

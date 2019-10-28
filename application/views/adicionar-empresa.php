@@ -34,6 +34,27 @@
                         <input id="cnae" name="cnae" type="text" class="form-control" placeholder="CNAE">
                       </div>
                     </div>
+
+                    <div id="modalCnae" class="modal fade">
+                      <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title">Buscar Cnaes</h4>
+                          </div>
+                          <div class="modal-body">
+                            <div class="row">
+                              <div class="col-md-6 pr-1">
+                                <input type="text" name="buscar" class="form-control">
+                              </div>
+                              <div class="col-md-6 pr-1">
+                                <button class="btn btn-default">BUSCAR<i class="fas fa-search"></i></button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                     <div class="col-md-6 pl-1">
                       <div class="form-group">
                         <label>Atividades secundárias (CNAES)</label>

@@ -34,7 +34,12 @@
                   </div>
                   <div class="row">
                     <div class="col-md-12">
-                      <p class="card-text">ESTADO: <strong><?=$attr->emp_uf?></strong></p>
+                      <p class="card-text">Estado: <strong><?=$attr->emp_uf?></strong></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <p class="card-text">Colaboradores: <strong><?=$attr->emp_qtd_emp?></strong></p>
                     </div>
                   </div>
                 </div>
