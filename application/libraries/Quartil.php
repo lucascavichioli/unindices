@@ -11,6 +11,7 @@ class Quartil {
     }
 
     private function calculaQuartil($q){
+
         $elementos = $this->elementos;
         sort($elementos);
         

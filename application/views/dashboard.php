@@ -23,8 +23,8 @@
                     <div class="col-4">
                       <a href="<?=base_url("indices/relatorio/").base64_encode($attr->emp_id);?>" class="card-link"><button class="btn btn-default btn-round">Índices</button></a>
                     </div>
-                    <div class="col-4">
-                      <a href="" class="card-link"><button class="btn btn-default btn-round">Relatórios</button></a>
+                    <div class="col-8">
+                      <a href="" class="card-link"><button class="btn btn-default btn-round">Balanço patrimonial</button></a>
                     </div>
                   </div>
                   <div class="row">

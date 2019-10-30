@@ -49,11 +49,11 @@ class IndicesModel extends CI_Model {
         try{         
             $select = "SELECT $comp FROM comparativos 
             INNER JOIN empresa ON COMP_EMP_ID = EMP_ID  
-            WHERE EMP_ID != ? AND COMP_ANO_ID = ? AND EMP_CNAE = ? AND EMP_QTD_EMP BETWEEN ? AND ?";
-            
+            WHERE COMP_EMP_ID != ? AND COMP_ANO_ID = ? AND EMP_CNAE = ? AND EMP_QTD_EMP BETWEEN ? AND ?";
+
             $consulta = $this->db->query($select, array($emp, $ano, $cnae, $m1, $m2));
 
-            return $consulta->row_array();
+            return $consulta->result();
         }catch(PDOException $e){
             log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
             return false;
