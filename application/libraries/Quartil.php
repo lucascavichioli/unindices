@@ -4,15 +4,9 @@ class Quartil {
     private $qUm;
     private $qDois;
     private $qTres;
-    private $elementos = array();
 
-    public function __construct($elementos){
-        $this->elementos = $elementos;
-    }
+    private function calculaQuartil($elementos, $q){
 
-    private function calculaQuartil($q){
-
-        $elementos = $this->elementos;
         sort($elementos);
         
         $qtdElementos = count($elementos);
@@ -36,16 +30,16 @@ class Quartil {
     
     }
 
-    public function getQuartilUm(){
-        $this->qUm = $this->calculaQuartil(1);
+    public function getQuartilUm($e){
+        $this->qUm = $this->calculaQuartil($e, 1);
         return $this->qUm;
     }
-    public function getQuartilDois(){
-        $this->qDois = $this->calculaQuartil(2);
+    public function getQuartilDois($e){
+        $this->qDois = $this->calculaQuartil($e, 2);
         return $this->qDois;
     }
-    public function getQuartilTres(){
-        $this->qTres = $this->calculaQuartil(3);
+    public function getQuartilTres($e){
+        $this->qTres = $this->calculaQuartil($e, 3);
         return $this->qTres;
     }
 

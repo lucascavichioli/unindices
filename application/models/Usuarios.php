@@ -27,10 +27,7 @@ class Usuarios extends CI_Model {
           $contabilidade['cont_localidade'] = null;
           $contabilidade['cont_cep'] = $data['cep'];
 
-
           $this->db->insert('usuarios', $contabilidade);
-          
-          $date =  date("d-m-Y H:i:s");
           
           $log = array('ip_cliente' => $ip, 'operacao' => 'insert', 'usuario' => null, 'id_afetado' => $data['cnpj'], 'tabela_afetada' => 'receitaws; usuarios');
 

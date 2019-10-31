@@ -8,7 +8,7 @@ class DadosFinanceiros extends CI_Model {
         $this->load->database();
     }
 
-    public function inserir($ativosAnoAnteriorMenosUm, $passivosAnoAnteriorMenosUm, $dreAnoAnteriorMenosUm, 
+    public function inserir($ip, $ativosAnoAnteriorMenosUm, $passivosAnoAnteriorMenosUm, $dreAnoAnteriorMenosUm, 
                             $ativosAnoAnterior, $passivosAnoAnterior, $dreAnoAnterior){
         try{ 
             $this->db->trans_begin();
@@ -25,6 +25,13 @@ class DadosFinanceiros extends CI_Model {
             }
             else{
                 $this->db->trans_commit();
+
+                $log = array('ip_cliente' => $ip, 'operacao' => 'insert', 'usuario' => null, 'id_afetado' => $ativosAnoAnterior['BATIV_EMP_ID']. ": ". $ativosAnoAnterior['BATIV_ANO_ID'], 'tabela_afetada' => 'balanco_ativos; balanco_passivos, demonstracao_resultado');
+
+                $this->db->insert('logs', $log);
+              
+                $this->db->close();
+                return true;
             }
         }catch(PDOException $e){
             log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
@@ -96,6 +103,14 @@ class DadosFinanceiros extends CI_Model {
             }
             else{
                 $this->db->trans_commit();
+                
+                /*$log = array('ip_cliente' => $ip, 'operacao' => 'insert', 'usuario' => null, 'id_afetado' => $data['cnpj'], 'tabela_afetada' => 'receitaws; usuarios');
+
+                $this->db->insert('logs', $log);
+              
+                $this->db->close();*/
+            
+                return true;
             }
         }catch(PDOException $e){
             log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());

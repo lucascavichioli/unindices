@@ -20,7 +20,9 @@ class IndicesModel extends CI_Model {
             }
             else{
                 $this->db->trans_commit();
+                return true;
             }
+            
         }catch(PDOException $e){
             log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
             return false;
@@ -38,6 +40,7 @@ class IndicesModel extends CI_Model {
             }
             else{
                 $this->db->trans_commit();
+                return true;
             }
         }catch(PDOException $e){
             log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());

@@ -75,25 +75,33 @@ class Indices extends CI_Controller {
             die("Não há indices suficientes para calcular o quartil");
 		} */
 		
-		print "<pre>";
-		print_r($lis);
-		print "</pre>";
-		$arr = array();
+		/* print "<pre>";
+		print_r($indices);
+		print "</pre>"; */
+
+		//array que armazena os elementos
+		$elementos = array();
+
+		//array que separa os quartis de cada conjunto de elementos por ano
+		$quartilPorAno = array();
+
+		$this->load->library('quartil');
+
 		foreach ($anos as $ano) {
-			print $ano . " - ";
 			foreach ($lis[$ano] as $t) {
-				$arr[] = $t->COMP_LI;
+				$elementos[] = $t->COMP_LI;
 			}
-			print "<br>";
+			$quartilPorAno[$ano][] = $this->quartil->getQuartilUm($elementos);
+			$quartilPorAno[$ano][] = $this->quartil->getQuartilDois($elementos);
+			$quartilPorAno[$ano][] = $this->quartil->getQuartilTres($elementos);
 		}
+		
+		//$e = array(7.1, 7.4, 7.5, 7.7, 7.8, 7.9);
+
+
 		print "<pre>";
-		print_r($arr);
+		print_r($quartilPorAno);
 		print "</pre>";
-			$this->load->library('quartil', $arr);
-
-			$teste = $this->quartil->getQuartilUm();
-
-			print $teste;
 		
 		//calcula o quartil
 

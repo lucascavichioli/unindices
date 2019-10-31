@@ -255,7 +255,8 @@ class EmpresaCliente extends CI_Controller {
 								die("Já possui dados financeiros para este ano");
 								return false;
 							}
-							$this->DadosFinanceiros->inserir($ativosAnoAnteriorMenosUm, $passivosAnoAnteriorMenosUm, $dreAnoAnteriorMenosUm, 
+							$ip = getenv('REMOTE_ADDR') ?? $_SERVER["REMOTE_ADDR"];
+							$this->DadosFinanceiros->inserir($ip, $ativosAnoAnteriorMenosUm, $passivosAnoAnteriorMenosUm, $dreAnoAnteriorMenosUm, 
 														$ativosAnoAnterior, $passivosAnoAnterior, $dreAnoAnterior);
 
 							//carrega modelo para inserir os comparativos
