@@ -74,54 +74,65 @@ class Indices extends CI_Controller {
 		if(count($lis) < 4){
             die("Não há indices suficientes para calcular o quartil");
 		} */
-		
-		/* print "<pre>";
-		print_r($indices);
-		print "</pre>"; */
-
 		//array que armazena os elementos
 		$elementos = array();
 
 		//array que separa os quartis de cada conjunto de elementos por ano
 		$quartilPorAno = array();
-
+		$i=0;
 		$this->load->library('quartil');
-
 		foreach ($anos as $ano) {
-			foreach ($lis[$ano] as $t) {
-				$elementos[] = $t->COMP_LI;
+			foreach ($lis[$ano] as $li) {
+				$elementosLi[] = $li->COMP_LI;
 			}
-			$quartilPorAno[$ano][] = $this->quartil->getQuartilUm($elementos);
-			$quartilPorAno[$ano][] = $this->quartil->getQuartilDois($elementos);
-			$quartilPorAno[$ano][] = $this->quartil->getQuartilTres($elementos);
+				$quartilLi[$ano][] = $this->quartil->getQuartilUm($elementosLi);
+				$quartilLi[$ano][] = $this->quartil->getQuartilDois($elementosLi);
+				$quartilLi[$ano][] = $this->quartil->getQuartilTres($elementosLi);
+			
+			unset($elementosLi);
+
+			foreach ($lcs[$ano] as $lc) {
+				$elementosLc[] = $lc->COMP_LC;
+			}
+				$quartilLc[$ano][] = $this->quartil->getQuartilUm($elementosLc);
+				$quartilLc[$ano][] = $this->quartil->getQuartilDois($elementosLc);
+				$quartilLc[$ano][] = $this->quartil->getQuartilTres($elementosLc);
+
+				unset($elementosLc);
+			
+			foreach ($lss[$ano] as $ls) {
+				$elementosLs[] = $ls->COMP_LS;
+			}
+				$quartilLs[$ano][] = $this->quartil->getQuartilUm($elementosLs);
+				$quartilLs[$ano][] = $this->quartil->getQuartilDois($elementosLs);
+				$quartilLs[$ano][] = $this->quartil->getQuartilTres($elementosLs);
+				$posicionamentoLs[$ano]['COMP_LS'] = $this->getPosicionamento($indices[$i]->COMP_LS, $quartilLi[$ano], 1);
+				unset($elementosLs);
+
+		 $i++;
 		}
-		
-		//$e = array(7.1, 7.4, 7.5, 7.7, 7.8, 7.9);
-
-
 		print "<pre>";
-		print_r($quartilPorAno);
+		print_r($posicionamentoLs);
 		print "</pre>";
-		
-		//calcula o quartil
-
-		//retorna posicionamento de cada indice
 
         $data['title'] = "Índices";
         $this->dashboard->show('relatorio-indices', $data);
 	}
 
-	public function getPosicionamento($indice, $elementos, $mn){
-		if(count($elementos) < 4){
-			 die("Não há indices suficientes para calcular o quartil");
-		 }
-		 //carrega biblioteca quartil
-		 $this->load->library('Quartil');
-		 $quartil = new Quartil($elementos);
-		 $quartilUm = $quartil->getQuartilUm();
-		 $quartilDois = $quartil->getQuartilDois();
-		 $quartilTres = $quartil->getQuartilTres();
- 
+	public function getPosicionamento($indice, $quartis, $mn){
+		print "<pre>";
+		print_r($indice);
+		print "</pre>";
+		
+		print "<pre>";
+		print_r($quartis);
+		print "</pre>";
+		
+		print "<pre>";
+		print_r($mn);
+		print "</pre>";
+
+		/*
 		 if($mn === 1){
 			 if($indice < $quartilUm){
 				 return self::$ruim;
@@ -155,6 +166,7 @@ class Indices extends CI_Controller {
 				 return self::$ruim;
 			 }
 		 }
+		 */
 	 }
 	
 }   
