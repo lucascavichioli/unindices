@@ -74,6 +74,8 @@ class Indices extends CI_Controller {
 		if(count($lis) < 4){
             die("Não há indices suficientes para calcular o quartil");
 		} */
+
+
 		//array que armazena os elementos
 		$elementos = array();
 
@@ -88,8 +90,8 @@ class Indices extends CI_Controller {
 				$quartilLi[$ano][] = $this->quartil->getQuartilUm($elementosLi);
 				$quartilLi[$ano][] = $this->quartil->getQuartilDois($elementosLi);
 				$quartilLi[$ano][] = $this->quartil->getQuartilTres($elementosLi);
-			
-			unset($elementosLi);
+				$posicionamentoLi[$ano]['COMP_LI'] = $this->getPosicionamento($indices[$i]->COMP_LI, $quartilLi[$ano], 1);
+				unset($elementosLi);
 
 			foreach ($lcs[$ano] as $lc) {
 				$elementosLc[] = $lc->COMP_LC;
@@ -97,7 +99,7 @@ class Indices extends CI_Controller {
 				$quartilLc[$ano][] = $this->quartil->getQuartilUm($elementosLc);
 				$quartilLc[$ano][] = $this->quartil->getQuartilDois($elementosLc);
 				$quartilLc[$ano][] = $this->quartil->getQuartilTres($elementosLc);
-
+				$posicionamentoLc[$ano]['COMP_LC'] = $this->getPosicionamento($indices[$i]->COMP_LC, $quartilLc[$ano], 1);
 				unset($elementosLc);
 			
 			foreach ($lss[$ano] as $ls) {
@@ -106,33 +108,134 @@ class Indices extends CI_Controller {
 				$quartilLs[$ano][] = $this->quartil->getQuartilUm($elementosLs);
 				$quartilLs[$ano][] = $this->quartil->getQuartilDois($elementosLs);
 				$quartilLs[$ano][] = $this->quartil->getQuartilTres($elementosLs);
-				$posicionamentoLs[$ano]['COMP_LS'] = $this->getPosicionamento($indices[$i]->COMP_LS, $quartilLi[$ano], 1);
+				$posicionamentoLs[$ano]['COMP_LS'] = $this->getPosicionamento($indices[$i]->COMP_LS, $quartilLs[$ano], 1);
 				unset($elementosLs);
+
+			foreach ($lgs[$ano] as $lg) {
+				$elementosLg[] = $lg->COMP_LG;
+			}
+				$quartilLg[$ano][] = $this->quartil->getQuartilUm($elementosLg);
+				$quartilLg[$ano][] = $this->quartil->getQuartilDois($elementosLg);
+				$quartilLg[$ano][] = $this->quartil->getQuartilTres($elementosLg);
+				$posicionamentoLg[$ano]['COMP_LG'] = $this->getPosicionamento($indices[$i]->COMP_LG, $quartilLg[$ano], 1);
+				unset($elementosLg);
+		
+			foreach ($egs[$ano] as $eg) {
+				$elementosEg[] = $eg->COMP_EG;
+			}
+				$quartilEg[$ano][] = $this->quartil->getQuartilUm($elementosEg);
+				$quartilEg[$ano][] = $this->quartil->getQuartilDois($elementosEg);
+				$quartilEg[$ano][] = $this->quartil->getQuartilTres($elementosEg);
+				$posicionamentoEg[$ano]['COMP_EG'] = $this->getPosicionamento($indices[$i]->COMP_EG, $quartilEg[$ano], 2);
+				unset($elementosEg);
+		
+			foreach ($ges[$ano] as $ge) {
+				$elementosGe[] = $ge->COMP_GE;
+			}
+				$quartilGe[$ano][] = $this->quartil->getQuartilUm($elementosGe);
+				$quartilGe[$ano][] = $this->quartil->getQuartilDois($elementosGe);
+				$quartilGe[$ano][] = $this->quartil->getQuartilTres($elementosGe);
+				$posicionamentoGe[$ano]['COMP_GE'] = $this->getPosicionamento($indices[$i]->COMP_GE, $quartilGe[$ano], 2);
+				unset($elementosGe);
+
+			foreach ($ces[$ano] as $ce) {
+				$elementosCe[] = $ce->COMP_CE;
+			}
+				$quartilCe[$ano][] = $this->quartil->getQuartilUm($elementosCe);
+				$quartilCe[$ano][] = $this->quartil->getQuartilDois($elementosCe);
+				$quartilCe[$ano][] = $this->quartil->getQuartilTres($elementosCe);
+				$posicionamentoCe[$ano]['COMP_CE'] = $this->getPosicionamento($indices[$i]->COMP_CE, $quartilCe[$ano], 2);
+				unset($elementosCe);
+
+			foreach ($gis[$ano] as $gi) {
+				$elementosGi[] = $gi->COMP_GI;
+			}
+				$quartilGi[$ano][] = $this->quartil->getQuartilUm($elementosGi);
+				$quartilGi[$ano][] = $this->quartil->getQuartilDois($elementosGi);
+				$quartilGi[$ano][] = $this->quartil->getQuartilTres($elementosGi);
+				$posicionamentoGi[$ano]['COMP_GI'] = $this->getPosicionamento($indices[$i]->COMP_GI, $quartilGi[$ano], 2);
+				unset($elementosGi);
+		
+			foreach ($gis[$ano] as $gi) {
+				$elementosGi[] = $gi->COMP_GI;
+			}
+				$quartilGi[$ano][] = $this->quartil->getQuartilUm($elementosGi);
+				$quartilGi[$ano][] = $this->quartil->getQuartilDois($elementosGi);
+				$quartilGi[$ano][] = $this->quartil->getQuartilTres($elementosGi);
+				$posicionamentoGi[$ano]['COMP_GI'] = $this->getPosicionamento($indices[$i]->COMP_GI, $quartilGi[$ano], 2);
+				unset($elementosGi);
+		
+			foreach ($irncs[$ano] as $irnc) {
+				$elementosIrnc[] = $irnc->COMP_IRNC;
+			}
+				$quartilIrnc[$ano][] = $this->quartil->getQuartilUm($elementosIrnc);
+				$quartilIrnc[$ano][] = $this->quartil->getQuartilDois($elementosIrnc);
+				$quartilIrnc[$ano][] = $this->quartil->getQuartilTres($elementosIrnc);
+				$posicionamentoIrnc[$ano]['COMP_IRNC'] = $this->getPosicionamento($indices[$i]->COMP_IRNC, $quartilIrnc[$ano], 2);
+				unset($elementosIrnc);
+
+			foreach ($mafs[$ano] as $maf) {
+				$elementosMaf[] = $maf->COMP_MAF;
+			}
+				$quartilMaf[$ano][] = $this->quartil->getQuartilUm($elementosMaf);
+				$quartilMaf[$ano][] = $this->quartil->getQuartilDois($elementosMaf);
+				$quartilMaf[$ano][] = $this->quartil->getQuartilTres($elementosMaf);
+				$posicionamentoMaf[$ano]['COMP_MAF'] = $this->getPosicionamento($indices[$i]->COMP_MAF, $quartilMaf[$ano], 1);
+				unset($elementosMaf);
+
+			foreach ($mbs[$ano] as $mb) {
+				$elementosMb[] = $mb->COMP_MB;
+			}
+				$quartilMb[$ano][] = $this->quartil->getQuartilUm($elementosMb);
+				$quartilMb[$ano][] = $this->quartil->getQuartilDois($elementosMb);
+				$quartilMb[$ano][] = $this->quartil->getQuartilTres($elementosMb);
+				$posicionamentoMb[$ano]['COMP_MB'] = $this->getPosicionamento($indices[$i]->COMP_MB, $quartilMb[$ano], 1);
+				unset($elementosMb);
+		
+			foreach ($mos[$ano] as $mo) {
+				$elementosMo[] = $mo->COMP_MO;
+			}
+				$quartilMo[$ano][] = $this->quartil->getQuartilUm($elementosMo);
+				$quartilMo[$ano][] = $this->quartil->getQuartilDois($elementosMo);
+				$quartilMo[$ano][] = $this->quartil->getQuartilTres($elementosMo);
+				$posicionamentoMo[$ano]['COMP_MO'] = $this->getPosicionamento($indices[$i]->COMP_MO, $quartilMo[$ano], 1);
+				unset($elementosMo);
+
+			foreach ($mls[$ano] as $ml) {
+				$elementosMl[] = $ml->COMP_ML;
+			}
+				$quartilMl[$ano][] = $this->quartil->getQuartilUm($elementosMl);
+				$quartilMl[$ano][] = $this->quartil->getQuartilDois($elementosMl);
+				$quartilMl[$ano][] = $this->quartil->getQuartilTres($elementosMl);
+				$posicionamentoMl[$ano]['COMP_ML'] = $this->getPosicionamento($indices[$i]->COMP_ML, $quartilMl[$ano], 1);
+				unset($elementosMl);
 
 		 $i++;
 		}
-		print "<pre>";
-		print_r($posicionamentoLs);
-		print "</pre>";
+		 print "<pre>";
+		 print_r($posicionamentoLi);
+		 print "</pre>";
+
+		// print "<pre>";
+		// print_r($posicionamentoLc);
+		// print "</pre>";
+
+
+		// print "<pre>";
+		// print_r($posicionamentoLs);
+		// print "</pre>";
+
 
         $data['title'] = "Índices";
         $this->dashboard->show('relatorio-indices', $data);
 	}
 
 	public function getPosicionamento($indice, $quartis, $mn){
-		print "<pre>";
-		print_r($indice);
-		print "</pre>";
 		
-		print "<pre>";
-		print_r($quartis);
-		print "</pre>";
-		
-		print "<pre>";
-		print_r($mn);
-		print "</pre>";
+		$quartilUm = $quartis[0];
+		$quartilDois = $quartis[1];
+		$quartilTres = $quartil[2];
 
-		/*
 		 if($mn === 1){
 			 if($indice < $quartilUm){
 				 return self::$ruim;
@@ -166,7 +269,6 @@ class Indices extends CI_Controller {
 				 return self::$ruim;
 			 }
 		 }
-		 */
 	 }
 	
 }   

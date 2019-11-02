@@ -80,6 +80,7 @@ class Painel extends CI_Controller {
 		if(strcmp($_SERVER['REQUEST_METHOD'], 'POST') === 0){
 			if($this->session->userdata('usuario') != '' && $this->session->userdata('logado') === true){
 				$ip = getenv('REMOTE_ADDR') ?? $_SERVER["REMOTE_ADDR"];
+				//$teste = $this->input->ip_address();
 				
 				$this->load->helper( array( 'form' ,  'url' ));
 				$this->load->library( 'form_validation' );
@@ -87,6 +88,8 @@ class Painel extends CI_Controller {
 
 				$data = array();
 
+				
+				
 				$data['EMP_NOME'] = $this->input->post('nomeFantasia', true);
 				$data['EMP_CNAE'] = $this->input->post('cnae', true);
 				$data['EMP_CNAE_SECUNDARIO'] = $this->input->post('cnaeSec', true);
