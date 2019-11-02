@@ -24,7 +24,7 @@ class Quartil {
 
         $n = $x - $posicao;
 
-        $var = $elementos[$posicaoArray+1] - $elementos[$posicaoArray];
+        $var = $elementos[$posicaoArray] - $elementos[$posicaoArray];
 
         $quartil = $elementos[$posicaoArray] + $n * $var;
 

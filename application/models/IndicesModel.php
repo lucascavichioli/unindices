@@ -85,5 +85,22 @@ class IndicesModel extends CI_Model {
             log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
             return false;
         }
+    } 
+    
+    public function listaIndicesAnoAnterior($empId){
+        try{         
+            $select = 'SELECT COMPANT_ID, COMPANT_PMC, COMPANT_PME, COMPANT_PMP, COMPANT_CO,
+            COMPANT_CF, COMPANT_GA, COMPANT_RSA, COMPANT_RSPL, COMPANT_ANO_ID FROM comparativos_ano_anterior
+            WHERE COMPANT_EMP_ID = ?
+            ORDER BY COMPANT_ANO_ID ASC';
+    
+            $consulta = $this->db->query($select, array($empId));
+
+            return $consulta->result();
+
+        }catch(PDOException $e){
+            log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
+            return false;
+        }
     }   
 }

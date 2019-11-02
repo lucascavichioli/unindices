@@ -3,9 +3,10 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
+                    <th>Índice</th>
                         <?php
                             foreach ($anos as $ano) {
-                                print "<th class='text-center'>";
+                                print "<th>";
                                 print $ano;
                                 print "</th>";
                             }
@@ -14,13 +15,12 @@
                 </thead>
                 <tbody>
                 <?php   
-                    foreach ($indices as $i) {
+                    foreach ($comparativos as $i => $v) {
                         print "<tr>";
-                            foreach ($i as $ano => $indice) {
-                                print "<td>";
-                                    foreach ($indice as $valor) {
-                                        print $valor;
-                                    }
+                        print "<td class='text-left' title='teste'>" . $i . "</td>";
+                            foreach ($v as $ano => $indice) {
+                                print "<td title='". $indice['VALOR'] . "%'>";
+                                    print $indice['POSICIONAMENTO'] . "(" . $indice['VALOR'] ."%)";
                                 print "</td>";
                             }
                         print "</tr>";
@@ -28,4 +28,9 @@
                 ?>
                 </tbody>
             </table>
+</div>
+
+<div class="">
+<h6>LEGENDAS</h6>
+LG = Líquidez Geral
 </div>
