@@ -49,12 +49,18 @@ class IndicesModel extends CI_Model {
     }
 
     public function listaDeIndicesDoMesmoGrupo($emp, $ano, $cnae, $m1, $m2, $comp){
-        try{         
-            $select = "SELECT $comp FROM comparativos 
-            INNER JOIN empresa ON COMP_EMP_ID = EMP_ID  
-            WHERE COMP_EMP_ID != ? AND COMP_ANO_ID = ? AND EMP_CNAE = ? AND EMP_QTD_EMP BETWEEN ? AND ?";
+        try{      
+            
+            $this->db->select($comp);
+            $this->db->from('comparativos');
+            $this->db->join('empresa', 'comp_emp_id = emp_id');
+            $this->db->where('comp_emp_id !=', $emp);
+            $this->db->where('comp_ano_id', $ano);
+            $this->db->like('emp_cnae', $cnae, 'after');
+            $this->db->where('emp_qtd_emp >=', $m1);
+            $this->db->where('emp_qtd_emp <=', $m2);
 
-            $consulta = $this->db->query($select, array($emp, $ano, $cnae, $m1, $m2));
+            $consulta = $this->db->get();
 
             return $consulta->result();
         }catch(PDOException $e){
