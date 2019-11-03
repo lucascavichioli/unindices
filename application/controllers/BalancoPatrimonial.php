@@ -15,11 +15,24 @@ class BalancoPatrimonial extends CI_Controller {
 		if(empty($this->session->userdata('usuario'))){
 			redirect(base_url() . "painel/login");
 		}
+		$id = base64_decode($empId);
 
-        $id = base64_decode($empId);
+		$this->load->model('EmpresaClienteModel');
+		$empresa = $this->EmpresaClienteModel->listaEmpresasDeUmUsuario($this->session->userdata('cont_id'), $id);
 
-        $data['title'] = "Balanço Patrimonial";
-        $this->dashboard->show('relatorio-balanco-patrimonial', $data);
+		//Se a empresa não pertence a contabilidade, volta para a dashboard
+		if(empty($empresa)){
+			redirect(base_url() . "painel/dashboard");
+		}else{
+			$this->load->model('BalancoPatrimonialModel');
+			$relatorio = $this->BalancoPatrimonialModel->listar($id);
+			$anos = $this->BalancoPatrimonialModel->listarAnosComRegistro($id);
+
+			$data['anos'] = $anos;
+			$data['balanco'] = $relatorio;
+			$data['tituloGrafico'] = "BALANÇO PATRIMONIAL";
+			$data['title'] = "Balanço Patrimonial";
+			$this->dashboard->show('relatorio-balanco-patrimonial', $data);	
+		}
     }
-
 }

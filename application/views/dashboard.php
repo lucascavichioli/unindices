@@ -14,7 +14,7 @@
                     <div class="dropdown-menu dropdown-menu-right">
                       <a class="dropdown-item" href="<?=base_url("empresacliente/cadastrardadosfinanceiros/").base64_encode($attr->emp_id);?>">Adicionar Dados Financeiros</a>
                       <a class="dropdown-item" href="<?=base_url("empresacliente/atualizarempresa/").base64_encode($attr->emp_id);?>">Atualizar informações</a>
-                      <a class="dropdown-item text-danger" href="<?=base_url("empresacliente/excluirempresa/").base64_encode($attr->emp_id);?>">Excluir empresa</a>
+                      <a class="dropdown-item text-danger" href="<?=base_url("empresacliente/excluirempresa/").base64_encode($attr->emp_id);?>" onclick="confirmaExclusao()">Excluir empresa</a>
                     </div>
                   </div>
                 </div>

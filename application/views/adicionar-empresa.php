@@ -31,7 +31,7 @@
                     <div class="col-md-6 pr-1">
                       <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
                         <label>CNAE - Atividade Principal</label>
-                        <input id="cnae" name="cnae" type="text" class="form-control" placeholder="CNAE">
+                        <input id="cnae" name="cnae" type="text" class="form-control" onclick="teste()" placeholder="CNAE">
                       </div>
                     </div>
 
