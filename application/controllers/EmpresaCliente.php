@@ -399,6 +399,24 @@ class EmpresaCliente extends CI_Controller {
 		
 	}
 
+	public function atualizarEmpresa($empId){
+		if(empty($this->session->userdata('usuario'))){
+			redirect(base_url() . "painel/login");
+		}
+		$id = base64_decode($empId);
+		$data['title'] = "Atualizar Empresa";
+
+		$this->load->model('EmpresaClienteModel');
+		$empresa = $this->EmpresaClienteModel->listaEmpresasDeUmUsuario($this->session->userdata('cont_id'), $id);
+
+		//Se a empresa não pertence a contabilidade, volta para a dashboard
+		if(empty($empresa)){
+			redirect(base_url() . "painel/dashboard");
+		}else{
+			$this->dashboard->show('atualizar-empresa', $data);
+		}
+	}
+
 	private function validaBalancoAtivos($data) {
 		$this->load->helper( array( 'form' ,  'url' ));
 		$this->load->library( 'form_validation' );

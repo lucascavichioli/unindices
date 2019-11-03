@@ -238,7 +238,7 @@ demo = {
           fill: true,
           backgroundColor: gradientFill,
           borderWidth: 2,
-          data: [2, 6, 9, 13, 14, 23, 50, 25, 40, 36, 10, num]
+          data: [0, 0, 9, 13, 14, 23, 50, 25, 40, 36, 10, num]
         }]
       },
       options: {

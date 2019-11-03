@@ -10,7 +10,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo"><?=$tituloGrafico ?? ''?></a>
+            <h6><?=$tituloGrafico ?? ''?></h6>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -36,6 +36,20 @@
         </div>
       </nav>
       <!-- End Navbar -->
-      <div class="panel-header panel-header-<?php if(empty($grafico)){print "sm";}else{print "lg";}?>">
+      <div class="panel-header panel-header-<?php if(empty($grafico)){print "sm";}else{print "md";}?>">
         <?=$grafico ?? ''?>
+        <?php 
+        if(!empty($indicesComparados)){ ?>
+        <div class="title col-md-12">
+          <div class="row">
+            <div class="title col-md-4" style="color:white">
+              Empresas comparadas: <?php print $indicesComparados ?? ''?>
+            </div>
+            <div class="title col-md-4" style="color:white">
+              CNAE: <?php print $cnae ?? ''?>
+            </div>
+          </div>
+        </div>
+        <?php }
+        ?>
       </div>

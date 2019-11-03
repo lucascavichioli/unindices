@@ -38,7 +38,7 @@ class Indices extends CI_Controller {
 		$dadosEmpresa = $this->EmpresaClienteModel->listaCnaeEstadoQtdEmp($id);
 
 		$cnae = $dadosEmpresa[0]->emp_cnae;
-		$cnae = substr($cnae, 0, 4);
+		$cnaeGeral = substr($cnae, 0, 4);
 
 		$uf = $dadosEmpresa[0]->emp_uf;
 		$qtdEmp = $dadosEmpresa[0]->emp_qtd_emp;
@@ -53,7 +53,7 @@ class Indices extends CI_Controller {
 
 		//separa anos dos indices ano anterior
 		foreach($indicesAnoAnterior as $chave => $valor){
-			$anosDosAnosAnterior[$valor->COMPANT_ANO_ID] = $valor->COMPANT_ANO_ID;
+			$anosDosAnosAnteriores[$valor->COMPANT_ANO_ID] = $valor->COMPANT_ANO_ID;
 		}
 
 		if(empty($anos)){
@@ -63,26 +63,37 @@ class Indices extends CI_Controller {
 		//para cada ano; lista indices da empresa com o mesmo cnae, range de colaboradores e estado;
 		//todos os arrays estão vazios no início desse laço de repetição.
 		foreach ($anos as $chave => $ano) {
-			$lis[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_LI');
-			$lcs[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_LC');
-			$lss[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_LS');
-			$lgs[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_LG');
-			$egs[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_EG');
-			$ges[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_GE');
-			$ces[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_CE');
-			$gis[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_GI');
-			$irncs[$ano] = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_IRNC');
-			$mafs[$ano]  = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_MAF');
-			$mbs[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_MB');
-			$mos[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_MO');
-			$mls[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnae, $m1, $m2, 'COMP_ML');
+			$lis[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnaeGeral, $m1, $m2, 'COMP_LI');
+			$lcs[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnaeGeral, $m1, $m2, 'COMP_LC');
+			$lss[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnaeGeral, $m1, $m2, 'COMP_LS');
+			$lgs[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnaeGeral, $m1, $m2, 'COMP_LG');
+			$egs[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnaeGeral, $m1, $m2, 'COMP_EG');
+			$ges[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnaeGeral, $m1, $m2, 'COMP_GE');
+			$ces[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnaeGeral, $m1, $m2, 'COMP_CE');
+			$gis[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnaeGeral, $m1, $m2, 'COMP_GI');
+			$irncs[$ano] = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnaeGeral, $m1, $m2, 'COMP_IRNC');
+			$mafs[$ano]  = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnaeGeral, $m1, $m2, 'COMP_MAF');
+			$mbs[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnaeGeral, $m1, $m2, 'COMP_MB');
+			$mos[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnaeGeral, $m1, $m2, 'COMP_MO');
+			$mls[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupo($id, $ano, $cnaeGeral, $m1, $m2, 'COMP_ML');
 		}
-		
 
+		foreach ($anosDosAnosAnteriores as $chave => $ano) {
+			$pmcs[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupoAnoAnterior($id, $ano, $cnaeGeral, $m1, $m2, 'COMPANT_PMC');
+			$pmes[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupoAnoAnterior($id, $ano, $cnaeGeral, $m1, $m2, 'COMPANT_PME');
+			$pmps[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupoAnoAnterior($id, $ano, $cnaeGeral, $m1, $m2, 'COMPANT_PMP');
+			$cos[$ano]    = $this->IndicesModel->listaDeIndicesDoMesmoGrupoAnoAnterior($id, $ano, $cnaeGeral, $m1, $m2, 'COMPANT_CO');
+			$cfs[$ano]    = $this->IndicesModel->listaDeIndicesDoMesmoGrupoAnoAnterior($id, $ano, $cnaeGeral, $m1, $m2, 'COMPANT_CF');
+			$gas[$ano]    = $this->IndicesModel->listaDeIndicesDoMesmoGrupoAnoAnterior($id, $ano, $cnaeGeral, $m1, $m2, 'COMPANT_GA');
+			$rsas[$ano]   = $this->IndicesModel->listaDeIndicesDoMesmoGrupoAnoAnterior($id, $ano, $cnaeGeral, $m1, $m2, 'COMPANT_RSA');
+			$rspls[$ano]  = $this->IndicesModel->listaDeIndicesDoMesmoGrupoAnoAnterior($id, $ano, $cnaeGeral, $m1, $m2, 'COMPANT_RSPL');
+		}	
+		
+		$quantidadeIndices = count($lis);
 		//verifica se não existem índices suficientes
-		// if(count($lis) < 4){
-        //     die("Não há indices suficientes para calcular o quartil");
-		// } 
+		if(count($lis) < 4){
+            die("Não há indices suficientes para calcular o quartil");
+		} 
 
 		$i=0;
 		$this->load->library('quartil');
@@ -134,7 +145,7 @@ class Indices extends CI_Controller {
 				$quartilEg[$ano][1] = $this->quartil->getQuartilDois($elementosEg);
 				$quartilEg[$ano][2] = $this->quartil->getQuartilTres($elementosEg);
 				$posicionamentoEg[$ano]['POSICIONAMENTO'] = $this->getPosicionamento($indices[$i]->COMP_EG, $quartilEg[$ano], 2);
-				$posicionamentoEg[$ano]['VALOR'] = $indices[$i]->COMP_EG;
+				$posicionamentoEg[$ano]['VALOR'] = $indices[$i]->COMP_EG . "%";
 				unset($elementosEg);
 		
 			foreach ($ges[$ano] as $ge) {
@@ -144,7 +155,7 @@ class Indices extends CI_Controller {
 				$quartilGe[$ano][1] = $this->quartil->getQuartilDois($elementosGe);
 				$quartilGe[$ano][2] = $this->quartil->getQuartilTres($elementosGe);
 				$posicionamentoGe[$ano]['POSICIONAMENTO'] = $this->getPosicionamento($indices[$i]->COMP_GE, $quartilGe[$ano], 2);
-				$posicionamentoGe[$ano]['VALOR'] = $indices[$i]->COMP_GE;
+				$posicionamentoGe[$ano]['VALOR'] = $indices[$i]->COMP_GE . "%";
 				unset($elementosGe);
 
 			foreach ($ces[$ano] as $ce) {
@@ -154,7 +165,7 @@ class Indices extends CI_Controller {
 				$quartilCe[$ano][1] = $this->quartil->getQuartilDois($elementosCe);
 				$quartilCe[$ano][2] = $this->quartil->getQuartilTres($elementosCe);
 				$posicionamentoCe[$ano]['POSICIONAMENTO'] = $this->getPosicionamento($indices[$i]->COMP_CE, $quartilCe[$ano], 2);
-				$posicionamentoCe[$ano]['VALOR'] = $indices[$i]->COMP_CE;
+				$posicionamentoCe[$ano]['VALOR'] = $indices[$i]->COMP_CE . "%";
 				unset($elementosCe);
 
 			foreach ($gis[$ano] as $gi) {
@@ -164,7 +175,7 @@ class Indices extends CI_Controller {
 				$quartilGi[$ano][1] = $this->quartil->getQuartilDois($elementosGi);
 				$quartilGi[$ano][2] = $this->quartil->getQuartilTres($elementosGi);
 				$posicionamentoGi[$ano]['POSICIONAMENTO'] = $this->getPosicionamento($indices[$i]->COMP_GI, $quartilGi[$ano], 2);
-				$posicionamentoGi[$ano]['VALOR'] = $indices[$i]->COMP_GI;
+				$posicionamentoGi[$ano]['VALOR'] = $indices[$i]->COMP_GI . "%";
 				unset($elementosGi);
 		
 			foreach ($irncs[$ano] as $irnc) {
@@ -174,7 +185,7 @@ class Indices extends CI_Controller {
 				$quartilIrnc[$ano][1] = $this->quartil->getQuartilDois($elementosIrnc);
 				$quartilIrnc[$ano][2] = $this->quartil->getQuartilTres($elementosIrnc);
 				$posicionamentoIrnc[$ano]['POSICIONAMENTO'] = $this->getPosicionamento($indices[$i]->COMP_IRNC, $quartilIrnc[$ano], 2);
-				$posicionamentoIrnc[$ano]['VALOR'] = $indices[$i]->COMP_IRNC;
+				$posicionamentoIrnc[$ano]['VALOR'] = $indices[$i]->COMP_IRNC . "%";
 				unset($elementosIrnc);
 
 			foreach ($mafs[$ano] as $maf) {
@@ -220,6 +231,92 @@ class Indices extends CI_Controller {
 		 $i++;
 		}
 
+		$j=0;
+		foreach ($anosDosAnosAnteriores as $anoA){
+			foreach ($pmcs[$anoA] as $pmc) {
+				$elementosPmc[] = $pmc->COMPANT_PMC;
+			}
+				$quartilPmc[$anoA][0] = $this->quartil->getQuartilUm($elementosPmc);
+				$quartilPmc[$anoA][1] = $this->quartil->getQuartilDois($elementosPmc);
+				$quartilPmc[$anoA][2] = $this->quartil->getQuartilTres($elementosPmc);
+				$posicionamentoPmc[$anoA]['POSICIONAMENTO'] = $this->getPosicionamento($indicesAnoAnterior[$j]->COMPANT_PMC, $quartilPmc[$anoA], 2);
+				$posicionamentoPmc[$anoA]['VALOR'] = $indicesAnoAnterior[$j]->COMPANT_PMC;
+				unset($elementosPmc);
+		
+			foreach ($pmes[$anoA] as $pme) {
+				$elementosPme[] = $pme->COMPANT_PME;
+			}
+				$quartilPme[$anoA][0] = $this->quartil->getQuartilUm($elementosPme);
+				$quartilPme[$anoA][1] = $this->quartil->getQuartilDois($elementosPme);
+				$quartilPme[$anoA][2] = $this->quartil->getQuartilTres($elementosPme);
+				$posicionamentoPme[$anoA]['POSICIONAMENTO'] = $this->getPosicionamento($indicesAnoAnterior[$j]->COMPANT_PME, $quartilPme[$anoA], 2);
+				$posicionamentoPme[$anoA]['VALOR'] = $indicesAnoAnterior[$j]->COMPANT_PME;
+				unset($elementosPme);
+			
+			foreach ($pmps[$anoA] as $pmp) {
+				$elementosPmp[] = $pmp->COMPANT_PMP;
+			}
+				$quartilPmp[$anoA][0] = $this->quartil->getQuartilUm($elementosPmp);
+				$quartilPmp[$anoA][1] = $this->quartil->getQuartilDois($elementosPmp);
+				$quartilPmp[$anoA][2] = $this->quartil->getQuartilTres($elementosPmp);
+				$posicionamentoPmp[$anoA]['POSICIONAMENTO'] = $this->getPosicionamento($indicesAnoAnterior[$j]->COMPANT_PMP, $quartilPmp[$anoA], 1);
+				$posicionamentoPmp[$anoA]['VALOR'] = $indicesAnoAnterior[$j]->COMPANT_PMP;
+				unset($elementosPmp);
+			
+			foreach ($cos[$anoA] as $co) {
+				$elementosCo[] = $co->COMPANT_CO;
+			}
+				$quartilCo[$anoA][0] = $this->quartil->getQuartilUm($elementosCo);
+				$quartilCo[$anoA][1] = $this->quartil->getQuartilDois($elementosCo);
+				$quartilCo[$anoA][2] = $this->quartil->getQuartilTres($elementosCo);
+				$posicionamentoCo[$anoA]['POSICIONAMENTO'] = $this->getPosicionamento($indicesAnoAnterior[$j]->COMPANT_CO, $quartilCo[$anoA], 2);
+				$posicionamentoCo[$anoA]['VALOR'] = $indicesAnoAnterior[$j]->COMPANT_CO;
+				unset($elementosCo);
+
+			foreach ($cfs[$anoA] as $cf) {
+				$elementosCf[] = $cf->COMPANT_CF;
+			}
+				$quartilCf[$anoA][0] = $this->quartil->getQuartilUm($elementosCf);
+				$quartilCf[$anoA][1] = $this->quartil->getQuartilDois($elementosCf);
+				$quartilCf[$anoA][2] = $this->quartil->getQuartilTres($elementosCf);
+				$posicionamentoCf[$anoA]['POSICIONAMENTO'] = $this->getPosicionamento($indicesAnoAnterior[$j]->COMPANT_CF, $quartilCf[$anoA], 1);
+				$posicionamentoCf[$anoA]['VALOR'] = $indicesAnoAnterior[$j]->COMPANT_CF;
+				unset($elementosCf);
+
+			foreach ($gas[$anoA] as $ga) {
+				$elementosGa[] = $ga->COMPANT_GA;
+			}
+				$quartilGa[$anoA][0] = $this->quartil->getQuartilUm($elementosGa);
+				$quartilGa[$anoA][1] = $this->quartil->getQuartilDois($elementosGa);
+				$quartilGa[$anoA][2] = $this->quartil->getQuartilTres($elementosGa);
+				$posicionamentoGa[$anoA]['POSICIONAMENTO'] = $this->getPosicionamento($indicesAnoAnterior[$j]->COMPANT_GA, $quartilGa[$anoA], 1);
+				$posicionamentoGa[$anoA]['VALOR'] = $indicesAnoAnterior[$j]->COMPANT_GA;
+				unset($elementosGa);
+
+			foreach ($rsas[$anoA] as $rsa) {
+				$elementosRsa[] = $rsa->COMPANT_RSA;
+			}
+				$quartilRsa[$anoA][0] = $this->quartil->getQuartilUm($elementosRsa);
+				$quartilRsa[$anoA][1] = $this->quartil->getQuartilDois($elementosRsa);
+				$quartilRsa[$anoA][2] = $this->quartil->getQuartilTres($elementosRsa);
+				$posicionamentoRsa[$anoA]['POSICIONAMENTO'] = $this->getPosicionamento($indicesAnoAnterior[$j]->COMPANT_RSA, $quartilRsa[$anoA], 1);
+				$posicionamentoRsa[$anoA]['VALOR'] = $indicesAnoAnterior[$j]->COMPANT_RSA;
+				unset($elementosRsa);
+
+			foreach ($rspls[$anoA] as $rspl) {
+			$elementosRspl[] = $rspl->COMPANT_RSPL;
+			}
+				$quartilRspl[$anoA][0] = $this->quartil->getQuartilUm($elementosRspl);
+				$quartilRspl[$anoA][1] = $this->quartil->getQuartilDois($elementosRspl);
+				$quartilRspl[$anoA][2] = $this->quartil->getQuartilTres($elementosRspl);
+				$posicionamentoRspl[$anoA]['POSICIONAMENTO'] = $this->getPosicionamento($indicesAnoAnterior[$j]->COMPANT_RSPL, $quartilRspl[$anoA], 1);
+				$posicionamentoRspl[$anoA]['VALOR'] = $indicesAnoAnterior[$j]->COMPANT_RSPL;
+				unset($elementosRspl);
+			
+			
+			$j++;
+		}
+
 		$posicionamento['LI'] = $posicionamentoLi;
 		$posicionamento['LC'] = $posicionamentoLc;
 		$posicionamento['LS'] = $posicionamentoLs;
@@ -234,13 +331,32 @@ class Indices extends CI_Controller {
 		$posicionamento['MO'] = $posicionamentoMo;
 		$posicionamento['ML'] = $posicionamentoMl;
 
+		$posicionamentoAnoAnterior['PMC'] = $posicionamentoPmc;
+		$posicionamentoAnoAnterior['PME'] = $posicionamentoPme;
+		$posicionamentoAnoAnterior['PMP'] = $posicionamentoPmp;
+		$posicionamentoAnoAnterior['CO'] = $posicionamentoCo;
+		$posicionamentoAnoAnterior['CF'] = $posicionamentoCf;
+		$posicionamentoAnoAnterior['GA'] = $posicionamentoGa;
+		$posicionamentoAnoAnterior['RSA'] = $posicionamentoRsa;
+		$posicionamentoAnoAnterior['RSPL'] = $posicionamentoRspl;
+
+		$data['tituloGrafico'] = "DESEMPENHO DOS ÍNDICES";
+		$data['empresa'] = $dadosEmpresa[0]->emp_nome;
+		$data['cnae'] = $cnaeGeral;
+		$data['indicesComparados'] = $quantidadeIndices;
 		$data['indices'] = $indices;
 		$data['anos'] = $anos; 
+		$data['anosAnterior'] = $anosDosAnosAnteriores;
 		$data['comparativos'] = $posicionamento;
+		$data['comparativosAnoAnterior'] = $posicionamentoAnoAnterior;
         $data['title'] = "Índices";
         $this->dashboard->show('relatorio-indices', $data);
 	}
 
+	/*
+	1 Para índices quanto maior melhor
+	Qualquer outro número quanto menor melhor
+	*/
 	public function getPosicionamento($indice, $quartis, $mn){
 		
 		$quartilUm = $quartis[0];

@@ -69,6 +69,27 @@ class IndicesModel extends CI_Model {
         }
     }
 
+    public function listaDeIndicesDoMesmoGrupoAnoAnterior($emp, $ano, $cnae, $m1, $m2, $comp){
+        try{      
+            
+            $this->db->select($comp);
+            $this->db->from('comparativos_ano_anterior');
+            $this->db->join('empresa', 'compant_emp_id = emp_id');
+            $this->db->where('compant_emp_id !=', $emp);
+            $this->db->where('compant_ano_id', $ano);
+            $this->db->like('emp_cnae', $cnae, 'after');
+            $this->db->where('emp_qtd_emp >=', $m1);
+            $this->db->where('emp_qtd_emp <=', $m2);
+
+            $consulta = $this->db->get();
+
+            return $consulta->result();
+        }catch(PDOException $e){
+            log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
+            return false;
+        }
+    }
+
     public function listaIndices($empId){
         try{         
             $select = 'SELECT COMP_ID, COMP_LI, COMP_LC, COMP_LS, COMP_LG, 

@@ -13,8 +13,8 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                       <a class="dropdown-item" href="<?=base_url("empresacliente/cadastrardadosfinanceiros/").base64_encode($attr->emp_id);?>">Adicionar Dados Financeiros</a>
-                      <a class="dropdown-item" href="#">Atualizar informações</a>
-                      <a class="dropdown-item text-danger" href="#">Excluir empresa</a>
+                      <a class="dropdown-item" href="<?=base_url("empresacliente/atualizarempresa/").base64_encode($attr->emp_id);?>">Atualizar informações</a>
+                      <a class="dropdown-item text-danger" href="<?=base_url("empresacliente/excluirempresa/").base64_encode($attr->emp_id);?>">Excluir empresa</a>
                     </div>
                   </div>
                 </div>
@@ -24,7 +24,7 @@
                       <a href="<?=base_url("indices/relatorio/").base64_encode($attr->emp_id);?>" class="card-link"><button class="btn btn-default btn-round">Índices</button></a>
                     </div>
                     <div class="col-8">
-                      <a href="" class="card-link"><button class="btn btn-default btn-round">Balanço patrimonial</button></a>
+                      <a href="<?=base_url("balancopatrimonial/relatorio/").base64_encode($attr->emp_id);?>" class="card-link"><button class="btn btn-default btn-round">Balanço patrimonial</button></a>
                     </div>
                   </div>
                   <div class="row">
