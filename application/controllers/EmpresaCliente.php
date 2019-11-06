@@ -284,17 +284,21 @@ class EmpresaCliente extends CI_Controller {
 					$this->load->model('Anos');
 					$ano = $this->Anos->getAno();
 					$anoAtual = $ano[0]->ano;
-					if(empty($this->Anos->jaExiste($anoAtual))){
-						var_dump($anoAtual);
-						$a['ANO_ID'] = $anoAtual;
-						$a['ANO_REF'] = (string)$anoAtual;
-						$this->Anos->inserir($a);
-						$anoAnterior = $this->Anos->getAnoAnterior();
-						$data['anoAnterior'] = $anoAnterior;
-					}else{
-						$anoAnterior = $this->Anos->getAnoAnterior();
-						$data['anoAnterior'] = $anoAnterior;
-					}
+					$ultimoAno = $this->Anos->getAnoAnterior();
+
+					$ano = $anoAtual - $ultimoAno;
+					
+					//se não existe faça
+					if(empty($this->Anos->jaExiste($anoAtual))){	
+						if($ano === 2){
+							$anoExercicio = $anoAtual - 1;
+							$a['ANO_ID'] = $anoExercicio;
+							$a['ANO_REF'] = (string)$anoExercicio;
+							$this->Anos->inserir($a);
+						}else{
+							$anoAnterior = $this->Anos->getAnoAnterior();
+							$data['anoAnterior'] = $anoAnterior;
+						}				
 
 					$id = base64_decode($id);
 					$data['title'] = "Cadastro Único";
