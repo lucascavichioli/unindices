@@ -27,13 +27,33 @@ class BalancoPatrimonialModel extends CI_Model {
             BATIV_ATIVO_RLP as 'Ativo realizável a longo prazo',
             BATIV_INVESTIMENTOS as 'Investimentos',
             BATIV_IMOB_INTANGIVEL as 'Imobilizado e Intangível',
-            BATIV_ATIVO_TOTAL as '<strong>Ativo total</strong>'");
+            BATIV_ATIVO_TOTAL as '<strong>Ativo Total</strong>',
+            BPAS_FORNECEDORES as 'Fornecedores',
+            BPAS_PASSIVO_CIRCULANTE as 'Passivo Circulante',
+            BPAS_OUTROS_PASSIVOS_CIRCULANTES as 'Outros passivos circulantes',
+            BPAS_PASSIVO_N_CIRCULANTE as 'Passivo não circulante',
+            BPAS_PASSIVO_TOTAL as '<strong>Passivo Total</strong>',
+            BPAS_PATRIMONIO_LIQUIDO as '<strong>Patrimônio Líquido</strong>',
+            DRES_RECEITA_LIQUIDA_VENDAS as 'Receita Líquida de vendas',
+            DRES_CUSTO_VENDAS as 'Custo das vendas',
+            DRES_LUCRO_BRUTO as '<strong>Lucro bruto</strong>',            
+            DRES_DESPESAS_OPERACIONAIS as 'Despesas operacionais (exceto financeiras)',
+            DRES_OUTRAS_RECEITAS_OP as 'Outras receitas operacionais (exceto financeiras)',
+            DRES_RESULT_OPERACIONAL as '<strong>Resultado Operacional</strong>',       
+            DRES_DESPESAS_FINANCEIRAS as 'Despesas financeiras',
+            DRES_RECEITAS_FINANCEIRAS as 'Receitas financeiras',
+            DRES_OUTRAS_DESPESAS as 'Outras despesas',
+            DRES_RESULT_ANTES_IRPJ_CSLL as '<strong>Resultado antes do IRPJ e CSLL</strong>',
+            DRES_IRPJ_CSLL as 'IRPJ e CSLL',
+            DRES_RESULT_ANTES_CONT_PART as '<strong>Resultado antes das contribuições e participações</strong>',
+            DRES_CONTRIBUICOES_PARTICIP as 'Contribuições e participações',
+            DRES_RESULT_LIQUIDO_EXERCICIO as '<strong>Resultado líquido do exercício</strong>'");
             $this->db->from('empresa');
             $this->db->join('balanco_ativos', 'bativ_emp_id = emp_id');
             $this->db->join('balanco_passivos', 'bpas_id = bativ_id');
             $this->db->join('demonstracao_resultado', 'dres_id = bpas_id');
             $this->db->where('emp_id', $emp);
-            $this->db->order_by('bativ_ano_id', 'ASC');
+            $this->db->order_by('bativ_ano_id', 'DESC');
 
             $consulta = $this->db->get();
 
@@ -54,7 +74,7 @@ class BalancoPatrimonialModel extends CI_Model {
             $this->db->join('balanco_passivos', 'bpas_id = bativ_id');
             $this->db->join('demonstracao_resultado', 'dres_id = bpas_id');
             $this->db->where('emp_id', $emp);
-            $this->db->order_by('bativ_ano_id', 'ASC');
+            $this->db->order_by('bativ_ano_id', 'DESC');
 
             $consulta = $this->db->get();
 

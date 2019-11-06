@@ -55,4 +55,11 @@ class EmpresaClienteModel extends CI_Model {
 		
         return $consulta->result();
 	}
+
+	public function listaEmpresaClienteParaAtualizar($contId, $empId){
+		$this->db->select('emp_nome, emp_email, emp_cnae, emp_cnae_secundario, emp_qtd_emp, emp_uf, emp_telefone, emp_telefone2');
+        $consulta = $this->db->get_where('empresa', array( 'emp_cont_id'  => $contId, 'emp_id' => $empId ));
+		
+        return $consulta->result();
+	}
 }

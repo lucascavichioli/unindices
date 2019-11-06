@@ -18,7 +18,7 @@
   <!-- Chart JS -->
   <script src="<?=base_url()?>public/js/plugins/chartjs.min.js"></script>
   <!--  Notifications Plugin    -->
-  <script src="<?=base_url()?>public/js/seewtalert.js"></script>
+  <script src="<?=base_url()?>public/js/sweetalert.js"></script>
   <script src="<?=base_url()?>public/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="<?=base_url()?>public/js/now-ui-dashboard.min.js?v=1.3.0" type="text/javascript"></script>

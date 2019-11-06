@@ -96,7 +96,7 @@ class IndicesModel extends CI_Model {
             COMP_EG, COMP_GE, COMP_CE, COMP_GI, COMP_IRNC, COMP_MAF, 
             COMP_MB, COMP_MO, COMP_ML, COMP_ANO_ID FROM comparativos
             WHERE COMP_EMP_ID = ?
-            ORDER BY COMP_ANO_ID ASC';
+            ORDER BY COMP_ANO_ID DESC';
     
             $consulta = $this->db->query($select, array($empId));
 
@@ -113,7 +113,7 @@ class IndicesModel extends CI_Model {
             $select = 'SELECT COMPANT_ID, COMPANT_PMC, COMPANT_PME, COMPANT_PMP, COMPANT_CO,
             COMPANT_CF, COMPANT_GA, COMPANT_RSA, COMPANT_RSPL, COMPANT_ANO_ID FROM comparativos_ano_anterior
             WHERE COMPANT_EMP_ID = ?
-            ORDER BY COMPANT_ANO_ID ASC';
+            ORDER BY COMPANT_ANO_ID DESC';
     
             $consulta = $this->db->query($select, array($empId));
 

@@ -1,4 +1,3 @@
-
 (function ($) {
     "use strict";
 
@@ -305,25 +304,35 @@ function MascaraCEP(cep){
     }
   }
 
-function confirmaExclusao(){
+$(".excluirEmpresa").click(function(){
+  
   Swal.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
+    title: 'Tem certeza que deseja excluir esta empresa?',
+    text: "Todos os dados financeiros serão excluídos!",
     type: 'warning',
     showCancelButton: true,
+    cancelButtonText: 'Não',
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!'
+    confirmButtonText: 'Sim, quero excluir!'
   }).then((result) => {
-    if (result.value) {
-      Swal.fire(
-        'Deleted!',
-        'Your file has been deleted.',
-        'success'
-      )
-    }
-  })
-}
+      if (result.value) {
+          $.ajax({
+            type: "POST",
+            url: "/TCC/empresacliente/ajaxexcluirempresa",
+            dataType: "json",
+            data: {"empresa": $(this).attr("empresa")},
+            success: function(response){
+              Swal(
+                'Excluido!',
+                'Todos os dados desta empresa foram excluídos com sucesso.',
+                'success'
+              );
+            }
+          })
+      }
+  });
+});
 
 function teste(){
   $('#modalCnae').modal();

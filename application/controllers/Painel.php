@@ -25,8 +25,11 @@ class Painel extends CI_Controller {
 
 			if($this->form_validation->run()){
 			
-				$usuario = $this->input->post("usuario", true);
-				$senha = $this->input->post("pass", true);
+				$usuarioLogin = $this->input->post("usuario", true);
+				$senhaLogin = $this->input->post("pass", true);
+
+				$usuario = $this->security->xss_clean($usuarioLogin);
+				$senha = $this->security->xss_clean($senhaLogin);
 
 				$this->load->model("usuarios");
 				$getUser = $this->usuarios->getUser($usuario);

@@ -341,6 +341,7 @@ class Indices extends CI_Controller {
 		$posicionamentoAnoAnterior['RSPL'] = $posicionamentoRspl;
 
 		$data['tituloGrafico'] = "DESEMPENHO DOS ÍNDICES";
+		$data['uf'] = $uf;
 		$data['empresa'] = $dadosEmpresa[0]->emp_nome;
 		$data['cnae'] = $cnaeGeral;
 		$data['indicesComparados'] = $quantidadeIndices;

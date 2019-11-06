@@ -2,7 +2,7 @@
     <div class="title col-md-8">
     </div>
 </div>
-<center><h3>Relatório - <?php print 'TESTE'; ?></h3></center>
+<center><h3>Balanço Patrimonial</h3></center>
 <div class="table-responsive">
     <table class="table table-hover">
         <thead>
@@ -24,7 +24,7 @@
                         print "<tr>";
                         print "<td>" . $col . "</td>";
                             foreach ($balanco as $ano) {
-                                print "<td title='' onblur='mascaraMoeda(this);'>";
+                                print "<td title=''>";
                                     print number_format($ano->$col,2,",",".");
                                 print "</td>";
                             }

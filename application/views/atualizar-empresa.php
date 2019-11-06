@@ -3,7 +3,7 @@
           <div class="col-md-8">
             <div class="card">
               <div class="card-header">
-                <h5 class="title">Atualizar informações da Empresa</h5>
+                <h5 class="title">Atualizar Empresa</h5>
               </div>
               <div class="card-body">
                 <form id="formulario" method='post' action='' class="validate-form" autocomplete="off">
@@ -11,19 +11,13 @@
                     <div class="col-md-6 pr-1">
                       <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
                         <label>Nome fantasia</label>
-                        <input name="nomeFantasia" type="text" class="form-control" placeholder="Nome fantasia / Apelido" >
+                        <input name="nomeFantasia" type="text" class="form-control" placeholder="Nome fantasia / Apelido" value="<?=$emp_nome ?? ''?>">
                       </div>
                     </div>
-                    <!--<div class="col-md-3 px-1">
-                      <div class="form-group">
-                        <label>Username</label>
-                        <input type="text" class="form-control" placeholder="Username" value="michael23">
-                      </div>
-                    </div>-->
                     <div class="col-md-6 pl-1">
                       <div class="form-group">
                         <label for="exampleInputEmail1">E-mail</label>
-                        <input name="email" type="text" class="form-control" placeholder="E-mail">
+                        <input name="email" type="text" class="form-control" placeholder="E-mail" value="<?=$emp_email ?? ''?>">
                       </div>
                     </div>
                   </div>
@@ -31,7 +25,7 @@
                     <div class="col-md-6 pr-1">
                       <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
                         <label>CNAE - Atividade Principal</label>
-                        <input id="cnae" name="cnae" type="text" class="form-control" placeholder="CNAE">
+                        <input id="cnae" name="cnae" type="text" class="form-control" onclick="teste()" placeholder="CNAE" value="<?=$emp_cnae ?? ''?>">
                       </div>
                     </div>
 
@@ -47,7 +41,7 @@
                                 <input type="text" name="buscar" class="form-control">
                               </div>
                               <div class="col-md-6 pr-1">
-                                <button class="btn btn-default">BUSCAR<i class="fas fa-search"></i></button>
+                                <a class="btn btn-default">BUSCAR<i class="fas fa-search"></i></a>
                               </div>
                             </div>
                           </div>
@@ -58,7 +52,7 @@
                     <div class="col-md-6 pl-1">
                       <div class="form-group">
                         <label>Atividades secundárias (CNAES)</label>
-                        <input name="cnaeSec" type="text" class="form-control" placeholder="CNAES separados por ;" >
+                        <input name="cnaeSec" type="text" class="form-control" placeholder="CNAES separados por ;" value="<?=$emp_cnae_secundario ?? ''?>">
                       </div>
                     </div>
                   </div>
@@ -66,53 +60,25 @@
                     <div class="col-md-6 pr-1">
                       <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
                         <label>Quantidade de colaboradores</label>
-                        <input name="qtdColaboradores" type="number" class="form-control" placeholder="Quantidade de empregados" >
+                        <input name="qtdColaboradores" type="number" class="form-control" placeholder="Quantidade de empregados" value="<?=$emp_qtd_emp ?? ''?>">
                       </div>
                     </div>
                     <div class="form-group col-md-6 pl-1">
                     <label for="inputState">Estado</label>
-                    <select id="uf" name="uf" class="form-control">
-                                <option value="AC">Acre</option>
-                                <option value="AL">Alagoas</option>
-                                <option value="AP">Amapá</option>
-                                <option value="AM">Amazonas</option>
-                                <option value="BA">Bahia</option>
-                                <option value="CE">Ceará</option>
-                                <option value="DF">Distrito Federal</option>
-                                <option value="ES">Espírito Santo</option>
-                                <option value="GO">Goiás</option>
-                                <option value="MA">Maranhão</option>
-                                <option value="MT">Mato Grosso</option>
-                                <option value="MS">Mato Grosso do Sul</option>
-                                <option value="MG">Minas Gerais</option>
-                                <option value="PA">Pará</option>
-                                <option value="PB">Paraíba</option>
-                                <option value="PR">Paraná</option>
-                                <option value="PE">Pernambuco</option>
-                                <option value="PI">Piauí</option>
-                                <option value="RJ">Rio de Janeiro</option>
-                                <option value="RN">Rio Grande do Norte</option>
-                                <option value="RS">Rio Grande do Sul</option>
-                                <option value="RO">Rondônia</option>
-                                <option value="RR">Roraima</option>
-                                <option value="SC">Santa Catarina</option>
-                                <option value="SP">São Paulo</option>
-                                <option value="SE">Sergipe</option>
-                                <option value="TO">Tocantins</option>
-                    </select>
+                    <input id="uf" name="uf" value="<?= $emp_uf ?? ''?>" class="form-control" readonly>
                   </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Telefone</label>
-                        <input name="telefone" type="text" class="form-control" onkeypress="MascaraTelefone(formulario.telefone);" maxlength="14" placeholder="(DDD)####-####">
+                        <input name="telefone" type="text" class="form-control" onkeypress="MascaraTelefone(formulario.telefone);" maxlength="14" placeholder="(DDD)####-####" value="<?=$emp_telefone ?? ''?>">
                       </div>
                     </div>
                     <div class="col-md-6 pl-1">
                       <div class="form-group">
                         <label>Celular</label>
-                        <input name="celular" type="text" class="form-control" onkeypress="MascaraTelefone(formulario.celular);" maxlength="14" placeholder="(DDD)####-#####">
+                        <input name="celular" type="text" class="form-control" onkeypress="MascaraTelefone(formulario.celular);" maxlength="14" placeholder="(DDD)####-#####" value="<?=$emp_telefone2 ?? ''?>">
                       </div>
                     </div>
                   </div>
@@ -120,7 +86,7 @@
                     <div class="col-md-12">
                       <div class="container-login100-form-btn">
                         <button class="login100-form-btn">
-                          CADASTRAR
+                          ATUALIZAR
                         </button>
                       </div>
                     </div>
@@ -152,7 +118,7 @@
               </div>
               <hr>
               <div class="button-container">
-                <a href="<?=base_url("documentation/cadastroempresa")?>" target="_blank">Acesse a documentação</a>
+                <a href="<?=base_url("documentation/cadastroempresa.php")?>" target="_blank">Acesse a documentação</a>
               </div>
             </div>
           </div>

@@ -399,10 +399,34 @@ class EmpresaCliente extends CI_Controller {
 		
 	}
 
+	public function ajaxExcluirEmpresa(){
+		$this->load->library('user_agent');
+		
+		if (!$this->agent->is_browser()){
+			die('Nenhum acesso de script direto permitido!');
+		}else{
+			if(empty($this->session->userdata('usuario'))){
+				redirect(base_url() . "painel/login");
+			}else{
+				if(!$this->input->is_ajax_request()){
+					exit("Nenhum acesso de script direto permitido!");
+				} 
+				print_r($_POST);exit;
+
+				$json = array();
+				$json['status'] = 1;
+
+				$this->load->model('EmpresaClienteModel');
+			}
+		}
+	}
+
 	public function atualizarEmpresa($empId){
 		if(empty($this->session->userdata('usuario'))){
 			redirect(base_url() . "painel/login");
 		}
+
+		
 		$id = base64_decode($empId);
 		$data['title'] = "Atualizar Empresa";
 
@@ -413,6 +437,12 @@ class EmpresaCliente extends CI_Controller {
 		if(empty($empresa)){
 			redirect(base_url() . "painel/dashboard");
 		}else{
+			$empresa = $this->EmpresaClienteModel->listaEmpresaClienteParaAtualizar($this->session->userdata('cont_id'), $id);
+			foreach ($empresa as $key => $value) {
+				foreach ($value as $k => $v) {
+					$data[$k] = $v;
+				}
+			}
 			$this->dashboard->show('atualizar-empresa', $data);
 		}
 	}
