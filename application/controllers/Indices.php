@@ -91,12 +91,13 @@ class Indices extends CI_Controller {
 		
 		$quantidadeIndices = count($lis);
 		//verifica se não existem índices suficientes
-		if(count($lis) < 4){
-            die("Não há indices suficientes para calcular o quartil");
-		} 
+		// if(count($lis) < 4){
+        //     die("Não há indices suficientes para calcular o quartil");
+		// } 
 
 		$i=0;
 		$this->load->library('quartil');
+		
 		foreach ($anos as $ano) {
 			foreach ($lis[$ano] as $li) {
 				$elementosLi[] = $li->COMP_LI;

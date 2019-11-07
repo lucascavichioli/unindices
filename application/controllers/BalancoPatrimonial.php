@@ -27,6 +27,23 @@ class BalancoPatrimonial extends CI_Controller {
 			$this->load->model('BalancoPatrimonialModel');
 			$relatorio = $this->BalancoPatrimonialModel->listar($id);
 			$anos = $this->BalancoPatrimonialModel->listarAnosComRegistro($id);
+			
+			//$rel = array();
+			
+			foreach($relatorio as $ano => $array) {
+				$relatorio[$ano] = $array;
+				foreach($array as $chave => $valor) {
+					if($valor < 0){
+						$relatorio[$ano][$chave] = "(" .str_replace('-', '', (string)number_format($valor,2,',','.')) . ")";
+					}else{
+						$relatorio[$ano][$chave] = number_format($valor,2,',','.');
+					}
+				}
+			}
+
+			// print "<pre>";
+			// print_r($rel); 
+			// print "</pre>";exit();
 
 			$data['anos'] = $anos;
 			$data['balanco'] = $relatorio;

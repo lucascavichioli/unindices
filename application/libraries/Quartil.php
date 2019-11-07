@@ -44,5 +44,4 @@ class Quartil {
         $this->qTres = $this->calculaQuartil($e, 3);
         return $this->qTres;
     }
-
 }

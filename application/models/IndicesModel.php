@@ -51,7 +51,7 @@ class IndicesModel extends CI_Model {
     public function listaDeIndicesDoMesmoGrupo($emp, $ano, $cnae, $m1, $m2, $comp){
         try{      
             
-            $this->db->select($comp);
+            $this->db->select('round('.$comp.', 2)');
             $this->db->from('comparativos');
             $this->db->join('empresa', 'comp_emp_id = emp_id');
             $this->db->where('comp_emp_id !=', $emp);
@@ -72,7 +72,7 @@ class IndicesModel extends CI_Model {
     public function listaDeIndicesDoMesmoGrupoAnoAnterior($emp, $ano, $cnae, $m1, $m2, $comp){
         try{      
             
-            $this->db->select($comp);
+            $this->db->select('round('.$comp.', 2)');
             $this->db->from('comparativos_ano_anterior');
             $this->db->join('empresa', 'compant_emp_id = emp_id');
             $this->db->where('compant_emp_id !=', $emp);

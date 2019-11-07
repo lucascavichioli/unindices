@@ -57,7 +57,7 @@ class BalancoPatrimonialModel extends CI_Model {
 
             $consulta = $this->db->get();
 
-            return $consulta->result();
+            return $consulta->result_array();
 
 
         }catch(PDOException $e){

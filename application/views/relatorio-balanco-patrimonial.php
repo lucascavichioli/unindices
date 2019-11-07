@@ -25,7 +25,7 @@
                         print "<td>" . $col . "</td>";
                             foreach ($balanco as $ano) {
                                 print "<td title=''>";
-                                    print number_format($ano->$col,2,",",".");
+                                    print $ano[$col];
                                 print "</td>";
                             }
                         print "</tr>";

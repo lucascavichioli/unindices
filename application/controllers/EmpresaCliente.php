@@ -102,27 +102,27 @@ class EmpresaCliente extends CI_Controller {
 						$dreAnoAnteriorMenosUm['DRES_EMP_ID'] = $this->empId;
 						$dreAnoAnteriorMenosUm['DRES_ANO_ID'] = $this->anoAnteriorMenosUm;
 						$dreAnoAnteriorMenosUm['DRES_RECEITA_LIQUIDA_VENDAS'] = $this->input->post('receitaLiquidaVendas', true);
-						$dreAnoAnteriorMenosUm['DRES_CUSTO_VENDAS'] =  $this->input->post('custoVendas', true);
-						$dreAnoAnteriorMenosUm['DRES_DESPESAS_OPERACIONAIS'] = $this->input->post('despesasOperacionais', true);
+						$dreAnoAnteriorMenosUm['DRES_CUSTO_VENDAS'] =  $this->formataParaNegativo($this->input->post('custoVendas', true));
+						$dreAnoAnteriorMenosUm['DRES_DESPESAS_OPERACIONAIS'] = $this->formataParaNegativo($this->input->post('despesasOperacionais', true));
 						$dreAnoAnteriorMenosUm['DRES_OUTRAS_RECEITAS_OP'] = $this->input->post('outrasReceitasOperacionais', true);
-						$dreAnoAnteriorMenosUm['DRES_DESPESAS_FINANCEIRAS'] = $this->input->post('despesasFinanceiras', true);
+						$dreAnoAnteriorMenosUm['DRES_DESPESAS_FINANCEIRAS'] = $this->formataParaNegativo($this->input->post('despesasFinanceiras', true));
 						$dreAnoAnteriorMenosUm['DRES_RECEITAS_FINANCEIRAS'] = $this->input->post('receitasFinanceiras', true);
-						$dreAnoAnteriorMenosUm['DRES_OUTRAS_DESPESAS'] = $this->input->post('outrasDespesas', true);
-						$dreAnoAnteriorMenosUm['DRES_IRPJ_CSLL'] = $this->input->post('irpjCsll', true);
-						$dreAnoAnteriorMenosUm['DRES_CONTRIBUICOES_PARTICIP'] = $this->input->post('contribuicoesParticipacoes', true);
+						$dreAnoAnteriorMenosUm['DRES_OUTRAS_DESPESAS'] = $this->formataParaNegativo($this->input->post('outrasDespesas', true));
+						$dreAnoAnteriorMenosUm['DRES_IRPJ_CSLL'] = $this->formataParaNegativo($this->input->post('irpjCsll', true));
+						$dreAnoAnteriorMenosUm['DRES_CONTRIBUICOES_PARTICIP'] = $this->formataParaNegativo($this->input->post('contribuicoesParticipacoes', true));
 
 						// DEMONSTRAÇÃO DE RESULTADO (ANO ANTERIOR)
 						$dreAnoAnterior['DRES_EMP_ID'] = $this->empId;
 						$dreAnoAnterior['DRES_ANO_ID'] = $this->anoAnterior;
 						$dreAnoAnterior['DRES_RECEITA_LIQUIDA_VENDAS'] = $this->input->post('receitaLiquidaVendas2', true);
-						$dreAnoAnterior['DRES_CUSTO_VENDAS'] =  $this->input->post('custoVendas2', true);
-						$dreAnoAnterior['DRES_DESPESAS_OPERACIONAIS'] = $this->input->post('despesasOperacionais2', true);
+						$dreAnoAnterior['DRES_CUSTO_VENDAS'] =  $this->formataParaNegativo($this->input->post('custoVendas2', true));
+						$dreAnoAnterior['DRES_DESPESAS_OPERACIONAIS'] = $this->formataParaNegativo($this->input->post('despesasOperacionais2', true));
 						$dreAnoAnterior['DRES_OUTRAS_RECEITAS_OP'] = $this->input->post('outrasReceitasOperacionais2', true);
-						$dreAnoAnterior['DRES_DESPESAS_FINANCEIRAS'] = $this->input->post('despesasFinanceiras2', true);
+						$dreAnoAnterior['DRES_DESPESAS_FINANCEIRAS'] = $this->formataParaNegativo($this->input->post('despesasFinanceiras2', true));
 						$dreAnoAnterior['DRES_RECEITAS_FINANCEIRAS'] = $this->input->post('receitasFinanceiras2', true);
-						$dreAnoAnterior['DRES_OUTRAS_DESPESAS'] = $this->input->post('outrasDespesas2', true);
-						$dreAnoAnterior['DRES_IRPJ_CSLL'] = $this->input->post('irpjCsll2', true);
-						$dreAnoAnterior['DRES_CONTRIBUICOES_PARTICIP'] = $this->input->post('contribuicoesParticipacoes2', true);
+						$dreAnoAnterior['DRES_OUTRAS_DESPESAS'] = $this->formataParaNegativo($this->input->post('outrasDespesas2', true));
+						$dreAnoAnterior['DRES_IRPJ_CSLL'] = $this->formataParaNegativo($this->input->post('irpjCsll2', true));
+						$dreAnoAnterior['DRES_CONTRIBUICOES_PARTICIP'] = $this->formataParaNegativo($this->input->post('contribuicoesParticipacoes2', true));
 						
 						//VALIDA FORMULÁRIOS
 						$validouDreAnoAnteriorMenosUm = $this->validaDre($dreAnoAnteriorMenosUm);
@@ -286,7 +286,7 @@ class EmpresaCliente extends CI_Controller {
 					$anoAtual = $ano[0]->ano;
 					$ultimoAno = $this->Anos->getAnoAnterior();
 
-					$ano = $anoAtual - $ultimoAno;
+					$ano = (int)$anoAtual - (int)$ultimoAno;
 					
 					//se não existe faça
 					if(empty($this->Anos->jaExiste($anoAtual))){	
@@ -296,9 +296,11 @@ class EmpresaCliente extends CI_Controller {
 							$a['ANO_REF'] = (string)$anoExercicio;
 							$this->Anos->inserir($a);
 						}else{
-							$anoAnterior = $this->Anos->getAnoAnterior();
-							$data['anoAnterior'] = $anoAnterior;
-						}				
+							$data['anoAnterior'] = $ultimoAno;
+						}
+					}else{
+						$data['anoAnterior'] = $ultimoAno;
+					}				
 
 					$id = base64_decode($id);
 					$data['title'] = "Cadastro Único";
@@ -343,14 +345,14 @@ class EmpresaCliente extends CI_Controller {
 						$dreAnoAnterior['DRES_EMP_ID'] = $this->empId;
 						$dreAnoAnterior['DRES_ANO_ID'] = $this->anoAnteriorMenosUm;
 						$dreAnoAnterior['DRES_RECEITA_LIQUIDA_VENDAS'] = $this->input->post('receitaLiquidaVendas', true);
-						$dreAnoAnterior['DRES_CUSTO_VENDAS'] =  $this->input->post('custoVendas', true);
-						$dreAnoAnterior['DRES_DESPESAS_OPERACIONAIS'] = $this->input->post('despesasOperacionais', true);
+						$dreAnoAnterior['DRES_CUSTO_VENDAS'] =  $this->formataParaNegativo($this->input->post('custoVendas', true));
+						$dreAnoAnterior['DRES_DESPESAS_OPERACIONAIS'] = $this->formataParaNegativo($this->input->post('despesasOperacionais', true));
 						$dreAnoAnterior['DRES_OUTRAS_RECEITAS_OP'] = $this->input->post('outrasReceitasOperacionais', true);
-						$dreAnoAnterior['DRES_DESPESAS_FINANCEIRAS'] = $this->input->post('despesasFinanceiras', true);
+						$dreAnoAnterior['DRES_DESPESAS_FINANCEIRAS'] = $this->formataParaNegativo($this->input->post('despesasFinanceiras', true));
 						$dreAnoAnterior['DRES_RECEITAS_FINANCEIRAS'] = $this->input->post('receitasFinanceiras', true);
-						$dreAnoAnterior['DRES_OUTRAS_DESPESAS'] = $this->input->post('outrasDespesas', true);
-						$dreAnoAnterior['DRES_IRPJ_CSLL'] = $this->input->post('irpjCsll', true);
-						$dreAnoAnterior['DRES_CONTRIBUICOES_PARTICIP'] = $this->input->post('contribuicoesParticipacoes', true);
+						$dreAnoAnterior['DRES_OUTRAS_DESPESAS'] = $this->formataParaNegativo($this->input->post('outrasDespesas', true));
+						$dreAnoAnterior['DRES_IRPJ_CSLL'] = $this->formataParaNegativo($this->input->post('irpjCsll', true));
+						$dreAnoAnterior['DRES_CONTRIBUICOES_PARTICIP'] = $this->formataParaNegativo($this->input->post('contribuicoesParticipacoes', true));
 
 						$validouDreAnoAnterior = $this->validaDre($dreAnoAnterior);
 
@@ -517,6 +519,12 @@ class EmpresaCliente extends CI_Controller {
             return true;
 		}else{
 			return false;
+		}
+	}
+
+	public function formataParaNegativo($valor){
+		if($valor > 0){
+			return $valor * -1;
 		}
 	}
 }
