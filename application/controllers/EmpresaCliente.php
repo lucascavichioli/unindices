@@ -45,7 +45,7 @@ class EmpresaCliente extends CI_Controller {
 
 					//Se a empresa não pertence a contabilidade, volta para a dashboard
 					if(empty($empresa)){
-						redirect(base_url() . "painel/dashboard");
+						redirect(base_url() . "painel/sair");
 					}else{
 
 						$this->empId 			  = $this->input->post('empId', true);
@@ -264,7 +264,8 @@ class EmpresaCliente extends CI_Controller {
 							$this->IndicesModel->inserirIndices($indicesAnoAnteriorMenosUm, $indicesAnoAnterior);
 							$this->IndicesModel->inserirSomenteIndicesAnoAnterior($indicesSomenteAnoAnterior);
 
-							return true;
+							redirect(base_url() . "painel/dashboard");
+							
 							}else{
 								//retorna pra view com os alerts
 								var_dump($this->form_validation->error_array());
@@ -385,26 +386,6 @@ class EmpresaCliente extends CI_Controller {
 			}
 	}
 
-	public function cadastrarDre($id){
-		
-	}
-
-	public function listarIndicesEconomicos(){
-
-	}
-
-	public function listarBalanco(){
-
-	}
-
-	public function listarDre(){
-
-	}
-
-	public function gerarQuartil(){
-		
-	}
-
 	public function ajaxExcluirEmpresa(){
 		$this->load->library('user_agent');
 		
@@ -417,12 +398,17 @@ class EmpresaCliente extends CI_Controller {
 				if(!$this->input->is_ajax_request()){
 					exit("Nenhum acesso de script direto permitido!");
 				} 
-				print_r($_POST);exit;
-
 				$json = array();
 				$json['status'] = 1;
 
+				$empId = $this->input->post("empresa",true);
+				$usuario = $this->session->userdata('usuario');
+				$ip = $_SERVER["REMOTE_ADDR"];
+				
 				$this->load->model('EmpresaClienteModel');
+				$this->EmpresaClienteModel->removerEmpresaCliente($ip, $usuario, $empId);
+
+				echo json_encode($json);
 			}
 		}
 	}
@@ -431,25 +417,83 @@ class EmpresaCliente extends CI_Controller {
 		if(empty($this->session->userdata('usuario'))){
 			redirect(base_url() . "painel/login");
 		}
-
 		
-		$id = base64_decode($empId);
-		$data['title'] = "Atualizar Empresa";
+		if($_SERVER['REQUEST_METHOD'] === 'GET'){
+			$id = base64_decode($empId);
+			$data['title'] = "Atualizar Empresa";
 
-		$this->load->model('EmpresaClienteModel');
-		$empresa = $this->EmpresaClienteModel->listaEmpresasDeUmUsuario($this->session->userdata('cont_id'), $id);
+			$this->load->model('EmpresaClienteModel');
+			$empresa = $this->EmpresaClienteModel->listaEmpresasDeUmUsuario($this->session->userdata('cont_id'), $id);
 
-		//Se a empresa não pertence a contabilidade, volta para a dashboard
-		if(empty($empresa)){
-			redirect(base_url() . "painel/dashboard");
-		}else{
-			$empresa = $this->EmpresaClienteModel->listaEmpresaClienteParaAtualizar($this->session->userdata('cont_id'), $id);
-			foreach ($empresa as $key => $value) {
-				foreach ($value as $k => $v) {
-					$data[$k] = $v;
+			//Se a empresa não pertence a contabilidade, volta para a dashboard
+			if(empty($empresa)){
+				redirect(base_url() . "painel/dashboard");
+			}else{
+				$empresa = $this->EmpresaClienteModel->listaEmpresaClienteParaAtualizar($this->session->userdata('cont_id'), $id);
+				foreach ($empresa as $key => $value) {
+					foreach ($value as $k => $v) {
+						$data[$k] = $v;
+					}
 				}
+				$data['contId'] = $this->session->userdata('cont_id');
+				$this->dashboard->show('atualizar-empresa', $data);
 			}
-			$this->dashboard->show('atualizar-empresa', $data);
+		}else{
+			$id = base64_decode($empId);
+			$data['EMP_NOME'] = $this->input->post('nomeFantasia', true);
+			$data['EMP_CNAE'] = $this->input->post('cnae', true);
+			$data['EMP_CNAE_SECUNDARIO'] = $this->input->post('cnaeSec', true);
+			$data['EMP_QTD_EMP'] = $this->input->post('qtdColaboradores', true);
+			$data['EMP_UF'] = $this->input->post('uf', true);
+			$data['EMP_EMAIL'] = $this->input->post('email', true);
+			$data['EMP_TELEFONE'] = $this->input->post('telefone', true);
+			$data['EMP_TELEFONE2'] = $this->input->post('celular', true);
+
+			$ip = $this->input->ip_address();
+
+			$this->load->model('EmpresaClienteModel');
+			if($this->EmpresaClienteModel->atualizarEmpresaCliente($id, $data, $ip)){
+				redirect(base_url() . "empresacliente/atualizarempresa/". base64_encode($id));
+			}
+		}
+	}
+
+	public function alterarSenha($empId){
+		if(empty($this->session->userdata('usuario'))){
+			redirect(base_url() . "painel/login");
+		}
+		$id = base64_decode($empId);
+
+		if($_SERVER['REQUEST_METHOD'] !== 'POST'){
+			$data['title'] = "Alteração de senha";
+			$data['contId'] = $id;
+
+			$this->dashboard->show('alterar-senha', $data);
+		}else{
+			$ip = $this->input->ip_address();
+			
+			$this->load->helper( array( 'form' ,  'url' ));
+			$this->load->library( 'form_validation' );
+
+			$data = array();
+
+			$data['senha'] = $this->input->post('senha', true);
+			$data['senha2'] = $this->input->post('confirmarSenha', true);
+
+			$this->form_validation->set_data($data);
+			$this->form_validation->set_rules('senha', 'Senha', 'trim|required|min_length[6]');
+			$this->form_validation->set_rules('senha2', 'Confirmação de senha', 'trim|required|matches[senha]|min_length[6]');
+
+			if($this->form_validation->run()){
+				unset($data['senha2']);
+				$this->load->model("Usuarios");
+				$this->Usuarios->alterarSenha($ip, $id, $data);
+
+				print "senha alterada com sucesso";
+			}else{
+				var_dump($this->form_validation->error_array());
+			}
+
 		}
 	}
 
@@ -525,6 +569,8 @@ class EmpresaCliente extends CI_Controller {
 	public function formataParaNegativo($valor){
 		if($valor > 0){
 			return $valor * -1;
+		}else{
+			return $valor;
 		}
 	}
 }

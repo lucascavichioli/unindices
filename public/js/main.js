@@ -305,7 +305,7 @@ function MascaraCEP(cep){
   }
 
 $(".excluirEmpresa").click(function(){
-  
+  var emp = $(this);
   Swal.fire({
     title: 'Tem certeza que deseja excluir esta empresa?',
     text: "Todos os dados financeiros serão excluídos!",
@@ -314,7 +314,9 @@ $(".excluirEmpresa").click(function(){
     cancelButtonText: 'Não',
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Sim, quero excluir!'
+    confirmButtonText: 'Sim, quero excluir!',
+    closeOnConfirm: true,
+    closeOnCancel: true,
   }).then((result) => {
       if (result.value) {
           $.ajax({
@@ -323,17 +325,24 @@ $(".excluirEmpresa").click(function(){
             dataType: "json",
             data: {"empresa": $(this).attr("empresa")},
             success: function(response){
-              Swal(
-                'Excluido!',
-                'Todos os dados desta empresa foram excluídos com sucesso.',
+              Swal.fire(
+                "Excluído!",
+                "Todos os dados desta empresa foram excluídos com sucesso.",
                 'success'
               );
+              $("#"+emp.attr("empresa")).remove();
+              /*setInterval(function(){location.reload();}, 1500);*/
             }
           })
       }
-  });
+  })
 });
 
 function teste(){
   $('#modalCnae').modal();
+}
+
+function modalQuartil(ind){
+  let modal = "#modalQuartil"+ind;
+  $(modal).modal();
 }

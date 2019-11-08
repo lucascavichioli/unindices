@@ -5,7 +5,7 @@ class Quartil {
     private $qDois;
     private $qTres;
 
-    //$e = array(7.1, 7.4, 7.5, 7.7, 7.8, 7.9);
+    //$elementos = array(7.1, 7.4, 7.5, 7.7, 7.8, 7.9);
 
     private function calculaQuartil($elementos, $q){
 

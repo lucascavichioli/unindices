@@ -1,0 +1,1 @@
+<center><h5>Não possui o número mínimo de empresas do mesmo ramo de atividade para comparação.</h5></center>

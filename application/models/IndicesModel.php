@@ -48,10 +48,10 @@ class IndicesModel extends CI_Model {
         }
     }
 
-    public function listaDeIndicesDoMesmoGrupo($emp, $ano, $cnae, $m1, $m2, $comp){
+    public function listaDeIndicesDoMesmoGrupo($emp, $ano, $cnae, $uf, $m1, $m2, $comp){
         try{      
             
-            $this->db->select('round('.$comp.', 2)');
+            $this->db->select('round('.$comp.', 2) as ' . $comp);
             $this->db->from('comparativos');
             $this->db->join('empresa', 'comp_emp_id = emp_id');
             $this->db->where('comp_emp_id !=', $emp);
@@ -59,6 +59,7 @@ class IndicesModel extends CI_Model {
             $this->db->like('emp_cnae', $cnae, 'after');
             $this->db->where('emp_qtd_emp >=', $m1);
             $this->db->where('emp_qtd_emp <=', $m2);
+            $this->db->where('emp_uf', $uf);
 
             $consulta = $this->db->get();
 
@@ -69,10 +70,10 @@ class IndicesModel extends CI_Model {
         }
     }
 
-    public function listaDeIndicesDoMesmoGrupoAnoAnterior($emp, $ano, $cnae, $m1, $m2, $comp){
+    public function listaDeIndicesDoMesmoGrupoAnoAnterior($emp, $ano, $cnae, $uf, $m1, $m2, $comp){
         try{      
             
-            $this->db->select('round('.$comp.', 2)');
+            $this->db->select('round('.$comp.', 2) as ' . $comp);
             $this->db->from('comparativos_ano_anterior');
             $this->db->join('empresa', 'compant_emp_id = emp_id');
             $this->db->where('compant_emp_id !=', $emp);
@@ -80,6 +81,7 @@ class IndicesModel extends CI_Model {
             $this->db->like('emp_cnae', $cnae, 'after');
             $this->db->where('emp_qtd_emp >=', $m1);
             $this->db->where('emp_qtd_emp <=', $m2);
+            $this->db->where('emp_uf', $uf);
 
             $consulta = $this->db->get();
 
@@ -92,9 +94,9 @@ class IndicesModel extends CI_Model {
 
     public function listaIndices($empId){
         try{         
-            $select = 'SELECT COMP_ID, COMP_LI, COMP_LC, COMP_LS, COMP_LG, 
-            COMP_EG, COMP_GE, COMP_CE, COMP_GI, COMP_IRNC, COMP_MAF, 
-            COMP_MB, COMP_MO, COMP_ML, COMP_ANO_ID FROM comparativos
+            $select = 'SELECT COMP_ID, COMP_LI AS LI, COMP_LC AS LC, COMP_LS AS LS, COMP_LG AS LG, 
+            COMP_EG AS EG, COMP_GE AS GE, COMP_CE AS CE, COMP_GI AS GI, COMP_IRNC AS IRNC, COMP_MAF AS MAF, 
+            COMP_MB AS MB, COMP_MO AS MO, COMP_ML AS ML, COMP_ANO_ID FROM comparativos
             WHERE COMP_EMP_ID = ?
             ORDER BY COMP_ANO_ID DESC';
     
@@ -110,8 +112,8 @@ class IndicesModel extends CI_Model {
     
     public function listaIndicesAnoAnterior($empId){
         try{         
-            $select = 'SELECT COMPANT_ID, COMPANT_PMC, COMPANT_PME, COMPANT_PMP, COMPANT_CO,
-            COMPANT_CF, COMPANT_GA, COMPANT_RSA, COMPANT_RSPL, COMPANT_ANO_ID FROM comparativos_ano_anterior
+            $select = 'SELECT COMPANT_ID, COMPANT_PMC AS PMC, COMPANT_PME AS PME, COMPANT_PMP AS PMP, COMPANT_CO AS CO,
+            COMPANT_CF AS CF, COMPANT_GA AS GA, COMPANT_RSA AS RSA, COMPANT_RSPL AS RSPL, COMPANT_ANO_ID FROM comparativos_ano_anterior
             WHERE COMPANT_EMP_ID = ?
             ORDER BY COMPANT_ANO_ID DESC';
     
@@ -123,5 +125,5 @@ class IndicesModel extends CI_Model {
             log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
             return false;
         }
-    }   
+    }         
 }

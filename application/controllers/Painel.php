@@ -69,6 +69,10 @@ class Painel extends CI_Controller {
 			$data['tituloGrafico'] = "EMPRESAS CONTRIBUINTES";
 			$data['grafico'] = "<canvas id='bigDashboardChart'></canvas>";
 			
+			$usuario = $this->session->userdata('usuario');
+			$this->load->model("usuarios");
+			$getUser = $this->usuarios->getUser($usuario);
+			$data['contId'] = $getUser[0]->cont_id;
 			$this->load->model("empresaclientemodel");
 			$getEmp = $this->empresaclientemodel->listaEmpresaCliente($this->session->userdata('cont_id'));
 			$data['empresas'] = $getEmp;
@@ -135,6 +139,7 @@ class Painel extends CI_Controller {
 			if($this->session->userdata('usuario') != '' && $this->session->userdata('logado') === true){
 				$data['title'] = "Adicionar Empresa";
 				$data['activeAddEmpresa'] = "active ";
+				$data['contId'] = $this->session->userdata('cont_id');
 				//$this->load->model('Cnae');
 				//$data['cnaes'] = $this->Cnae->get();
 				$this->dashboard->show('adicionar-empresa.php', $data);

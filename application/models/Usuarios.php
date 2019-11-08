@@ -83,4 +83,24 @@ class Usuarios extends CI_Model {
         
         return $consulta->result();
     }
+
+    public function alterarSenha($ip, $contId, $dados){
+        try{
+             $data['cont_senha'] = password_hash($dados['senha'], CRYPT_BLOWFISH, ['cost' => 12]);
+
+             $this->db->where('cont_id', $contId);
+             $this->db->update('usuarios', $data); 
+             
+              $log = array('ip_cliente' => $ip, 'operacao' => 'update', 'usuario' => $contId, 'id_afetado' => $contId, 'tabela_afetada' => 'usuarios');
+  
+              $this->db->insert('logs', $log);
+            
+              $this->db->close();
+              return true;
+          }catch(PDOException $e){
+              log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
+              return false;
+          }
+
+    }
 }

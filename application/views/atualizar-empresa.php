@@ -14,6 +14,7 @@
                         <input name="nomeFantasia" type="text" class="form-control" placeholder="Nome fantasia / Apelido" value="<?=$emp_nome ?? ''?>">
                       </div>
                     </div>
+                    <input name="empId" type="hidden" class="form-control" value="<?=$emp_id?>"  required>
                     <div class="col-md-6 pl-1">
                       <div class="form-group">
                         <label for="exampleInputEmail1">E-mail</label>
@@ -25,30 +26,9 @@
                     <div class="col-md-6 pr-1">
                       <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
                         <label>CNAE - Atividade Principal</label>
-                        <input id="cnae" name="cnae" type="text" class="form-control" onclick="teste()" placeholder="CNAE" value="<?=$emp_cnae ?? ''?>">
+                        <input id="cnae" name="cnae" type="text" class="form-control" placeholder="CNAE" value="<?=$emp_cnae ?? ''?>" readonly>
                       </div>
                     </div>
-
-                    <div id="modalCnae" class="modal fade">
-                      <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h4 class="modal-title">Buscar Cnaes</h4>
-                          </div>
-                          <div class="modal-body">
-                            <div class="row">
-                              <div class="col-md-6 pr-1">
-                                <input type="text" name="buscar" class="form-control">
-                              </div>
-                              <div class="col-md-6 pr-1">
-                                <a class="btn btn-default">BUSCAR<i class="fas fa-search"></i></a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
                     <div class="col-md-6 pl-1">
                       <div class="form-group">
                         <label>Atividades secundárias (CNAES)</label>
@@ -60,7 +40,7 @@
                     <div class="col-md-6 pr-1">
                       <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
                         <label>Quantidade de colaboradores</label>
-                        <input name="qtdColaboradores" type="number" class="form-control" placeholder="Quantidade de empregados" value="<?=$emp_qtd_emp ?? ''?>">
+                        <input name="qtdColaboradores" type="number" class="form-control" placeholder="Quantidade de colaboradores" value="<?=$emp_qtd_emp ?? ''?>">
                       </div>
                     </div>
                     <div class="form-group col-md-6 pl-1">

@@ -20,12 +20,51 @@ class EmpresaClienteModel extends CI_Model {
 		}
 	}
 
-	public function removerEmpresaCliente($empresa){
+	public function removerEmpresaCliente($ip, $usuario, $empresa){
+		try{
+			$this->db->trans_begin();
 
+			$this->db->delete('balanco_ativos', array('bativ_emp_id' => $empresa));
+			$this->db->delete('balanco_passivos', array('bpas_emp_id' => $empresa));
+			$this->db->delete('demonstracao_resultado', array('dres_emp_id' => $empresa));
+			$this->db->delete('comparativos', array('comp_emp_id' => $empresa));
+			$this->db->delete('comparativos_ano_anterior', array('compant_emp_id' => $empresa));
+			$this->db->delete('empresa', array('emp_id' => $empresa));
+
+            if ($this->db->trans_status() === FALSE){
+                $this->db->trans_rollback();
+            }
+            else{
+                $this->db->trans_commit();
+
+                $log = array('ip_cliente' => $ip, 'operacao' => 'delete', 'usuario' => $usuario, 'id_afetado' => $empresa, 'tabela_afetada' => 'balanco_ativos; balanco_passivos, demonstracao_resultado, comparativos, comparativos_ano_anterior, empresa');
+
+                $this->db->insert('logs', $log);
+              
+                $this->db->close();
+                return true;
+            }
+		}catch(PDOException $e){
+			log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
+			return false;
+		}
 	}
 
-	public function atualizarEmpresaCliente($empresa, $dados){
-		
+	public function atualizarEmpresaCliente($empresa, $dados, $ip){
+		try{
+			$this->db->where('emp_id', $empresa);
+			$this->db->update('empresa', $dados); 
+			
+			$log = array('ip_cliente' => $ip, 'operacao' => 'update', 'usuario' => $this->session->userdata('usuario'), 'id_afetado' => $empresa, 'tabela_afetada' => 'empresa');
+
+			$this->db->insert('logs', $log);
+			
+			$this->db->close();
+			return true;
+		}catch(PDOException $e){
+			log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
+			return false;
+		}
 	}
 
 	public function listaEmpresaCliente($contId){
@@ -57,9 +96,30 @@ class EmpresaClienteModel extends CI_Model {
 	}
 
 	public function listaEmpresaClienteParaAtualizar($contId, $empId){
-		$this->db->select('emp_nome, emp_email, emp_cnae, emp_cnae_secundario, emp_qtd_emp, emp_uf, emp_telefone, emp_telefone2');
+		$this->db->select('emp_id, emp_nome, emp_email, emp_cnae, emp_cnae_secundario, emp_qtd_emp, emp_uf, emp_telefone, emp_telefone2');
         $consulta = $this->db->get_where('empresa', array( 'emp_cont_id'  => $contId, 'emp_id' => $empId ));
 		
         return $consulta->result();
 	}
+
+	public function listaQtdEmpresasDoMesmoRamo($emp, $uf, $cnae, $m1, $m2){
+        try{      
+            $this->db->select('emp_id');
+			$this->db->distinct();
+            $this->db->from('empresa');
+            $this->db->join('comparativos', 'comp_emp_id = emp_id');
+            $this->db->where('emp_id !=', $emp);
+            $this->db->like('emp_cnae', $cnae, 'after');
+            $this->db->where('emp_qtd_emp >=', $m1);
+			$this->db->where('emp_qtd_emp <=', $m2);
+			$this->db->where('emp_uf', $uf);
+
+            $consulta = $this->db->get();
+
+            return $consulta->num_rows();
+        }catch(PDOException $e){
+            log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
+            return false;
+        }
+    } 
 }

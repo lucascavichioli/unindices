@@ -38,77 +38,75 @@ class IndicesEconomicos {
     }
 
     public function li($caixa_equi_cai, $pas_circulante){
-        if($this->ehZero($caixa_equi_cai)){$caixa_equi_cai = 1;}
-        if($this->ehZero($pas_circulante)){$pas_circulante = 1;}
+        if($this->ehZero($pas_circulante)){return 0;}
             $this->li = $caixa_equi_cai / $pas_circulante;
             return $this->li;
     }
 
     public function lc($atv_circulante, $pas_circulante){
-        if($this->ehZero($atv_circulante)){$atv_circulante = 1;}
-        if($this->ehZero($pas_circulante)){$pas_circulante = 1;}
+        if($this->ehZero($pas_circulante)){return 0;}
         $this->lc = $atv_circulante / $pas_circulante;
         return $this->lc;
     }
 
     public function ls($atv_circulante, $estoque, $pas_circulante){
-        if($this->ehZero($pas_circulante)){$pas_circulante = 1;}
+        if($this->ehZero($pas_circulante)){return 0;}
         $this->ls = ($atv_circulante - $estoque) / $pas_circulante;
         return $this->ls;
     }
 
     public function lg($atv_circulante, $atv_realizavel_longo_prazo, $pas_circulante, $pas_nao_circulante){
-        if($this->ehZero($pas_nao_circulante)){$pas_nao_circulante = 1;}
+        if($this->ehZero($pas_nao_circulante) && $this->ehZero($pas_circulante)){return 0;}
         $this->lg = ($atv_circulante + $atv_realizavel_longo_prazo) / ($pas_circulante + $pas_nao_circulante);
         return $this->lg;
     }
 
     public function eg($pas_circulante, $pas_nao_circulante, $pas_total){
-        if($this->ehZero($pas_total)){$pas_total = 1;}
+        if($this->ehZero($pas_total)){return 0;}
         $this->eg = ($pas_circulante + $pas_nao_circulante) / $pas_total * 100;
         return $this->eg;
     }
 
     public function ge($pas_circulante, $pas_nao_circulante, $patrimonio_liquido){
-        if($this->ehZero($patrimonio_liquido)){$patrimonio_liquido = 1;}
+        if($this->ehZero($patrimonio_liquido)){return 0;}
         $this->ge = ($pas_circulante + $pas_nao_circulante) / $patrimonio_liquido * 100;
         return $this->ge;
     }
 
     public function ce($pas_circulante, $pas_nao_circulante){
-        if($this->ehZero($pas_circulante)){$pas_circulante = 1;}
+        if($this->ehZero($pas_circulante) && $this->ehZero($pas_nao_circulante)){return 0;}
         $this->ce = $pas_circulante / ($pas_circulante + $pas_nao_circulante) * 100; 
         return $this->ce;
     }
 
     public function gi($investimentos, $imobilizado_intangivel, $patrimonio_liquido){
-        if($this->ehZero($patrimonio_liquido)){$patrimonio_liquido = 1;}
+        if($this->ehZero($patrimonio_liquido)){return 0;}
         $this->gi = ($investimentos + $imobilizado_intangivel) / $patrimonio_liquido * 100;
         return $this->gi;
     }
 
     public function irnc($investimentos, $imobilizado_intangivel, $pas_nao_circulante, $patrimonio_liquido){
-        if($this->ehZero($pas_nao_circulante)){$pas_nao_circulante = 1;}
+        if($this->ehZero($pas_nao_circulante) && $this->ehZero($patrimonio_liquido)){return 0;}
         $this->irnc = ($investimentos + $imobilizado_intangivel) / ($pas_nao_circulante + $patrimonio_liquido) * 100;
         return $this->irnc;
     }
 
     public function maf($pas_total, $patrimonio_liquido){
-        if($this->ehZero($patrimonio_liquido)){$patrimonio_liquido = 1;}
+        if($this->ehZero($patrimonio_liquido)){return 0;}
         $this->maf = $pas_total / $patrimonio_liquido;
         return $this->maf;
     }
 
     //*
     public function pmc($clientes_ano_um, $clientes_ano_dois, $receita_liq_vendas){
-        if($this->ehZero($receita_liq_vendas)){$receita_liq_vendas = 1;}
+        if($this->ehZero($receita_liq_vendas)){return 0;}
         $this->pmc = ((($clientes_ano_um)+($clientes_ano_dois))/2) / ($receita_liq_vendas / 360);
         return $this->pmc;
     } 
 
     //*
     public function pme($estoque_ano_um, $estoque_ano_dois, $custo_vendas){
-        if($this->ehZero($custo_vendas)){$custo_vendas = 1;}
+        if($this->ehZero($custo_vendas)){return 0;}
         $this->pme = ((($estoque_ano_um)+($estoque_ano_dois)) / 2) / ($custo_vendas / 360);
         return $this->pme;
     }
@@ -116,7 +114,7 @@ class IndicesEconomicos {
     //*
     public function pmp($fornecedores_ano_um, $fornecedores_ano_dois, 
                         $custo_vendas, $estoque_ano_um, $estoque_ano_dois){
-        if($this->ehZero($custo_vendas)){$custo_vendas = 1;}
+        if($this->ehZero($custo_vendas)){return 0;}
         $this->pmp = ((($fornecedores_ano_um)+($fornecedores_ano_dois)) / 2) / (($custo_vendas+$estoque_ano_dois - $estoque_ano_um)/360);
         return $this->pmp;
     }
@@ -130,30 +128,30 @@ class IndicesEconomicos {
     //*
     public function cf($co, $pmp){
         $this->cf = $co - $pmp;
-        return $cf;
+        return $this->cf;
     }
 
     //*
     public function ga($receita_liq_vendas, $atv_total_ano_um, $atv_total_ano_dois){
-        if($this->ehZero($atv_total_ano_um)){$atv_total_ano_um = 1;}
+        if($this->ehZero($atv_total_ano_um) && $this->ehZero($atv_total_ano_dois)){return 0;}
         $this->ga = $receita_liq_vendas / (($atv_total_ano_um + $atv_total_ano_dois) / 2);
         return $this->ga;
     }
 
     public function mb($lucro_bruto, $receita_liq_vendas){
-        if($this->ehZero($receita_liq_vendas)){$receita_liq_vendas = 1;}
+        if($this->ehZero($receita_liq_vendas)){return 0;}
         $this->mb = $lucro_bruto/$receita_liq_vendas * 100;
         return $this->mb;
     }
 
     public function mo($resultado_operacional, $receita_liq_vendas){
-        if($this->ehZero($receita_liq_vendas)){$receita_liq_vendas = 1;}
+        if($this->ehZero($receita_liq_vendas)){return 0;}
         $this->mo = $resultado_operacional / $receita_liq_vendas * 100;
         return $this->mo;
     }
 
     public function ml($resultado_liq_exercicio, $receita_liq_vendas){
-        if($this->ehZero($receita_liq_vendas)){$receita_liq_vendas = 1;}
+        if($this->ehZero($receita_liq_vendas)){return 0;}
         $this->ml = $resultado_liq_exercicio / $receita_liq_vendas * 100;
         return $this->ml;
     }
@@ -169,5 +167,4 @@ class IndicesEconomicos {
         $this->rspl = $rsa * $maf;
         return $this->rspl;
     }
-
 }

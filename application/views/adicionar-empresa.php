@@ -66,7 +66,7 @@
                     <div class="col-md-6 pr-1">
                       <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
                         <label>Quantidade de colaboradores</label>
-                        <input name="qtdColaboradores" type="number" class="form-control" placeholder="Quantidade de empregados" >
+                        <input name="qtdColaboradores" type="number" class="form-control" placeholder="Quantidade de colaboradores" >
                       </div>
                     </div>
                     <div class="form-group col-md-6 pl-1">

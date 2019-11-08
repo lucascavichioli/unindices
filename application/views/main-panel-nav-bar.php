@@ -23,11 +23,11 @@
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="far fa-user"></i>
                   <p>
-                    <span class="d-lg-none d-md-block">Some Actions</span>
+                    <span class="d-lg-none d-md-block">Ações</span>
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Alterar senha</a>
+                  <a class="dropdown-item" href="<?=base_url('empresacliente/alterarsenha/').base64_encode($this->session->userdata('cont_id'));?>">Alterar senha</a>
                   <a class="dropdown-item" href="#">Dados cadastrais</a>
                 </div>
               </li>

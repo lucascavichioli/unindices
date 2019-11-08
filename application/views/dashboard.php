@@ -1,9 +1,9 @@
-      <div class="content">
+      <div id="content" class="content">
         <div class="row">
           <?php if(empty($empresas)){?> <div class="card"><div class="col-12">No momento, você não possui nenhuma empresa para gerenciar! <a href="<?=base_url("painel/novaempresa");?>" class="simple-text logo-normal"><strong>Adicione uma empresa-cliente!</strong></a> </div></div><?php } 
             else{foreach($empresas as $e => $attr){ ?>
             <div class="col-lg-4 col-md-6">
-              <div class="card card-chart">
+              <div id= "<?=$attr->emp_id?>" class="card card-chart">
                 <div class="card-header">
                   <h5 class="card-category">Código: <?=$attr->emp_id?></h5>
                   <h4 class="card-title"><?=$attr->emp_nome?></h4>
@@ -21,10 +21,13 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-4">
-                      <a href="<?=base_url("indices/relatorio/").base64_encode($attr->emp_id);?>" class="card-link"><button class="btn btn-default btn-round">Índices</button></a>
+                      <a href="<?=base_url("indices/analise/").base64_encode($attr->emp_id);?>" class="card-link"><button class="btn btn-default btn-round">Análise</button></a>
                     </div>
                     <div class="col-8">
                       <a href="<?=base_url("balancopatrimonial/relatorio/").base64_encode($attr->emp_id);?>" class="card-link"><button class="btn btn-default btn-round">Balanço patrimonial</button></a>
+                    </div>
+                    <div class="col-8">
+                      <a href="<?=base_url("indices/relatorio/").base64_encode($attr->emp_id);?>" class="card-link"><button class="btn btn-default btn-round">Índices</button></a>
                     </div>
                   </div>
                   <div class="row">
