@@ -103,4 +103,33 @@ class Usuarios extends CI_Model {
           }
 
     }
+
+    public function getDadosCadastrais($contId){
+        try{ 
+            $this->db->select('cont_id, cont_nome, cont_telefone, cont_telefone2, cont_crc, cont_email, cont_rec_cnpj, cont_responsavel');
+            $consulta = $this->db->get_where('usuarios', array( 'cont_id'  => $contId));
+            
+            return $consulta->result();
+         }catch(PDOException $e){
+             log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
+             return false;
+         }
+    }
+
+    public function atualizarDadosCadastrais($ip, $contId, $data){
+        try{ 
+            $this->db->where('cont_id', $contId);
+			$this->db->update('usuarios', $data); 
+			
+			$log = array('ip_cliente' => $ip, 'operacao' => 'update', 'usuario' => $this->session->userdata('usuario'), 'id_afetado' => $contId, 'tabela_afetada' => 'usuarios');
+
+			$this->db->insert('logs', $log);
+			
+			$this->db->close();
+			return true;
+         }catch(PDOException $e){
+             log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
+             return false;
+         }
+    }
 }

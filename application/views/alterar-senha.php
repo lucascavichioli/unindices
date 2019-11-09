@@ -11,16 +11,16 @@
                 <form id="formulario" method='post' action='' class="validate-form" autocomplete="off">
                   <div class="row">
                     <div class="col-md-6 pr-1">
-                      <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
+                      <div class="form-group <?=$alert ?? ''?>" data-validate = "<?=$mensagem ??''?>">
                         <label>Nova Senha</label>
-                        <input name="senha" type="password" class="form-control" placeholder="********">
+                        <input name="senha" type="password" class="form-control" placeholder="********" minlength="6">
                       </div>
                     </div>
                     <input name="empId" type="hidden" class="form-control" value="<?=$this->session->userdata('cont_id')?>"  required>
                     <div class="col-md-6 pl-1">
-                      <div class="form-group">
+                      <div class="form-group <?=$alert ?? ''?>" data-validate = "<?=$mensagem ??''?>">
                         <label for="exampleInputEmail1">Confirmar Senha</label>
-                        <input name="confirmarSenha" type="password" class="form-control" placeholder="********" >
+                        <input name="confirmarSenha" type="password" class="form-control" placeholder="********" minlength="6" >
                       </div>
                     </div>
                   </div>

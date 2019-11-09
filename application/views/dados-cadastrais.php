@@ -3,62 +3,50 @@
           <div class="col-md-8">
             <div class="card">
               <div class="card-header">
-                <h5 class="title">Atualizar Empresa</h5>
+                <h5 class="title">Dados Cadastrais</h5>
               </div>
               <div class="card-body">
                 <form id="formulario" method='post' action='' class="validate-form" autocomplete="off">
                   <div class="row">
                     <div class="col-md-6 pr-1">
-                      <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                        <label>Nome fantasia</label>
-                        <input name="nomeFantasia" type="text" class="form-control" placeholder="Nome fantasia / Apelido" value="<?=$emp_nome ?? ''?>">
+                      <div class="form-group">
+                        <label>Contabilidade/Contador</label>
+                        <input name="nome" type="text" class="form-control" placeholder="" value="<?=$cont_nome ?? ''?>" readonly>
                       </div>
                     </div>
-                    <input name="empId" type="hidden" class="form-control" value="<?=$emp_id?>"  required>
+                    <input name="contId" type="hidden" class="form-control" value="<?=$this->session->userdata('cont_id');?>" >
                     <div class="col-md-6 pl-1">
                       <div class="form-group">
                         <label for="exampleInputEmail1">E-mail</label>
-                        <input name="email" type="text" class="form-control" placeholder="E-mail" value="<?=$emp_email ?? ''?>">
+                        <input name="email" type="email" class="form-control <?=$alert ?? ''?>" data-validate="Digite um e-mail válido" placeholder="E-mail" value="<?=$cont_email ?? ''?>">
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
-                        <label>CNAE - Atividade Principal</label>
-                        <input id="cnae" name="cnae" type="text" class="form-control" placeholder="CNAE" value="<?=$emp_cnae ?? ''?>" readonly>
+                        <label>CNPJ / CRC</label>
+                        <input id="card" name="card" type="text" class="form-control" placeholder="CNPJ / CRC" value="<?=$cont_crc ?? $cont_cnpj?>" readonly>
                       </div>
                     </div>
                     <div class="col-md-6 pl-1">
                       <div class="form-group">
-                        <label>Atividades secundárias (CNAES)</label>
-                        <input name="cnaeSec" type="text" class="form-control" placeholder="CNAES separados por ;" value="<?=$emp_cnae_secundario ?? ''?>">
+                        <label>Responsável</label>
+                        <input name="responsavel" type="text" class="form-control" placeholder="Responsável" value="<?=$cont_responsavel ?? ''?>">
                       </div>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6 pr-1">
-                      <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                        <label>Quantidade de colaboradores</label>
-                        <input name="qtdColaboradores" type="number" class="form-control" placeholder="Quantidade de colaboradores" value="<?=$emp_qtd_emp ?? ''?>">
-                      </div>
-                    </div>
-                    <div class="form-group col-md-6 pl-1">
-                    <label for="inputState">Estado</label>
-                    <input id="uf" name="uf" value="<?= $emp_uf ?? ''?>" class="form-control" readonly>
-                  </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Telefone</label>
-                        <input name="telefone" type="text" class="form-control" onkeypress="MascaraTelefone(formulario.telefone);" maxlength="14" placeholder="(DDD)####-####" value="<?=$emp_telefone ?? ''?>">
+                        <input name="telefone" type="text" class="form-control" onkeypress="MascaraTelefone(formulario.telefone);" maxlength="14" placeholder="(DDD)####-####" value="<?=$cont_telefone ?? ''?>">
                       </div>
                     </div>
                     <div class="col-md-6 pl-1">
                       <div class="form-group">
                         <label>Celular</label>
-                        <input name="celular" type="text" class="form-control" onkeypress="MascaraTelefone(formulario.celular);" maxlength="14" placeholder="(DDD)####-#####" value="<?=$emp_telefone2 ?? ''?>">
+                        <input name="celular" type="text" class="form-control" onkeypress="MascaraTelefone(formulario.celular);" maxlength="14" placeholder="(DDD)####-#####" value="<?=$cont_telefone2 ?? ''?>">
                       </div>
                     </div>
                   </div>

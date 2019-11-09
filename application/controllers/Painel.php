@@ -149,12 +149,120 @@ class Painel extends CI_Controller {
 		}
 	}
 
+		
+
+	public function alterarSenha($contId){
+		if(empty($this->session->userdata('usuario'))){
+			redirect(base_url() . "painel/login");
+		}
+		$id = base64_decode($contId);
+		$data['title'] = "Alteração de senha";
+		$data['contId'] = $id;
+
+		if($_SERVER['REQUEST_METHOD'] !== 'POST'){
+			$this->dashboard->show('alterar-senha', $data);
+		}else{
+			$ip = $this->input->ip_address();
+			
+			$this->load->helper( array( 'form' ,  'url' ));
+			$this->load->library( 'form_validation' );
+
+			$data = array();
+
+			$data['senha'] = $this->input->post('senha', true);
+			$data['senha2'] = $this->input->post('confirmarSenha', true);
+
+			$this->form_validation->set_data($data);
+			$this->form_validation->set_rules('senha', 'Senha', 'trim|required|min_length[6]');
+			$this->form_validation->set_rules('senha2', 'Confirmação de senha', 'trim|required|matches[senha]|min_length[6]');
+
+			if($this->form_validation->run()){
+				unset($data['senha2']);
+				$this->load->model("Usuarios");
+				$this->Usuarios->alterarSenha($ip, $id, $data);
+
+				redirect(base_url() . "painel/dashboard");
+			}else{
+				$data['alert'] = "alert-validate";
+				$data['mensagem'] = "Digite uma senha valida!";
+				$this->dashboard->show("alterar-senha", $data);
+				//var_dump($this->form_validation->error_array());
+			}
+
+		}
+	}
+
+	public function dadosCadastrais(){
+		if(empty($this->session->userdata('usuario'))){
+			redirect(base_url() . "painel/login");
+		}
+
+		if($_SERVER['REQUEST_METHOD'] === 'GET'){
+			$this->load->model('Usuarios');
+			$cont = $this->Usuarios->getDadosCadastrais($this->session->userdata('cont_id'));
+
+			foreach ($cont as $key => $value) {
+				foreach ($value as $k => $v) {
+					$data[$k] = $v;
+				}
+			}
+			$data['title'] = 'Dados Cadastrais';
+			$this->dashboard->show("dados-cadastrais", $data);
+		}else{
+				$this->load->helper( array( 'form' ,  'url' ));
+				$this->load->library( 'form_validation' );
+				$id = $this->session->userdata('cont_id');
+				$data['CONT_ID'] = $this->input->post('contId', true);
+				$data['CONT_EMAIL'] = $this->input->post('email', true);
+				$data['CONT_RESPONSAVEL'] = $this->input->post('responsavel', true);
+				$data['CONT_TELEFONE'] = $this->input->post('telefone', true);
+				$data['CONT_TELEFONE2'] = $this->input->post('celular', true);
+				$ip = $this->input->ip_address();
+
+				$this->form_validation->set_data($data);
+
+				$this->form_validation->set_rules('CONT_RESPONSAVEL', 'Responsável', 'trim');
+				$this->form_validation->set_rules('CONT_EMAIL', 'E-mail do responsável', 'trim|valid_email');
+				$this->form_validation->set_rules('CONT_TELEFONE', 'Telefone', 'trim');
+				$this->form_validation->set_rules('CONT_TELEFONE2', 'Celular', 'trim');
+
+				
+
+				if($this->form_validation->run()){
+					$this->load->model('Usuarios');
+					$atualizou = $this->Usuarios->atualizarDadosCadastrais($ip, $id, $data);
+					print_r($atualizou);
+					if($atualizou){
+						$this->session->unset_userdata('usuario');
+						$this->session->set_userdata('usuario', $data['CONT_EMAIL']);
+						redirect(base_url() . "painel/dadoscadastrais/". base64_encode($id));
+					}else{
+						redirect(base_url() . "painel");
+					}
+				}else{
+					$data['title'] = "Dados Cadastrais";
+					$data['alert'] = "alert-validate";
+					$this->load->model('Usuarios');
+					$cont = $this->Usuarios->getDadosCadastrais($this->session->userdata('cont_id'));
+					foreach ($cont as $key => $value) {
+						foreach ($value as $k => $v) {
+							$data[$k] = $v;
+						}
+					}
+					$this->dashboard->show('dados-cadastrais', $data);
+				}
+			}
+	
+		}
+
 	public function sair(){
 		$this->session->unset_userdata('cont_id');
 		$this->session->unset_userdata('usuario');
 		$this->session->unset_userdata('logado');
 		$this->session->sess_destroy();
-		$this->load->view('sair');
+
+		$data['title'] = "Logout";
+		$this->load->view('sair', $data);
 	}
 
 }

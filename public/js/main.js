@@ -35,17 +35,53 @@
         }
 
             if(check){
+                  Swal.fire({
+                      type: 'success',
+                      title: 'Dados enviados com sucesso!',
+                      showConfirmButton: false,
+                      timer: 1500
+                    })
+                  }
+            return check;
+    });
+
+      
+    $('.validate-login').on('submit',function(){
+        var check = true;
+
+        for(var i=0; i<input.length; i++) {
+            if(validate(input[i]) == false){
+                showValidate(input[i]);
+                check=false;
+            }
+        }
+
+        /*let senha1 = input[5].value;
+        let senha2 = input[6].value;*/
+            if(check){
+                let timerInterval
                 Swal.fire({
-                    type: 'success',
-                    title: 'Dados enviados com sucesso!',
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
+                  //title: 'Carregando',
+                  //html: 'I will close in <b></b> milliseconds.',
+                  timer: 2000,
+                  onBeforeOpen: () => {
+                    Swal.showLoading()
+                  },
+                  onClose: () => {
+                    clearInterval(timerInterval)
+                  }
+                }).then((result) => {
+                  if (result.value){
+                    Swal.fire({
+                      type: 'success',
+                      title: 'Login efetuado com sucesso!',
+                      showConfirmButton: false,
+                      timer: 1500
+                    })
+                  }
+                })
             }
             return check;
-
-        
-
     });
 
     $('.validate-form .input100').each(function(){
@@ -83,6 +119,7 @@
     
 
 })(jQuery);
+
 
 function MascaraTelefone(telefone){
     if(mascaraInteiro(telefone)==false){

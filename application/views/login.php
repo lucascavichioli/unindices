@@ -33,7 +33,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<img src="<?=base_url("public/images/logo_unindices.jpeg")?>" alt="IMG">
 				</div>
 
-				<form method="post" class="login100-form validate-form" action="<?=base_url("painel/login")?>">
+				<form method="post" class="login100-form validate-login" action="<?=base_url("painel/login")?>">
 					<span class="login100-form-title">
 						UnIndices
 					</span>
@@ -55,7 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 					
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						<button id="login" class="login100-form-btn" onclick="login()">
 							ENTRAR
 						</button>
 					</div>

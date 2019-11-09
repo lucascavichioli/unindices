@@ -574,10 +574,12 @@ class Indices extends CI_Controller {
 	 }
 
 	 public function erroNenhumDadoCadastrado(){
-		$this->dashboard->show('erro-nenhum-dado-cadastrado');
+		$data['title'] = "Erro";
+		$this->dashboard->show('erro-nenhum-dado-cadastrado', $data);
 	 }
 	
 	 public function erroNaoPossuiIndicesSuficientes(){
-		$this->dashboard->show('erro-nao-possui-indices-suficientes');
+		$data['title'] = "Erro";
+		$this->dashboard->show('erro-nao-possui-indices-suficientes', $data);
 	 }
 }   

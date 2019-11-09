@@ -439,7 +439,10 @@ class EmpresaCliente extends CI_Controller {
 				$this->dashboard->show('atualizar-empresa', $data);
 			}
 		}else{
+			$this->load->helper( array( 'form' ,  'url' ));
+			$this->load->library( 'form_validation' );
 			$id = base64_decode($empId);
+			$data['EMP_ID'] = $this->input->post('empId', true);
 			$data['EMP_NOME'] = $this->input->post('nomeFantasia', true);
 			$data['EMP_CNAE'] = $this->input->post('cnae', true);
 			$data['EMP_CNAE_SECUNDARIO'] = $this->input->post('cnaeSec', true);
@@ -448,55 +451,50 @@ class EmpresaCliente extends CI_Controller {
 			$data['EMP_EMAIL'] = $this->input->post('email', true);
 			$data['EMP_TELEFONE'] = $this->input->post('telefone', true);
 			$data['EMP_TELEFONE2'] = $this->input->post('celular', true);
-
 			$ip = $this->input->ip_address();
-
-			$this->load->model('EmpresaClienteModel');
-			if($this->EmpresaClienteModel->atualizarEmpresaCliente($id, $data, $ip)){
-				redirect(base_url() . "empresacliente/atualizarempresa/". base64_encode($id));
-			}
-		}
-	}
-
-	public function alterarSenha($empId){
-		if(empty($this->session->userdata('usuario'))){
-			redirect(base_url() . "painel/login");
-		}
-		$id = base64_decode($empId);
-
-		if($_SERVER['REQUEST_METHOD'] !== 'POST'){
-			$data['title'] = "Alteração de senha";
-			$data['contId'] = $id;
-
-			$this->dashboard->show('alterar-senha', $data);
-		}else{
-			$ip = $this->input->ip_address();
-			
-			$this->load->helper( array( 'form' ,  'url' ));
-			$this->load->library( 'form_validation' );
-
-			$data = array();
-
-			$data['senha'] = $this->input->post('senha', true);
-			$data['senha2'] = $this->input->post('confirmarSenha', true);
 
 			$this->form_validation->set_data($data);
-			$this->form_validation->set_rules('senha', 'Senha', 'trim|required|min_length[6]');
-			$this->form_validation->set_rules('senha2', 'Confirmação de senha', 'trim|required|matches[senha]|min_length[6]');
+
+//			$data['EMP_CONT_ID'] = $this->session->userdata('cont_id');
+
+			$this->form_validation->set_rules('EMP_NOME', 'Nome Fantasia da Empresa', 'trim|required');
+			$this->form_validation->set_rules('EMP_CNAE', 'CNAE', 'trim|required');
+			$this->form_validation->set_rules('EMP_CNAE_SECUNDARIO', 'CNAEs Secundários', 'trim');
+			$this->form_validation->set_rules('EMP_UF', 'UF', 'trim');
+			$this->form_validation->set_rules('EMP_QTD_EMP', 'Quantidade de colaboradores', 'trim|required');
+			$this->form_validation->set_rules('EMP_EMAIL', 'E-mail do responsável', 'trim');
+			$this->form_validation->set_rules('EMP_TELEFONE', 'Telefone', 'trim');
+			$this->form_validation->set_rules('EMP_TELEFONE2', 'Celular', 'trim');
+
+			
 
 			if($this->form_validation->run()){
-				unset($data['senha2']);
-				$this->load->model("Usuarios");
-				$this->Usuarios->alterarSenha($ip, $id, $data);
-
-				print "senha alterada com sucesso";
+				$this->load->model('EmpresaClienteModel');
+				$atualizou = $this->EmpresaClienteModel->atualizarEmpresaCliente($id, $data, $ip);
+				if($atualizou){
+					redirect(base_url() . "empresacliente/atualizarempresa/". base64_encode($id));
+				}else{
+					redirect(base_url() . "painel/novaEmpresa");
+				}
 			}else{
-				var_dump($this->form_validation->error_array());
+				$data['title'] = "Atualizar Empresa";
+				$data['activeAddEmpresa'] = "active ";
+				$data['alert'] = "alert-validate";
+				$data['emp_id'] = $id;
+				$this->load->model('EmpresaClienteModel');
+				$empresa = $this->EmpresaClienteModel->listaEmpresaClienteParaAtualizar($this->session->userdata('cont_id'), $id);
+				foreach ($empresa as $key => $value) {
+					foreach ($value as $k => $v) {
+						$data[$k] = $v;
+					}
+				}
+				$data['contId'] = $this->session->userdata('cont_id');
+				$this->dashboard->show('atualizar-empresa', $data);
 			}
-
 		}
 	}
 
+	
 	private function validaBalancoAtivos($data) {
 		$this->load->helper( array( 'form' ,  'url' ));
 		$this->load->library( 'form_validation' );

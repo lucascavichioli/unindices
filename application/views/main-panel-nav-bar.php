@@ -27,8 +27,8 @@
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="<?=base_url('empresacliente/alterarsenha/').base64_encode($this->session->userdata('cont_id'));?>">Alterar senha</a>
-                  <a class="dropdown-item" href="#">Dados cadastrais</a>
+                  <a class="dropdown-item" href="<?=base_url('painel/alterarsenha/').base64_encode($this->session->userdata('cont_id'));?>">Alterar senha</a>
+                  <a class="dropdown-item" href="<?=base_url('painel/dadoscadastrais');?>">Dados cadastrais</a>
                 </div>
               </li>
             </ul>
@@ -38,21 +38,4 @@
       <!-- End Navbar -->
       <div class="panel-header panel-header-<?php if(empty($grafico)){print "sm";}else{print "md";}?>">
         <?=$grafico ?? ''?>
-        <?php 
-        if(!empty($indicesComparados)){ ?>
-        <div class="title col-md-12">
-          <div class="row">
-            <div class="title col-md-4" style="color:white">
-              Empresas comparadas: <?php print $indicesComparados ?? ''?>
-            </div>
-            <div class="title col-md-4" style="color:white">
-              CNAE: <?php print $cnae ?? ''?>
-            </div>
-            <div class="title col-md-4" style="color:white">
-              Estado: <?php print $uf ?? ''?>
-            </div>
-          </div>
-        </div>
-        <?php }
-        ?>
       </div>
