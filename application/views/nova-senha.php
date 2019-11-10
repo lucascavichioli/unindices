@@ -34,11 +34,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </span>
                 <div class="container-cadastro100-form-btn">
                     <div class="wrap-input100 validate-input" data-validate = "Preencha um e-mail válido">
-                            <input class="input100" type="text" name="email" placeholder="E-mail">
+                            <input style="text-align: center;" class="inputNovaSenha" type="text" name="email" placeholder="E-mail">
                             <span class="focus-input100"></span>
-                            <span class="symbol-input100">
-                                <i class="fa fa-envelope" aria-hidden="true"></i>
-                            </span>
                     </div>
                     <button type="submit" class="login100-form-btn" onclick="">
                         ENVIAR

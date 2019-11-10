@@ -9,7 +9,7 @@
           UI
         </a>
         <a href="" class="simple-text logo-normal">
-          UnIndices
+          <?php print $this->session->userdata('cadastro'); ?> <!--UnIndices-->
         </a>
       </div>
       <div class="sidebar-wrapper" id="sidebar-wrapper">

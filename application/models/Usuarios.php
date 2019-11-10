@@ -78,7 +78,7 @@ class Usuarios extends CI_Model {
     }
 
     public function getUser($email){
-        $this->db->select('cont_id, cont_email, cont_senha');
+        $this->db->select('cont_id, cont_rec_cnpj, cont_crc, cont_email, cont_senha');
         $consulta = $this->db->get_where('usuarios', array( 'cont_email'  => $email ));
         
         return $consulta->result();

@@ -19,17 +19,24 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <div class="row">
-                    <div class="col-4">
-                      <a href="<?=base_url("indices/analise/").base64_encode($attr->emp_id);?>" class="card-link"><button class="btn btn-default btn-round">Análise</button></a>
-                    </div>
-                    <div class="col-8">
-                      <a href="<?=base_url("balancopatrimonial/relatorio/").base64_encode($attr->emp_id);?>" class="card-link"><button class="btn btn-default btn-round">Balanço patrimonial</button></a>
-                    </div>
-                    <div class="col-8">
-                      <a href="<?=base_url("indices/relatorio/").base64_encode($attr->emp_id);?>" class="card-link"><button class="btn btn-default btn-round">Índices</button></a>
-                    </div>
-                  </div>
+                  <table class="table responsive">
+                    <thead>
+                        <tr>
+                        <th></th>
+                        <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><a href="<?=base_url("indices/relatorio/").base64_encode($attr->emp_id);?>" class="card-link"><button class="btn btn-default btn-round">Índices</button></a></td>
+                        <td><a href="<?=base_url("balancopatrimonial/relatorio/").base64_encode($attr->emp_id);?>" class="card-link"><button class="btn btn-default btn-round">Balanço Patrimonial</button></a></td>
+                      </tr>
+                      <tr>
+                        <td><a href="<?=base_url("indices/analise/").base64_encode($attr->emp_id);?>" class="card-link"><button class="btn btn-default btn-round">Análise</button></a></td>
+                      </tr>     
+                    </tbody>
+                  </table>
+                  
                   <div class="row">
                       <div class="col-md-12">
                         <p class="card-text">CNAE: <strong><?=$attr->emp_cnae?></strong></p>

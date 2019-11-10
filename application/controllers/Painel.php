@@ -37,12 +37,18 @@ class Painel extends CI_Controller {
 					foreach ($getUser as $campo)
 					{
 						$contId = $campo->cont_id;
+						if($campo->cont_rec_cnpj != null){
+							$cadastro = $campo->cont_rec_cnpj;
+						}else{
+							$cadastro = $campo->cont_crc;
+						}
 						$email = $campo->cont_email;
 						$hash = $campo->cont_senha;
 					}
 					if(password_verify($senha, $hash)){
 						$session_data = array(
 							'cont_id' => $contId,
+							'cadastro' => $cadastro,
 							'usuario' => $usuario,
 							'logado' => true
 						);
@@ -64,6 +70,7 @@ class Painel extends CI_Controller {
 
 	public function dashboard(){
 		if($this->session->userdata('usuario') != '' && $this->session->userdata('logado') === true){
+			
 			$data['title'] = "Dashboard";
 			$data['activeDashboard'] = "active ";
 			$data['tituloGrafico'] = "EMPRESAS CONTRIBUINTES";
@@ -129,6 +136,7 @@ class Painel extends CI_Controller {
 						redirect(base_url() . "painel/novaEmpresa");
 					}
 				}else{
+
 					$data['title'] = "Adicionar Empresa";
 					$data['activeAddEmpresa'] = "active ";
 					$data['alert'] = "alert-validate";

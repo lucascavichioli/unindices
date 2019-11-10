@@ -29,9 +29,9 @@
                   </div>
                   <div class="row">
                     <div class="col-md-6 pr-1">
-                      <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
+                      <div class="buscarCnae form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
                         <label>CNAE - Atividade Principal</label>
-                        <input id="cnae" name="cnae" type="text" class="form-control" onclick="teste()" placeholder="CNAE">
+                        <input id="cnae" name="cnae" type="text" class="form-control" onclick="modalCnae()" placeholder="CNAE">
                       </div>
                     </div>
 
@@ -43,12 +43,12 @@
                           </div>
                           <div class="modal-body">
                             <div class="row">
-                              <div class="col-md-6 pr-1">
-                                <input type="text" name="buscar" class="form-control">
+                              <div class="col-md-12 pr-1">
+                                <input id="busca" type="text" name="buscar" class="form-control" >
                               </div>
-                              <div class="col-md-6 pr-1">
-                                <button class="btn btn-default">BUSCAR<i class="fas fa-search"></i></button>
-                              </div>
+                            </div>
+                            <div id="lista">
+
                             </div>
                           </div>
                         </div>

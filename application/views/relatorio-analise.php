@@ -48,18 +48,29 @@
                                                 print $indice['POSICIONAMENTO'] . "(" . $indice['VALOR'] .")";
                                                 ?>
                                                 <div id="modalQuartil<?php print $indice['ind'].$indice['ano']; ?>" class="modal fade">
-                                                    <div class="modal-dialog modal-md">
+                                                    <div class="modal-dialog modal-md modal-dialog-centered">
                                                         <div class="modal-content">
-                                                            <div class="modal-header">
+                                                            <div class="modal-header text-center d-block">
                                                             <h4 class="modal-title">Índices padrão - <?php print $i . " / "; print $indice['ano'] ?? '';?></h4>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <div class="row">
-                                                                    <div class="col-md-6 pr-1">
-                                                                        <label><?=$indice['Q1'] ?? ''?></label>
-                                                                        <label><?=$indice['Q2'] ?? ''?></label>
-                                                                        <label><?=$indice['Q3'] ?? ''?></label>
-                                                                    </div>
+                                                                <div class='table-responsive'>
+                                                                    <table class='table table-hover text-center'>
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Q 1</th>
+                                                                                <th>Q 2</th>
+                                                                                <th>Q 3</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td><label><?=$indice['Q1'] ?? ''?></label></td>
+                                                                                <td><label><?=$indice['Q2'] ?? ''?></label></td>
+                                                                                <td><label><?=$indice['Q3'] ?? ''?></label></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -106,9 +117,39 @@
                                     print "<tr>";
                                     print "<td class='text-left' title='teste'>" . $i . "</td>";
                                         foreach ($v as $ano => $indice) {
-                                            print "<td title='". $indice['VALOR'] . "'>";
+                                            print "<td title='". $indice['VALOR'] . "' onclick='modalQuartil(\"" . $indice['ind'] . $indice['ano'] . "\")'>";
                                                 print $indice['POSICIONAMENTO'] . "(" . $indice['VALOR'] .")";
-                                            print "</td>";
+                                        ?>
+                                        <div id="modalQuartil<?php print $indice['ind'].$indice['ano']; ?>" class="modal fade">
+                                                    <div class="modal-dialog modal-md modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header text-center d-block">
+                                                            <h4 class="modal-title">Índices padrão - <?php print $i . " / "; print $indice['ano'] ?? '';?></h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class='table-responsive'>
+                                                                    <table class='table table-hover text-center'>
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Q 1</th>
+                                                                                <th>Q 2</th>
+                                                                                <th>Q 3</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td><label><?=$indice['Q1'] ?? ''?></label></td>
+                                                                                <td><label><?=$indice['Q2'] ?? ''?></label></td>
+                                                                                <td><label><?=$indice['Q3'] ?? ''?></label></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php print "</td>";
                                         }
                                     print "</tr>";
                                 }                          

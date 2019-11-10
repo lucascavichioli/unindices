@@ -312,6 +312,8 @@ class EmpresaCliente extends CI_Controller {
 					$this->load->model('EmpresaClienteModel');
 					$empresa = $this->EmpresaClienteModel->listaEmpresasDeUmUsuario($this->session->userdata('cont_id'), $this->input->post('empId', true));
 
+					//verificar se já possui dados cadastrados neste ano
+
 					//Se a empresa não pertence a contabilidade, volta para a dashboard
 					if(empty($empresa)){
 						redirect(base_url() . "painel/dashboard");
@@ -375,11 +377,24 @@ class EmpresaCliente extends CI_Controller {
 							$passivosAnoAnterior['BPAS_EMP_ID']		   = (int)$passivosAnoAnterior['BPAS_EMP_ID'];	   
 							$dreAnoAnterior['DRES_EMP_ID'] 			   = (int)$dreAnoAnterior['DRES_EMP_ID'];
 
-							//calcular contas
+							
+							//calcula contas
+							$ativosAnoAnterior['BATIV_ATIVO_CIRCULANTE'] = ($ativosAnoAnterior['BATIV_CLIENTES'] + $ativosAnoAnterior['BATIV_ESTOQUE'] + $ativosAnoAnterior['BATIV_OUTROS_ATIVOS_CIRCULANTES'] + $ativosAnoAnterior['BATIV_CAIXA_EQUIV_CAIXA']);
+							$ativosAnoAnterior['BATIV_ATIVO_NAO_CIRCULANTE'] = ($ativosAnoAnterior['BATIV_ATIVO_RLP'] + $ativosAnoAnterior['BATIV_IMOB_INTANGIVEL'] + $ativosAnoAnterior['BATIV_INVESTIMENTOS']);
+							$ativosAnoAnterior['BATIV_ATIVO_TOTAL'] = ($ativosAnoAnterior['BATIV_ATIVO_CIRCULANTE'] + $ativosAnoAnterior['BATIV_ATIVO_NAO_CIRCULANTE']);
+							$passivosAnoAnterior['BPAS_PASSIVO_CIRCULANTE'] = ($passivosAnoAnterior['BPAS_FORNECEDORES'] + $passivosAnoAnterior['BPAS_OUTROS_PASSIVOS_CIRCULANTES']);
+							$passivosAnoAnterior['BPAS_PASSIVO_TOTAL'] = ($passivosAnoAnterior['BPAS_PASSIVO_CIRCULANTE'] + $passivosAnoAnterior['BPAS_PASSIVO_N_CIRCULANTE'] + $passivosAnoAnterior['BPAS_PATRIMONIO_LIQUIDO']);
+							$dreAnoAnterior['DRES_LUCRO_BRUTO'] = ($dreAnoAnterior['DRES_RECEITA_LIQUIDA_VENDAS'] + $dreAnoAnterior['DRES_CUSTO_VENDAS']); 
+							$dreAnoAnterior['DRES_RESULT_OPERACIONAL'] = ($dreAnoAnterior['DRES_LUCRO_BRUTO'] + $dreAnoAnterior['DRES_DESPESAS_OPERACIONAIS'] + $dreAnoAnterior['DRES_OUTRAS_RECEITAS_OP']);
+							$dreAnoAnterior['DRES_RESULT_ANTES_IRPJ_CSLL'] = ($dreAnoAnterior['DRES_RESULT_OPERACIONAL'] + $dreAnoAnterior['DRES_DESPESAS_FINANCEIRAS'] + $dreAnoAnterior['DRES_RECEITAS_FINANCEIRAS'] + $dreAnoAnterior['DRES_OUTRAS_DESPESAS']);
+							$dreAnoAnterior['DRES_RESULT_ANTES_CONT_PART'] = ($dreAnoAnterior['DRES_RESULT_ANTES_IRPJ_CSLL'] + $dreAnoAnterior['DRES_IRPJ_CSLL']);
+							$dreAnoAnterior['DRES_RESULT_LIQUIDO_EXERCICIO'] = ($dreAnoAnterior['DRES_RESULT_ANTES_CONT_PART'] + $dreAnoAnterior['DRES_CONTRIBUICOES_PARTICIP']);
 
 							//buscar ativos,passivos e dre do ano anterior a este
+
+							//carrega biblioteca dos índices.
+							$this->load->library('indiceseconomicos');
 							
-						
 						}
 					}
 				}
@@ -570,5 +585,41 @@ class EmpresaCliente extends CI_Controller {
 		}else{
 			return $valor;
 		}
+	}
+
+	public function cnaes(){
+		$codigo = $this->input->post('busca');
+
+
+		$this->load->model('Cnae');
+		$json = $this->Cnae->get($codigo);
+
+		print "<div class='table-responsive'>";
+		print "<table class='table table-hover'>";
+		print "<thead>";
+		print "<tr>";
+		print "<th>Código Cnae</th>";
+		print "<th>Descrição</th>";
+		print "</tr>";
+		print "</thead>";
+		print "<tbody>";
+
+		foreach ($json as $key => $value) {
+			print "<tr>";
+			foreach ($value as $codigo => $atributo) {
+				if($codigo === "codigo_cnae"){
+					print "<td class='target-copy'>"; 
+				}else {
+					print "<td>";
+				}
+					print $atributo;
+				print "</td>";
+			}
+			print "</tr>";
+		}
+
+		print "</tbody>";
+		print "</table>";
+		print "</div>";
 	}
 }

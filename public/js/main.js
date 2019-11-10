@@ -375,7 +375,23 @@ $(".excluirEmpresa").click(function(){
   })
 });
 
-function teste(){
+
+$("#busca").keyup(function(){
+  $.ajax({
+    type: "POST",
+    url: "/TCC/empresacliente/cnaes", 
+    data: {busca: $("#busca").val()},
+    success: function(data){
+        $("#lista").html(data);
+    }
+  });
+
+
+
+})
+
+
+function modalCnae(){
   $('#modalCnae').modal();
 }
 

@@ -19,7 +19,7 @@ class BalancoPatrimonial extends CI_Controller {
 
 		$this->load->model('EmpresaClienteModel');
 		$empresa = $this->EmpresaClienteModel->listaEmpresasDeUmUsuario($this->session->userdata('cont_id'), $id);
-
+	
 		//Se a empresa não pertence a contabilidade, volta para a dashboard
 		if(empty($empresa)){
 			redirect(base_url() . "painel/dashboard");
@@ -44,7 +44,7 @@ class BalancoPatrimonial extends CI_Controller {
 			// print "<pre>";
 			// print_r($rel); 
 			// print "</pre>";exit();
-
+			$data['empresa'] = $empresa[0]->emp_nome;
 			$data['anos'] = $anos;
 			$data['balanco'] = $relatorio;
 			$data['tituloGrafico'] = "BALANÇO PATRIMONIAL";

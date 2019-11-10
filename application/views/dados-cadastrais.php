@@ -10,7 +10,7 @@
                   <div class="row">
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
-                        <label>Contabilidade/Contador</label>
+                        <label>Contabilidade / Contador</label>
                         <input name="nome" type="text" class="form-control" placeholder="" value="<?=$cont_nome ?? ''?>" readonly>
                       </div>
                     </div>
@@ -26,7 +26,7 @@
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>CNPJ / CRC</label>
-                        <input id="card" name="card" type="text" class="form-control" placeholder="CNPJ / CRC" value="<?=$cont_crc ?? $cont_cnpj?>" readonly>
+                        <input id="card" name="card" type="text" class="form-control" placeholder="CNPJ / CRC" value="<?=$cont_crc ?? $cont_rec_cnpj?>" readonly>
                       </div>
                     </div>
                     <div class="col-md-6 pl-1">
