@@ -118,4 +118,29 @@ class DadosFinanceiros extends CI_Model {
         }
     }
 
+    public function ativosPassivosDresUltimoAno($emp){
+        try{
+            $sql = "SELECT 
+            BATIV_ATIVO_CIRCULANTE, BATIV_ESTOQUE, BATIV_ATIVO_RLP, BATIV_INVESTIMENTOS, BATIV_IMOB_INTANGIVEL, 
+            BATIV_ATIVO_TOTAL, BATIV_ATIVO_NAO_CIRCULANTE, BATIV_CAIXA_EQUIV_CAIXA, BATIV_CLIENTES, BATIV_OUTROS_ATIVOS_CIRCULANTES,
+            BPAS_PASSIVO_CIRCULANTE, BPAS_PASSIVO_N_CIRCULANTE, BPAS_PATRIMONIO_LIQUIDO, BPAS_PASSIVO_TOTAL, BPAS_FORNECEDORES, 
+            BPAS_OUTROS_PASSIVOS_CIRCULANTES, DRES_RECEITA_LIQUIDA_VENDAS, DRES_CUSTO_VENDAS, DRES_DESPESAS_OPERACIONAIS, 
+            DRES_OUTRAS_RECEITAS_OP, DRES_DESPESAS_FINANCEIRAS, DRES_RECEITAS_FINANCEIRAS, DRES_OUTRAS_DESPESAS, DRES_IRPJ_CSLL, 
+            DRES_CONTRIBUICOES_PARTICIP, DRES_LUCRO_BRUTO, DRES_RESULT_OPERACIONAL, DRES_RESULT_ANTES_IRPJ_CSLL, 
+            DRES_RESULT_ANTES_CONT_PART, DRES_RESULT_LIQUIDO_EXERCICIO, DRES_ANO_ID
+            from balanco_ativos
+            join balanco_passivos on bpas_id = bativ_id
+            join demonstracao_resultado dre on dre.dres_id = bpas_id
+            where dre.dres_ano_id = (select max(dres_ano_id) from demonstracao_resultado where dres_emp_id = dre.dres_emp_id) and dre.dres_emp_id = ?";
+            
+            $consulta = $this->db->query($sql, array($emp));
+            
+            return $consulta->result(); //result_array
+        }catch(PDOException $e){
+            log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
+            return false; 
+
+        }
+    }
+
 }

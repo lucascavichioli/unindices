@@ -13,8 +13,10 @@ class NovaConta extends CI_Controller {
 			$this->load->view('cadastro-contabilidade');
 		}else{
 
-			//$cnae = substr("69212312", 0, 3);
-			//if($cnae === '69.2'){prossegue}
+			$cnae = substr($this->input->post('atvEmpresa', true), 0, 4);
+			if($cnae !== "69.2"){
+				redirect(base_url() . "novaconta/cnaeinvalido");
+			}
 
 			$ip = getenv('REMOTE_ADDR') ?? $_SERVER["REMOTE_ADDR"];
 			
@@ -165,5 +167,11 @@ class NovaConta extends CI_Controller {
 		}
 		//var_dump($this->form_validation->error_array());
 		//$this->load->view('cadastro-contador');
+	}
+
+	public function cnaeInvalido(){
+		$data['erro'] = "alert-validate";
+		$data['mensagem'] = "Cnae inválido";
+		$this->load->view('cadastro-contabilidade', $data);
 	}
 }

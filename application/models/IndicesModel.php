@@ -125,5 +125,25 @@ class IndicesModel extends CI_Model {
             log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
             return false;
         }
-    }         
+    }
+    
+    public function inserirIndicesAnoUnico($indicesAnoAnterior){
+        try{ 
+            $this->db->trans_begin();
+
+            $this->db->insert('comparativos', $indicesAnoAnterior);
+        
+            if ($this->db->trans_status() === FALSE){
+                $this->db->trans_rollback();
+            }
+            else{
+                $this->db->trans_commit();
+                return true;
+            }
+            
+        }catch(PDOException $e){
+            log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
+            return false;
+        }
+    }
 }
