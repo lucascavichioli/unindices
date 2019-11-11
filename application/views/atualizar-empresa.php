@@ -91,9 +91,8 @@
                   </p>
                 </div>
                 <p class="description text-center">
-                  Escolha um nome fantasia ou apelido para lembrar da empresa-cliente
-                  <br> Não estamos interessados em saber qual é a empresa
-                  <br> Ao preencha todos os dados
+                  Preencha ou altere os campos em que deseja atualizar
+                  <br> os campos CNAE e estado não estão disponíveis para alteração.
                 </p>
               </div>
               <hr>

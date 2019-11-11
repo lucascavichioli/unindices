@@ -31,7 +31,7 @@
                     <div class="col-md-6 pr-1">
                       <div class="buscarCnae form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
                         <label>CNAE - Atividade Principal</label>
-                        <input id="cnae" name="cnae" type="text" class="form-control" onclick="modalCnae()" placeholder="CNAE">
+                        <input id="cnae" name="cnae" type="text" class="form-control" onclick="modalCnae()" placeholder="CNAE" value="">
                       </div>
                     </div>
 
@@ -146,8 +146,8 @@
                 </div>
                 <p class="description text-center">
                   Escolha um nome fantasia ou apelido para lembrar da empresa-cliente
-                  <br> Não estamos interessados em saber qual é a empresa
-                  <br> Ao preencha todos os dados
+                  <br> Os campos e-mail, CNAES secundários, telefone e celular são opcionais!
+                  <br> Qualquer dúvida acesse nossa página de documentação
                 </p>
               </div>
               <hr>

@@ -94,9 +94,9 @@ class IndicesModel extends CI_Model {
 
     public function listaIndices($empId){
         try{         
-            $select = 'SELECT COMP_ID, COMP_LI AS LI, COMP_LC AS LC, COMP_LS AS LS, COMP_LG AS LG, 
-            COMP_EG AS EG, COMP_GE AS GE, COMP_CE AS CE, COMP_GI AS GI, COMP_IRNC AS IRNC, COMP_MAF AS MAF, 
-            COMP_MB AS MB, COMP_MO AS MO, COMP_ML AS ML, COMP_ANO_ID FROM comparativos
+            $select = 'SELECT COMP_ID, round(COMP_LI,2) AS LI, round(COMP_LC,2) AS LC, round(COMP_LS,2) AS LS, round(COMP_LG,2) AS LG, 
+            round(COMP_EG,2) AS EG, round(COMP_GE,2) AS GE, round(COMP_CE,2) AS CE, round(COMP_GI,2) AS GI, round(COMP_IRNC,2) AS IRNC, round(COMP_MAF,2) AS MAF, 
+            round(COMP_MB,2) AS MB, round(COMP_MO,2) AS MO, round(COMP_ML,2) AS ML, COMP_ANO_ID FROM comparativos
             WHERE COMP_EMP_ID = ?
             ORDER BY COMP_ANO_ID DESC';
     
@@ -112,8 +112,8 @@ class IndicesModel extends CI_Model {
     
     public function listaIndicesAnoAnterior($empId){
         try{         
-            $select = 'SELECT COMPANT_ID, COMPANT_PMC AS PMC, COMPANT_PME AS PME, COMPANT_PMP AS PMP, COMPANT_CO AS CO,
-            COMPANT_CF AS CF, COMPANT_GA AS GA, COMPANT_RSA AS RSA, COMPANT_RSPL AS RSPL, COMPANT_ANO_ID FROM comparativos_ano_anterior
+            $select = 'SELECT COMPANT_ID, round(COMPANT_PMC,2) AS PMC, round(COMPANT_PME,2) AS PME, round(COMPANT_PMP,2) AS PMP, round(COMPANT_CO,2) AS CO,
+            round(COMPANT_CF,2) AS CF, round(COMPANT_GA,2) AS GA, round(COMPANT_RSA,2) AS RSA, round(COMPANT_RSPL,2) AS RSPL, COMPANT_ANO_ID FROM comparativos_ano_anterior
             WHERE COMPANT_EMP_ID = ?
             ORDER BY COMPANT_ANO_ID DESC';
     

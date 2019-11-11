@@ -79,9 +79,9 @@
                   </p>
                 </div>
                 <p class="description text-center">
-                  Escolha um nome fantasia ou apelido para lembrar da empresa-cliente
-                  <br> Não estamos interessados em saber qual é a empresa
-                  <br> Ao preencha todos os dados
+                  Preencha um e-mail válido
+                  <br> Altere os campos disponíveis para atualizar
+                  <br> Qualquer dúvida, acesse a documentação.
                 </p>
               </div>
               <hr>

@@ -17,7 +17,8 @@ class EmpresaCliente extends CI_Controller {
 	public function cadastrarDadosFinanceiros($id=null){
 		if(empty($this->session->userdata('usuario'))){
 			redirect(base_url() . "painel/login");
-		}else{
+		}else{		
+			$this->load->model('EmpresaClienteModel');
 				if(strcmp($_SERVER['REQUEST_METHOD'], 'POST') !== 0){
 					$this->load->model('DadosFinanceiros');
 					$empId = base64_decode($id);
@@ -34,13 +35,13 @@ class EmpresaCliente extends CI_Controller {
 
 						$id = base64_decode($id);
 						$data['title'] = "Cadastro dos dados financeiros";
+						//$data['empresa'] = $empresa[0]->emp_nome;
 						$data['id'] = $id;
 						$data['anoAnteriorMenosUm'] = $anoAnteriorMenosUm;
 						$data['anoAnterior'] = $anoAnterior;
 						
 						$this->dashboard->show('adicionar-dados-financeiros', $data);
 				}else{
-					$this->load->model('EmpresaClienteModel');
 					$empresa = $this->EmpresaClienteModel->listaEmpresasDeUmUsuario($this->session->userdata('cont_id'), $this->input->post('empId', true));
 
 					//Se a empresa não pertence a contabilidade, volta para a dashboard
@@ -608,7 +609,7 @@ class EmpresaCliente extends CI_Controller {
 			print "<tr>";
 			foreach ($value as $codigo => $atributo) {
 				if($codigo === "codigo_cnae"){
-					print "<td class='target-copy'>"; 
+					print "<td onclick='marcaCnae(\"" . $atributo . "\")'>"; 
 				}else {
 					print "<td>";
 				}

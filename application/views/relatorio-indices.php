@@ -29,7 +29,12 @@
                                             print "<td>" . $col . "</td>";
                                             foreach ($indices as $ano) {
                                                 print "<td title=''>";
+
                                                     print $ano->$col;
+                                                    if($col === "EG" || $col === "CE" || $col === "GE" || $col === "GI" ||
+                                                       $col === "ML"){
+                                                        print "%";
+                                                    }
                                                 print "</td>";
                                             }
                                         print "</tr>";
@@ -77,6 +82,9 @@
                                                 foreach ($indicesAnoAnterior as $ano) {
                                                     print "<td title=''>";
                                                         print $ano->$col;
+                                                        if($col === "RSA" || $col === "RSPL"){
+                                                        print "%";
+                                                    }    
                                                     print "</td>";
                                                 }
                                             print "</tr>";

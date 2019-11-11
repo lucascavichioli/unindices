@@ -375,6 +375,11 @@ $(".excluirEmpresa").click(function(){
   })
 });
 
+function marcaCnae(atributo){
+  //var campo = document.getElementById('cnae').value;
+  $("#cnae").val(atributo);
+  $("#modalCnae").modal('hide');
+}
 
 $("#busca").keyup(function(){
   $.ajax({

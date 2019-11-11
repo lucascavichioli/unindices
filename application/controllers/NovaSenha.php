@@ -8,5 +8,12 @@ class NovaSenha extends CI_Controller {
 		$this->load->view('nova-senha');
 	}
 
+	public function recuperaSenha(){
+
+	}
+
+	public function token(){
+		
+	}
 
 }
