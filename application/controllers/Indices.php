@@ -101,7 +101,7 @@ class Indices extends CI_Controller {
 		$dadosEmpresa = $this->EmpresaClienteModel->listaCnaeEstadoQtdEmp($id);
 
 		$cnae = $dadosEmpresa[0]->emp_cnae;
-		$cnaeGeral = substr($cnae, 0, 4);
+		$cnaeGeral = substr($cnae, 0, 3);
 
 		$uf = $dadosEmpresa[0]->emp_uf;
 		$qtdEmp = $dadosEmpresa[0]->emp_qtd_emp;
