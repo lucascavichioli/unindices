@@ -17,4 +17,13 @@ class Cnae extends CI_Model {
         
         return $consulta->result();
     }
+
+    public function getDescricao($codigo){
+        $this->db->select("GROUP_CONCAT(desc_cnae separator ', ') AS descricao");
+        $this->db->from('cnae');
+        $this->db->like('codigo_cnae', $codigo, 'after');
+        $consulta = $this->db->get();
+        
+        return $consulta->result();
+    }
 }

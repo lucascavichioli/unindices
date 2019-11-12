@@ -1,3 +1,4 @@
+var empresas = 'teste';
 demo = {
   initPickColor: function() {
     $('.pick-class-label').click(function() {
@@ -218,6 +219,21 @@ demo = {
     var gradientFill = ctx.createLinearGradient(0, 200, 0, 50);
     gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
     gradientFill.addColorStop(1, "rgba(255, 255, 255, 0.24)");
+
+
+    function teste(response){
+        empresas = response;
+        console.log(empresas);
+    }
+
+    window.onload = function() {
+      fetch("/TCC/painel/empresascontribuintes")
+          .then(response => response.json())
+          .catch(error => console.error("Erro:" + error))
+          .then(response => {
+              teste(response);
+          });
+    }
 
     var num = 55;
     var myChart = new Chart(ctx, {

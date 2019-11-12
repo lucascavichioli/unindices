@@ -273,4 +273,11 @@ class Painel extends CI_Controller {
 		$this->load->view('sair', $data);
 	}
 
+	public function empresasContribuintes(){
+		$this->load->model('EmpresaClienteModel');
+		$resultado = $this->EmpresaClienteModel->listaEmpresasContribuintes();
+
+		print json_encode($resultado);
+	}
+
 }

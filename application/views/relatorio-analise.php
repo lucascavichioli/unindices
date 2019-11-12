@@ -1,20 +1,10 @@
 <div class="title col-md-12">
           <div class="row">
-            <div class="title col-md-4" style="color:white">
-              Empresas comparadas: <?php print $indicesComparados ?? ''?>
-            </div>
-            <div class="title col-md-4" style="color:white">
-              CNAE: <?php print $cnae ?? ''?>
-            </div>
-            <div class="title col-md-4" style="color:white">
-              Estado: <?php print $uf ?? ''?>
-            </div>
+            
           </div>
         </div>
 <div class="row">
-    <div class="title col-md-8">
-        Notas: RUIM - SATISFATÓRIO - BOM - ÓTIMO
-    </div>
+
 </div>
 <div class="content">
         <div class="row">
@@ -22,8 +12,20 @@
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title center">Análise - <?php print $empresa ?></h4>
+                <div class="title col-md-4">
+                    Empresas comparadas: <?php print $indicesComparados ?? ''?>
+                </div>
+                <div class="col-md-12" >
+                    CNAE: <?php print $cnae ?? ''?> - <?php print $descricaoCnae ?? ''?>
+                </div>
+                <div class="col-md-4">
+                    Estado: <?php print $uf ?? ''?>
+                </div>
               </div>
                 <div class="card-body">
+                <div class="title col-md-8">
+                 Notas: RUIM - SATISFATÓRIO - BOM - ÓTIMO
+                </div>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
@@ -42,7 +44,7 @@
                             <?php   
                                 foreach ($comparativos as $i => $v) {
                                     print "<tr>";
-                                    print "<td class='text-left' title='teste'>" . $i . "</td>";
+                                    print "<td class='text-left' title=''>" . $i . "</td>";
                                         foreach ($v as $ano => $indice) {
                                             print "<td title='" . $indice['VALOR'] . "' onclick='modalQuartil(\"" . $indice['ind'] . $indice['ano'] . "\")'>";
                                                 print $indice['POSICIONAMENTO'] . "(" . $indice['VALOR'] .")";
@@ -65,9 +67,9 @@
                                                                         </thead>
                                                                         <tbody>
                                                                             <tr>
-                                                                                <td><label><?=$indice['Q1'] ?? ''?></label></td>
-                                                                                <td><label><?=$indice['Q2'] ?? ''?></label></td>
-                                                                                <td><label><?=$indice['Q3'] ?? ''?></label></td>
+                                                                                <td><strong><?=$indice['Q1'] ?? ''?></strong></td>
+                                                                                <td><strong><?=$indice['Q2'] ?? ''?></strong></td>
+                                                                                <td><strong><?=$indice['Q3'] ?? ''?></strong></td>
                                                                             </tr>
                                                                         </tbody>
                                                                     </table>
@@ -138,9 +140,9 @@
                                                                         </thead>
                                                                         <tbody>
                                                                             <tr>
-                                                                                <td><label><?=$indice['Q1'] ?? ''?></label></td>
-                                                                                <td><label><?=$indice['Q2'] ?? ''?></label></td>
-                                                                                <td><label><?=$indice['Q3'] ?? ''?></label></td>
+                                                                                <td><strong><?=$indice['Q1'] ?? ''?></strong></td>
+                                                                                <td><strong><?=$indice['Q2'] ?? ''?></strong></td>
+                                                                                <td><strong><?=$indice['Q3'] ?? ''?></strong></td>
                                                                             </tr>
                                                                         </tbody>
                                                                     </table>
@@ -162,7 +164,20 @@
         </div>
     </div>
 </div>
-<div class="">
-    <h6>LEGENDAS</h6>
-    LG = Líquidez Geral
-</div>
+<table>
+    <thead>
+    <tr>
+        <th>
+            Liquidez
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>LG = Líquidez Geral</td><td>LG = Líquidez Geral</td>
+        </tr>
+        <tr>
+            <td>LG = Líquidez Geral</td>
+        </tr>
+    </tbody>
+</table>

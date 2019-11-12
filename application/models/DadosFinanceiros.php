@@ -90,7 +90,7 @@ class DadosFinanceiros extends CI_Model {
         }
     }
 
-    public function inserirCadastroUnico($ativosAnoAnterior, $passivosAnoAnterior, $dreAnoAnterior){
+    public function inserirCadastroUnico($ip, $ativosAnoAnterior, $passivosAnoAnterior, $dreAnoAnterior){
         try{ 
             $this->db->trans_begin();
 
@@ -104,11 +104,11 @@ class DadosFinanceiros extends CI_Model {
             else{
                 $this->db->trans_commit();
                 
-                /*$log = array('ip_cliente' => $ip, 'operacao' => 'insert', 'usuario' => null, 'id_afetado' => $data['cnpj'], 'tabela_afetada' => 'receitaws; usuarios');
+                $log = array('ip_cliente' => $ip, 'operacao' => 'insert', 'usuario' => null, 'id_afetado' => $dreAnoAnterior['DRES_ANO_ID'] , 'tabela_afetada' => 'balanco_ativos, balanco_passivos, demonstracao_resultado');
 
                 $this->db->insert('logs', $log);
               
-                $this->db->close();*/
+                $this->db->close();
             
                 return true;
             }

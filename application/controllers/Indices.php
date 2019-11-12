@@ -109,7 +109,7 @@ class Indices extends CI_Controller {
 		$m1 = $qtdEmp - 50;
 		$m2 = $qtdEmp + 50;
 
-		$qtdEmpresasDoMesmoRamo = $this->EmpresaClienteModel->listaQtdEmpresasDoMesmoRamo($id, $uf, $cnae, $m1, $m2);
+		$qtdEmpresasDoMesmoRamo = $this->EmpresaClienteModel->listaQtdEmpresasDoMesmoRamo($id, $uf, $cnaeGeral, $m1, $m2);
 
 		//separa anos
 		foreach($indices as $chave => $valor){
@@ -124,6 +124,7 @@ class Indices extends CI_Controller {
 		if(empty($anos)){
 			redirect(base_url() . "indices/erronenhumdadocadastrado");
 		}
+
 		if(empty($qtdEmpresasDoMesmoRamo) || $qtdEmpresasDoMesmoRamo < 4){
 			redirect(base_url() . "indices/erronaopossuiindicessuficientes");
 		}
@@ -464,7 +465,7 @@ class Indices extends CI_Controller {
 				$quartilRsa[$anoA][1] = $this->quartil->getQuartilDois($elementosRsa);
 				$quartilRsa[$anoA][2] = $this->quartil->getQuartilTres($elementosRsa);
 				$posicionamentoRsa[$anoA]['POSICIONAMENTO'] = $this->getPosicionamento($indicesAnoAnterior[$j]->RSA, $quartilRsa[$anoA], 1);
-				$posicionamentoRsa[$anoA]['VALOR'] = $indicesAnoAnterior[$j]->RSA;
+				$posicionamentoRsa[$anoA]['VALOR'] = $indicesAnoAnterior[$j]->RSA . "%";
 				$posicionamentoRsa[$anoA]['Q1'] = $quartilRsa[$anoA][0];
 				$posicionamentoRsa[$anoA]['Q2'] = $quartilRsa[$anoA][1];
 				$posicionamentoRsa[$anoA]['Q3'] = $quartilRsa[$anoA][2];
@@ -479,7 +480,7 @@ class Indices extends CI_Controller {
 				$quartilRspl[$anoA][1] = $this->quartil->getQuartilDois($elementosRspl);
 				$quartilRspl[$anoA][2] = $this->quartil->getQuartilTres($elementosRspl);
 				$posicionamentoRspl[$anoA]['POSICIONAMENTO'] = $this->getPosicionamento($indicesAnoAnterior[$j]->RSPL, $quartilRspl[$anoA], 1);
-				$posicionamentoRspl[$anoA]['VALOR'] = $indicesAnoAnterior[$j]->RSPL;
+				$posicionamentoRspl[$anoA]['VALOR'] = $indicesAnoAnterior[$j]->RSPL . "%";
 				$posicionamentoRspl[$anoA]['Q1'] = $quartilRspl[$anoA][0];
 				$posicionamentoRspl[$anoA]['Q2'] = $quartilRspl[$anoA][1];
 				$posicionamentoRspl[$anoA]['Q3'] = $quartilRspl[$anoA][2];
@@ -514,10 +515,17 @@ class Indices extends CI_Controller {
 		$posicionamentoAnoAnterior['RSA'] = $posicionamentoRsa;
 		$posicionamentoAnoAnterior['RSPL'] = $posicionamentoRspl;
 
+
+		$this->load->model('Cnae');
+		$arr = $this->Cnae->getDescricao($cnaeGeral);
+		$descricaoCnae = $arr[0]->descricao;
+
+
 		$data['tituloGrafico'] = "DESEMPENHO DOS ÍNDICES";
 		$data['uf'] = $uf;
 		$data['empresa'] = $dadosEmpresa[0]->emp_nome;
 		$data['cnae'] = $cnaeGeral;
+		$data['descricaoCnae'] = $descricaoCnae;
 		$data['indicesComparados'] = $qtdEmpresasDoMesmoRamo;
 		$data['indices'] = $indices;
 		$data['anos'] = $anos; 

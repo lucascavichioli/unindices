@@ -431,12 +431,12 @@ class EmpresaCliente extends CI_Controller {
 
 
 							//índices somente para ano anterior
-							$indicesSomenteAnoAnterior['COMPANT_PMC'] = $this->indiceseconomicos->pmc($dadosAnoAnteriorMenosUm->BATIV_CLIENTES, $ativosAnoAnterior['BATIV_CLIENTES'], $dreAnoAnterior['DRES_RECEITA_LIQUIDA_VENDAS']);
-							$indicesSomenteAnoAnterior['COMPANT_PME'] = $this->indiceseconomicos->pme($dadosAnoAnteriorMenosUm->BATIV_ESTOQUE, $ativosAnoAnterior['BATIV_ESTOQUE'], $dreAnoAnterior['DRES_CUSTO_VENDAS']);
-							$indicesSomenteAnoAnterior['COMPANT_PMP'] = $this->indiceseconomicos->pmp($dadosAnoAnteriorMenosUm->BPAS_FORNECEDORES, $passivosAnoAnterior['BPAS_FORNECEDORES'], $dreAnoAnterior['DRES_CUSTO_VENDAS'], $dadosAnoAnteriorMenosUm->BATIV_ESTOQUE, $ativosAnoAnterior['BATIV_ESTOQUE']);
+							$indicesSomenteAnoAnterior['COMPANT_PMC'] = $this->indiceseconomicos->pmc($dadosAnoAnteriorMenosUm[0]->BATIV_CLIENTES, $ativosAnoAnterior['BATIV_CLIENTES'], $dreAnoAnterior['DRES_RECEITA_LIQUIDA_VENDAS']);
+							$indicesSomenteAnoAnterior['COMPANT_PME'] = $this->indiceseconomicos->pme($dadosAnoAnteriorMenosUm[0]->BATIV_ESTOQUE, $ativosAnoAnterior['BATIV_ESTOQUE'], $dreAnoAnterior['DRES_CUSTO_VENDAS']);
+							$indicesSomenteAnoAnterior['COMPANT_PMP'] = $this->indiceseconomicos->pmp($dadosAnoAnteriorMenosUm[0]->BPAS_FORNECEDORES, $passivosAnoAnterior['BPAS_FORNECEDORES'], $dreAnoAnterior['DRES_CUSTO_VENDAS'], $dadosAnoAnteriorMenosUm[0]->BATIV_ESTOQUE, $ativosAnoAnterior['BATIV_ESTOQUE']);
 							$indicesSomenteAnoAnterior['COMPANT_CO'] = $this->indiceseconomicos->co($indicesSomenteAnoAnterior['COMPANT_PMC'], $indicesSomenteAnoAnterior['COMPANT_PME']);
 							$indicesSomenteAnoAnterior['COMPANT_CF'] = $this->indiceseconomicos->cf($indicesSomenteAnoAnterior['COMPANT_CO'], $indicesSomenteAnoAnterior['COMPANT_PMP']);
-							$indicesSomenteAnoAnterior['COMPANT_GA'] = $this->indiceseconomicos->ga($dreAnoAnterior['DRES_RECEITA_LIQUIDA_VENDAS'], $dadosAnoAnteriorMenosUm->BATIV_ATIVO_TOTAL, $ativosAnoAnterior['BATIV_ATIVO_TOTAL']);
+							$indicesSomenteAnoAnterior['COMPANT_GA'] = $this->indiceseconomicos->ga($dreAnoAnterior['DRES_RECEITA_LIQUIDA_VENDAS'], $dadosAnoAnteriorMenosUm[0]->BATIV_ATIVO_TOTAL, $ativosAnoAnterior['BATIV_ATIVO_TOTAL']);
 							$indicesSomenteAnoAnterior['COMPANT_RSA'] = $this->indiceseconomicos->rsa($indicesAnoAnterior['COMP_ML'], $indicesSomenteAnoAnterior['COMPANT_GA']);
 							$indicesSomenteAnoAnterior['COMPANT_RSPL'] = $this->indiceseconomicos->rspl($indicesSomenteAnoAnterior['COMPANT_RSA'], $indicesAnoAnterior['COMP_MAF']);
 							$indicesSomenteAnoAnterior['COMPANT_EMP_ID'] = $this->empId;
@@ -445,12 +445,12 @@ class EmpresaCliente extends CI_Controller {
 							//carrega modelo para inserir o balanço (ativos/passivos) e o dre
 							$this->load->model('DadosFinanceiros');
 							if($this->DadosFinanceiros->possuiDadosDoAno($this->empId, $this->anoAnterior, $this->anoAnteriorMenosUm)){
-								die("Já possui dados financeiros para este ano");
+								redirect(base_url() . "empresacliente/errojapossuidados");
 								return false;
 							}
 
 							$ip = getenv('REMOTE_ADDR') ?? $_SERVER["REMOTE_ADDR"];
-							$this->DadosFinanceiros->inserir($ip, $ativosAnoAnterior, $passivosAnoAnterior, $dreAnoAnterior);
+							$this->DadosFinanceiros->inserirCadastroUnico($ip, $ativosAnoAnterior, $passivosAnoAnterior, $dreAnoAnterior);
 
 							//carrega modelo para inserir os comparativos
 							$this->load->model('IndicesModel');
@@ -650,6 +650,11 @@ class EmpresaCliente extends CI_Controller {
 		}else{
 			return $valor;
 		}
+	}
+
+	public function erroJaPossuiDados(){
+		$data['title'] = "Erro";
+		$this->dashboard->show('erro-ja-possui-dados', $data);
 	}
 
 	public function cnaes(){

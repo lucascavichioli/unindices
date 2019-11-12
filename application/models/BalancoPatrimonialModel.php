@@ -69,10 +69,11 @@ class BalancoPatrimonialModel extends CI_Model {
     public function listarAnosComRegistro($emp){
         try{
             $this->db->select("BATIV_ANO_ID");
+            $this->db->distinct();
             $this->db->from('empresa');
             $this->db->join('balanco_ativos', 'bativ_emp_id = emp_id');
-            $this->db->join('balanco_passivos', 'bpas_id = bativ_id');
-            $this->db->join('demonstracao_resultado', 'dres_id = bpas_id');
+            $this->db->join('balanco_passivos', 'bpas_emp_id = emp_id');
+            $this->db->join('demonstracao_resultado', 'dres_emp_id = emp_id');
             $this->db->where('emp_id', $emp);
             $this->db->order_by('bativ_ano_id', 'DESC');
 

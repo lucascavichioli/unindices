@@ -121,5 +121,11 @@ class EmpresaClienteModel extends CI_Model {
             log_message('error', "Código: " . $e->getCode() . " -> " . $e->getMessage());
             return false;
         }
-    } 
+	}
+	
+	public function listaEmpresasContribuintes(){
+		$consulta = $this->db->query("SELECT count(distinct emp_id) as qtdEmpresas from empresa join comparativos on comp_emp_id = emp_id");
+        
+        return $consulta->result();
+	}
 }
