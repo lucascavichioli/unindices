@@ -54,6 +54,7 @@
                                                         <div class="modal-content">
                                                             <div class="modal-header text-center d-block">
                                                             <h4 class="modal-title">Índices padrão - <?php print $i . " / "; print $indice['ano'] ?? '';?></h4>
+                                                            <?php print $indice['VALOR'] . " = " . $indice['POSICIONAMENTO'];?>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class='table-responsive'>
@@ -121,12 +122,13 @@
                                         foreach ($v as $ano => $indice) {
                                             print "<td title='". $indice['VALOR'] . "' onclick='modalQuartil(\"" . $indice['ind'] . $indice['ano'] . "\")'>";
                                                 print $indice['POSICIONAMENTO'] . "(" . $indice['VALOR'] .")";
-                                        ?>
+                                        ?> 
                                         <div id="modalQuartil<?php print $indice['ind'].$indice['ano']; ?>" class="modal fade">
                                                     <div class="modal-dialog modal-md modal-dialog-centered">
                                                         <div class="modal-content">
                                                             <div class="modal-header text-center d-block">
-                                                            <h4 class="modal-title">Índices padrão - <?php print $i . " / "; print $indice['ano'] ?? '';?></h4>
+                                                            <h4 class="modal-title">Índices padrão - <?php print $i . " / "; print $indice['ano'] ?? ''; ?></h4>
+                                                            <?php print $indice['VALOR'] . " = " . $indice['POSICIONAMENTO'];?>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class='table-responsive'>
