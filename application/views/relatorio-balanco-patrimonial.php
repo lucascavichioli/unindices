@@ -4,6 +4,7 @@
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title center">Balanço Patrimonial - <?php print $empresa ?></h4>
+                Valores expressos em reais.
               </div>
                 <div class="card-body">
                     <div class="table-responsive">

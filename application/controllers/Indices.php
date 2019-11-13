@@ -325,7 +325,7 @@ class Indices extends CI_Controller {
 				$quartilMb[$ano][1] = $this->quartil->getQuartilDois($elementosMb);
 				$quartilMb[$ano][2] = $this->quartil->getQuartilTres($elementosMb);
 				$posicionamentoMb[$ano]['POSICIONAMENTO'] = $this->getPosicionamento($indices[$i]->MB, $quartilMb[$ano], 1);
-				$posicionamentoMb[$ano]['VALOR'] = $indices[$i]->MB;
+				$posicionamentoMb[$ano]['VALOR'] = $indices[$i]->MB . "%";
 				$posicionamentoMb[$ano]['Q1'] = $quartilMb[$ano][0];
 				$posicionamentoMb[$ano]['Q2'] = $quartilMb[$ano][1];
 				$posicionamentoMb[$ano]['Q3'] = $quartilMb[$ano][2];
@@ -340,7 +340,7 @@ class Indices extends CI_Controller {
 				$quartilMo[$ano][1] = $this->quartil->getQuartilDois($elementosMo);
 				$quartilMo[$ano][2] = $this->quartil->getQuartilTres($elementosMo);
 				$posicionamentoMo[$ano]['POSICIONAMENTO'] = $this->getPosicionamento($indices[$i]->MO, $quartilMo[$ano], 1);
-				$posicionamentoMo[$ano]['VALOR'] = $indices[$i]->MO;
+				$posicionamentoMo[$ano]['VALOR'] = $indices[$i]->MO . "%";
 				$posicionamentoMo[$ano]['Q1'] = $quartilMo[$ano][0];
 				$posicionamentoMo[$ano]['Q2'] = $quartilMo[$ano][1];
 				$posicionamentoMo[$ano]['Q3'] = $quartilMo[$ano][2];
@@ -355,7 +355,7 @@ class Indices extends CI_Controller {
 				$quartilMl[$ano][1] = $this->quartil->getQuartilDois($elementosMl);
 				$quartilMl[$ano][2] = $this->quartil->getQuartilTres($elementosMl);
 				$posicionamentoMl[$ano]['POSICIONAMENTO'] = $this->getPosicionamento($indices[$i]->ML, $quartilMl[$ano], 1);
-				$posicionamentoMl[$ano]['VALOR'] = $indices[$i]->ML;
+				$posicionamentoMl[$ano]['VALOR'] = $indices[$i]->ML . "%";
 				$posicionamentoMl[$ano]['Q1'] = $quartilMl[$ano][0];
 				$posicionamentoMl[$ano]['Q2'] = $quartilMl[$ano][1];
 				$posicionamentoMl[$ano]['Q3'] = $quartilMl[$ano][2];

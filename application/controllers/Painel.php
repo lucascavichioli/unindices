@@ -277,7 +277,8 @@ class Painel extends CI_Controller {
 		$this->load->model('EmpresaClienteModel');
 		$resultado = $this->EmpresaClienteModel->listaEmpresasContribuintes();
 
-		print json_encode($resultado);
+		$res = $resultado[0]->qtdEmpresas;
+		print $res;
 	}
 
 }

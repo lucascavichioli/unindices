@@ -118,7 +118,7 @@
                             <?php   
                                 foreach ($comparativosAnoAnterior as $i => $v) {
                                     print "<tr>";
-                                    print "<td class='text-left' title='teste'>" . $i . "</td>";
+                                    print "<td class='text-left' title=''>" . $i . "</td>";
                                         foreach ($v as $ano => $indice) {
                                             print "<td title='". $indice['VALOR'] . "' onclick='modalQuartil(\"" . $indice['ind'] . $indice['ano'] . "\")'>";
                                                 print $indice['POSICIONAMENTO'] . "(" . $indice['VALOR'] .")";
