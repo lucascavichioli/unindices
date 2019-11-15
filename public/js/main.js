@@ -396,6 +396,34 @@ $("#busca").keyup(function(){
 })
 
 
+$(".analise").click(function(){
+  let timerInterval
+  Swal.fire({
+    title: 'Carregando análise...',
+    //html: 'I will close in <b></b> milliseconds.',
+    timer: 2000,
+    timerProgressBar: true,
+    onBeforeOpen: () => {
+      Swal.showLoading()
+      timerInterval = setInterval(() => {
+        Swal.getContent().querySelector('b')
+          .textContent = Swal.getTimerLeft()
+      }, 100)
+    },
+    onClose: () => {
+      clearInterval(timerInterval)
+    }
+  }).then((result) => {
+    if (
+      /* Read more about handling dismissals below */
+      result.dismiss === Swal.DismissReason.timer
+    ) {
+      console.log('I was closed by the timer') // eslint-disable-line
+    }
+  })
+})
+
+
 function modalCnae(){
   $('#modalCnae').modal();
 }

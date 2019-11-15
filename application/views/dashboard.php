@@ -32,7 +32,7 @@
                         <td><a href="<?=base_url("balancopatrimonial/relatorio/").base64_encode($attr->emp_id);?>" class="card-link"><button class="btn btn-default btn-round">Balanço Patrimonial</button></a></td>
                       </tr>
                       <tr>
-                        <td><a href="<?=base_url("indices/analise/").base64_encode($attr->emp_id);?>" class="card-link"><button class="btn btn-default btn-round">Análise</button></a></td>
+                        <td><a href="<?=base_url("indices/analise/").base64_encode($attr->emp_id);?>" class="card-link analise"><button class="btn btn-default btn-round">Análise</button></a></td>
                       </tr>     
                     </tbody>
                   </table>
