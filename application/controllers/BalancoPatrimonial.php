@@ -51,5 +51,5 @@ class BalancoPatrimonial extends CI_Controller {
 			$data['title'] = "Balanço Patrimonial";
 			$this->dashboard->show('relatorio-balanco-patrimonial', $data);	
 		}
-    }
+	}
 }

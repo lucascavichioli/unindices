@@ -60,7 +60,7 @@
               </div>
               <hr>
               <div class="button-container">
-                <a href="<?=base_url("documentation/cadastroempresa.php")?>" target="_blank">Acesse a documentação</a>
+                <a href="<?=base_url("documentation/alterarsenha.php")?>" target="_blank">Acesse a documentação</a>
               </div>
             </div>
           </div>

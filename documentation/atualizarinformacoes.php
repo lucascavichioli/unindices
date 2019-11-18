@@ -55,19 +55,9 @@
       </nav>
 
       <div class="container-fluid">
-        <h1 class="mt-4">Cadastro dos dados financeiros</h1>
-        <p>Este documento tem por finalidade auxiliar no cadastro dos dados financeiros das empresas-clientes.</p>
-        <p>Para o seu cadastro são exigidos as seguintes demontrações;</p>
-        <ul>
-            <li>Balanço Patrimonial (Ativos).</li>
-            <li>Balanço Patrimonial (Passivos).</li>
-            <li>Demonstração de Resultado do Exercício (DRE).</li>
-        </ul>
-        <p>O primeiro cadastro é composto por dois anos de exercícios, portanto, todos os campos deverão ser preenchidos, caso não possua valor para o campo exigido, este deverá ser preenchido com o valor <strong>zero (0)</strong>.</p>
-        <p>Os campos que iniciam com "(-)" deverão ser preenchidos com o sinal de "-" na frente. Caso não adicionado, o próprio sistema converterá o número para negativo.</p>
-        <h2>Cadastro Único</h2>
-        <p>É considerado cadastro único aquele no qual a empresa possui registro dos dados financeiros de dois anos ou mais.</p>
-        <p>Para este cadastro o sistema considera os mesmos campos, com a excessão de que é exigido somente um ano de exercício. Para o cálculo dos índices, o sistema fará uso do último ano cadastrado.</p>
+        <h1 class="mt-4">Atualizar informações</h1>
+        <p>Os campos CNAE e Estado não estão disponíveis para alteração.</p>
+        <p>Para atualizar as informações basta alterar qualquer campo disponível.</p>
       </div>
     </div>
     <!-- /#page-content-wrapper -->
@@ -90,3 +80,4 @@
 </body>
 
 </html>
+

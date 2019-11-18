@@ -28,6 +28,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	
 	<div class="limiter">
 		<div class="container-background100">
+        <form action="<?=base_url("novasenha/recuperasenha")?>" method="POST">
 			<div class="cadastro100-form">
                 <span class="cadastro100-form-title">
                     Recuperação de senha!
@@ -42,5 +43,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </button>
                 </div>
             </div>
+        </form>
         </div>
     </div>
