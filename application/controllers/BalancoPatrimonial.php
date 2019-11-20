@@ -44,6 +44,7 @@ class BalancoPatrimonial extends CI_Controller {
 			// print "<pre>";
 			// print_r($rel); 
 			// print "</pre>";exit();
+			$data['empId'] = $empId;
 			$data['empresa'] = $empresa[0]->emp_nome;
 			$data['anos'] = $anos;
 			$data['balanco'] = $relatorio;
@@ -51,5 +52,15 @@ class BalancoPatrimonial extends CI_Controller {
 			$data['title'] = "Balanço Patrimonial";
 			$this->dashboard->show('relatorio-balanco-patrimonial', $data);	
 		}
+	}
+
+	public function alterarBalanco($id){
+		//verificar sessão
+		//verificar se empresa pertence a contabilidade
+		//buscar ultimo ano de dados financeiros
+		$data['id'] = $id;
+		$this->load->view('alterar-balanco', $data);
+
+		//se for post -> processar os dados
 	}
 }

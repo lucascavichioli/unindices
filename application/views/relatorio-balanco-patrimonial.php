@@ -1,6 +1,6 @@
 <div class="content">
-        <div class="row">
-          <div class="col-md-12">
+    <div class="row">
+        <div class="col-md-12">
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title center">Balanço Patrimonial - <?php print $empresa ?></h4>
@@ -40,6 +40,9 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div class="card-footer">
+                    <a href="<?=base_url("balancopatrimonial/alterarbalanco/").$empId;?>"><button class="btn btn-default btn-round">Alterar Balanço</button></a>
                 </div>
             </div>
         </div>
