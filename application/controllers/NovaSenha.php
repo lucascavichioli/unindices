@@ -68,7 +68,11 @@ class NovaSenha extends CI_Controller {
 
 		$this->load->model('TokensSenhas');
 		$data = $this->TokensSenhas->get($token);
-
+		
+		if(empty($data)){
+			redirect(base_url() . "novasenha");
+		}
+		
 		$getDate = $data[0]->data_solicitacao;
 		
 		$dateStart = new \DateTime($getDate);
