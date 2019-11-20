@@ -30,18 +30,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 	<div class="limiter">
 		<div class="container-background100">
-        <form action="<?=base_url("novasenha/recuperasenha")?>" method="POST">
+        <form action="" method="POST">
 			<div class="cadastro100-form">
                 <span class="cadastro100-form-title">
-                    Recuperação de senha!
+                    Nova Senha!
                 </span>
                 <div class="container-cadastro100-form-btn">
-                    <div class="wrap-input100 validate-input" data-validate = "Preencha um e-mail válido">
-                            <input style="text-align: center;" class="inputNovaSenha" type="email" name="email" placeholder="E-mail">
+                    <div class="wrap-input50 validate-input <?=$alert ?? ''?>" data-validate = "Preencha uma senha válida">
+                            <input style="text-align: center;" class="inputNovaSenha" type="password" name="senha" placeholder="Senha">
                             <span class="focus-input100"></span>
                     </div>
+                    <div class="wrap-input50 validate-input <?=$alert ?? ''?>" data-validate = "As senhas não coincidem">
+                            <input style="text-align: center;" class="inputNovaSenha" type="password" name="senhaConfirma" placeholder="Confirmação de senha">
+                            <span class="focus-input100"></span>
+                    </div>
+                    <input type="hidden" name="key" value="<?=$token ?? ''?>">
                     <button type="submit" class="login100-form-btn" onclick="">
-                        ENVIAR
+                        ALTERAR
                     </button>
                 </div>
             </div>

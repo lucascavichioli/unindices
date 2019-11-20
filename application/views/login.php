@@ -26,13 +26,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!--===============================================================================================-->
 </head>
 <body>
+<div class="<?=$class ?? ''?>" role="alert">
+ 	<?=$success ?? '' ?>
+</div>
 	<div class="limiter">
 		<div class="container-background100">
 			<div class="wrap-center100">
 				<div class="login100-pic js-tilt" data-tilt>
 					<img src="<?=base_url("public/images/logo_unindices.jpeg")?>" alt="IMG">
 				</div>
-
 				<form method="post" class="login100-form validate-login" action="<?=base_url("painel/login")?>">
 					<span class="login100-form-title">
 						UnIndices
