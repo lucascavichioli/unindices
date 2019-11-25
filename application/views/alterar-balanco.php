@@ -17,9 +17,8 @@
                           <h6>Ativos</h6>
                         </th>
                         <th class="text-center">
-                          <select id="anoAnterior" name="anoAnterior" class="form-control" required>
-                              <?php foreach($anoAnterior as $ano_id => $attr){?>
-                              <option value="<?=$attr->ano_id?>"><?=$attr->ano_ref?></option> <?php }?>
+                          <select id="ano" name="ano" class="form-control" required>
+                              <option value="<?=$ano?>"><?=$ano?></option>
                           </select>
                         </th>
                     </tr>
@@ -30,7 +29,7 @@
                       <td>                        
                         <div class="col-md-18">
                             <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                              <input name="caixaEquivalenteDeCaixa" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Caixa e Equivalentes de caixa <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
+                              <input name="caixaEquivalenteDeCaixa" value="<?=$BATIV_CAIXA_EQUIV_CAIXA?>" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Caixa e Equivalentes de caixa <?=$ano;?>" maxlength="20" required>
                             </div>
                         </div>
                       </td>
@@ -40,7 +39,7 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="clientes" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Clientes <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
+                            <input name="clientes" value="<?=$BATIV_CLIENTES?>" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Clientes <?=$ano;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -50,7 +49,7 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="estoques" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Estoques <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
+                            <input name="estoques" value="<?=$BATIV_ESTOQUE?>" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Estoques <?=$ano;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -60,7 +59,7 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrosAtivosCirculantes" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Outros ativos circulantes <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
+                            <input name="outrosAtivosCirculantes" value="<?=$BATIV_OUTROS_ATIVOS_CIRCULANTES?>" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Outros ativos circulantes <?=$ano;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -70,7 +69,7 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="ativoRealizavelLongoPrazo" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Ativo realizável a longo prazo <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
+                            <input name="ativoRealizavelLongoPrazo" value="<?=$BATIV_ATIVO_RLP?>" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Ativo realizável a longo prazo <?=$ano;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -80,7 +79,7 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="investimentos" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Investimentos <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
+                            <input name="investimentos" value="<?=$BATIV_INVESTIMENTOS?>" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Investimentos <?=$ano;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -90,7 +89,7 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="imobilizadoIntangivel" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Imobilizado e intangível <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
+                            <input name="imobilizadoIntangivel" value="<?=$BATIV_IMOB_INTANGIVEL?>" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Imobilizado e intangível <?=$ano;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -114,7 +113,7 @@
                       <td>                        
                         <div class="col-18">
                             <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                              <input name="fornecedores" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Fornecedores <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
+                              <input name="fornecedores" value="<?=$BPAS_FORNECEDORES?>" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Fornecedores <?=$ano;?>" maxlength="20" required>
                             </div>
                         </div>
                       </td>
@@ -124,7 +123,7 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrosPassivosCirculantes" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Outros passivos circulantes <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
+                            <input name="outrosPassivosCirculantes" value="<?=$BPAS_OUTROS_PASSIVOS_CIRCULANTES?>" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Outros passivos circulantes <?=$ano;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -134,7 +133,7 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="passivoNaoCirculante" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Passivo não circulante <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
+                            <input name="passivoNaoCirculante" value="<?=$BPAS_PASSIVO_N_CIRCULANTE?>" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Passivo não circulante <?=$ano;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -144,7 +143,7 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="patrimonioLiquido" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Patrimônio líquido <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
+                            <input name="patrimonioLiquido" value="<?=$BPAS_PATRIMONIO_LIQUIDO?>" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Patrimônio líquido <?=$ano;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -168,7 +167,7 @@
                       <td>                        
                         <div class="col-18">
                             <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                              <input name="receitaLiquidaVendas" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Receita líquida de vendas <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
+                              <input name="receitaLiquidaVendas" value="<?=$DRES_RECEITA_LIQUIDA_VENDAS?>" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Receita líquida de vendas <?=$ano;?>" maxlength="20" required>
                             </div>
                         </div>
                       </td>
@@ -178,7 +177,7 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="custoVendas" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder=" Custo de vendas <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
+                            <input name="custoVendas" value="<?=$DRES_CUSTO_VENDAS?>" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder=" Custo de vendas <?=$ano;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -188,7 +187,7 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="despesasOperacionais" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Despesas operacionais <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
+                            <input name="despesasOperacionais" value="<?=$DRES_DESPESAS_OPERACIONAIS?>" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Despesas operacionais <?=$ano;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -198,7 +197,7 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrasReceitasOperacionais" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Outras receitas operacionais <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
+                            <input name="outrasReceitasOperacionais" value="<?=$DRES_OUTRAS_RECEITAS_OP?>" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Outras receitas operacionais <?=$ano;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -208,7 +207,7 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="despesasFinanceiras" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Despesas financeiras <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
+                            <input name="despesasFinanceiras" value="<?=$DRES_DESPESAS_FINANCEIRAS?>" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Despesas financeiras <?=$ano;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -218,7 +217,7 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="receitasFinanceiras" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Receitas financeiras <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
+                            <input name="receitasFinanceiras" value="<?=$DRES_RECEITAS_FINANCEIRAS?>" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Receitas financeiras <?=$ano;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -228,7 +227,7 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="outrasDespesas" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Outras despesas <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
+                            <input name="outrasDespesas" value="<?=$DRES_OUTRAS_DESPESAS?>" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Outras despesas <?=$ano;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -238,7 +237,7 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="irpjCsll" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="IRPJ e CSLL <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
+                            <input name="irpjCsll" value="<?=$DRES_IRPJ_CSLL?>" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="IRPJ e CSLL <?=$ano;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -248,7 +247,7 @@
                       <td>
                         <div class="col-18">
                           <div class="form-group <?=$alert ?? ''?>" data-validate = "Campo obrigatório">
-                            <input name="contribuicoesParticipacoes" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Contribuições e participações <?=$anoAnterior[0]->ano_ref;?>" maxlength="20" required>
+                            <input name="contribuicoesParticipacoes" value="<?=$DRES_CONTRIBUICOES_PARTICIP?>" type="text" class="form-control" onKeyUp="mascaraMoeda(this);" placeholder="Contribuições e participações <?=$ano;?>" maxlength="20" required>
                           </div>
                         </div>
                       </td>
@@ -290,7 +289,7 @@
           <p class="description text-center">
             Caso algum dado foi digitado equivocadamente, 
             <br> altere o campo desejado.
-            <br> Só é possível alterar o último ano de exercício
+            <br> Só é possível alterar os dados do último ano de exercício
           </p>
         </div>
         <hr>

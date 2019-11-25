@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="<?=base_url("balancopatrimonial/alterarbalanco/").$empId;?>"><button class="btn btn-default btn-round">Alterar Balanço</button></a>
+                    <a href="<?=base_url("empresacliente/alterarbalanco/").$empId;?>"><button class="btn btn-default btn-round">Alterar Balanço</button></a>
                 </div>
             </div>
         </div>
