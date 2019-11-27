@@ -251,7 +251,7 @@ class EmpresaCliente extends CI_Controller {
 							//carrega modelo para inserir o balanço (ativos/passivos) e o dre
 							$this->load->model('DadosFinanceiros');
 							if($this->DadosFinanceiros->possuiDadosDoAno($this->empId, $this->anoAnterior, $this->anoAnteriorMenosUm)){
-								die("Já possui dados financeiros para este ano");
+								redirect(base_url() . "empresacliente/errojapossuidados");
 								return false;
 							}
 							$ip = getenv('REMOTE_ADDR') ?? $_SERVER["REMOTE_ADDR"];
@@ -654,6 +654,11 @@ class EmpresaCliente extends CI_Controller {
 		$this->dashboard->show('erro-ja-possui-dados', $data);
 	}
 
+	public function erroNaoPossuiDados(){
+		$data['title'] = "Erro";
+		$this->dashboard->show('erro-nao-possui-dados', $data);
+	}
+
 	public function cnaes(){
 		$codigo = $this->input->post('busca');
 
@@ -707,6 +712,10 @@ class EmpresaCliente extends CI_Controller {
 			//buscar ultimo ano de dados financeiros
 			$this->load->model('DadosFinanceiros');
 			$dados = $this->DadosFinanceiros->ativosPassivosDresUltimoAno($empId);
+
+			if(empty($dados)){
+				redirect(base_url() . "empresacliente/erronaopossuidados");
+			}
 			
 			foreach ($dados as $key => $value) {
 				foreach ($value as $attr => $valor) {
