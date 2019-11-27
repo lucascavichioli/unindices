@@ -98,7 +98,7 @@ class IndicesModel extends CI_Model {
             round(COMP_EG,2) AS EG, round(COMP_GE,2) AS GE, round(COMP_CE,2) AS CE, round(COMP_GI,2) AS GI, round(COMP_IRNC,2) AS IRNC, round(COMP_MAF,2) AS MAF, 
             round(COMP_MB,2) AS MB, round(COMP_MO,2) AS MO, round(COMP_ML,2) AS ML, COMP_ANO_ID FROM comparativos
             WHERE COMP_EMP_ID = ?
-            ORDER BY COMP_ANO_ID DESC';
+            ORDER BY COMP_ANO_ID ASC';
     
             $consulta = $this->db->query($select, array($empId));
 
@@ -115,7 +115,7 @@ class IndicesModel extends CI_Model {
             $select = 'SELECT COMPANT_ID, round(COMPANT_PMC,2) AS PMC, round(COMPANT_PME,2) AS PME, round(COMPANT_PMP,2) AS PMP, round(COMPANT_CO,2) AS CO,
             round(COMPANT_CF,2) AS CF, round(COMPANT_GA,2) AS GA, round(COMPANT_RSA,2) AS RSA, round(COMPANT_RSPL,2) AS RSPL, COMPANT_ANO_ID FROM comparativos_ano_anterior
             WHERE COMPANT_EMP_ID = ?
-            ORDER BY COMPANT_ANO_ID DESC';
+            ORDER BY COMPANT_ANO_ID ASC';
     
             $consulta = $this->db->query($select, array($empId));
 

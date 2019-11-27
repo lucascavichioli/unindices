@@ -34,7 +34,7 @@
                                                 }
                                             print "</tr>";
                                         }
-                                    //break;
+                                    break;
                                 }                          
                             ?>
                             </tbody>
