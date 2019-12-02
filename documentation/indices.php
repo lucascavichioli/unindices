@@ -56,10 +56,29 @@
       </nav>
 
       <div class="container-fluid">
-        <h1 class="mt-4">Alterar Senha</h1>
-        <p>Para alterar sua senha:</p>
-        <p> Digite no mínimo 6 caracteres. Preencha os dois campos com a mesma senha para validar.</p>
-        <p> Dica: Adicione caracteres especiais e números para ter maior segurança.</p>
+        <h1 class="mt-4">Índices Econômico-Financeiros</h1>
+        <p>Abaixo é listado todas as fórmulas utilizadas para o cálculo de cada índice.</p>
+        <p>LI = Caixa e equivalentes de caixa (disponível) / Passivo Circulante;</p>
+        <p>LC = Ativo Circulante / Passivo Circulante;</p>
+        <p>LS = (Ativo Circulante - Estoque) / Passivo Circulante;</p>
+        <p>LG = (Ativo Circulante + Ativo Realizável a Longo Prazo) / (Passivo Circulante + Passivo Não Circulante);</p>
+        <p>EG = (Passivo Circulante + Passivo Não Circulante) / Passivo Total * 100;</p>
+        <p>GE = (Passivo Circulante + Passivo Não Circulante) / Patrimônio Líquido * 100;</p>
+        <p>CE = Passivo Circulante / (Passivo Circulante + Passivo Não Circulante) * 100;</p>
+        <p>GI = (Investimentos + Imobilizado e Intangível) / Patrimônio Líquido * 100;</p>
+        <p>IRNC = (Investimentos + Imobilizado e Intangível) / (Passivo Não Circulante + Patrimônio Líquido) * 100;</p>
+        <p>MAF = Passivo Total / Patrimônio Líquido;</p>
+        <p>MB = Lucro Bruto / Receita Líquida de Vendas * 100;</p>
+        <p>MO = Resultado Operacional / Receita Líquida de Vendas * 100;</p>
+        <p>ML = Resultado Líquido do Exercício / Receita Líquida de Vendas * 100;</p>
+        <p>PMC = (((Clientes “ano anterior -1”) + (Clientes “ano anterior”)) /2) / (Receita Líquida de Vendas/360);</p>
+        <p>PME = (((Estoque “ano anterior -1”) + (Estoque “ano anterior”)) /2) / (Custo das vendas/360);</p>
+        <p>PMP = (((Fornecedores “ano anterior - 1”) + (Fornecedores “ano anterior”)) / 2) / ((Custo das Vendas + Estoque “ano anterior” – Estoque “ano anterior -1”) / 360);</p>
+        <p>CO = PMC + PME;</p>
+        <p>CF = CO – PMP;</p>
+        <p>GA = Receita Líquida de Vendas / ((Ativo Total “ano anterior -1” + Ativo Total “ano anterior”) / 2);</p>
+        <p>RSA = ML * GA;</p>
+        <p>RSPL = RSA * MAF;</p>
       </div>
     </div>
     <!-- /#page-content-wrapper -->

@@ -29,6 +29,7 @@
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="<?=base_url('painel/alterarsenha/').base64_encode($this->session->userdata('cont_id'));?>">Alterar senha</a>
                   <a class="dropdown-item" href="<?=base_url('painel/dadoscadastrais');?>">Dados cadastrais</a>
+                  <a class="dropdown-item" target="_blank" href="<?=base_url('documentation');?>">Documentação</a>
                 </div>
               </li>
             </ul>

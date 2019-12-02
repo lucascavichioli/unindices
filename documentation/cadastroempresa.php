@@ -31,6 +31,7 @@
         <a href="atualizarinformacoes.php" class="list-group-item list-group-item-action bg-light">Atualizar informações</a>
         <a href="alterarsenha.php" class="list-group-item list-group-item-action bg-light">Alterar senha</a>
         <a href="dadoscadastrais.php" class="list-group-item list-group-item-action bg-light">Dados Cadastrais</a>
+        <a href="indices.php" class="list-group-item list-group-item-action bg-light">Índices Econômico-Financeiros</a>
       </div>
     </div>
     <!-- /#sidebar-wrapper -->
