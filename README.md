@@ -1,8 +1,6 @@
-# Meu TCC =)
+# Meu TCC
 
 Sistema de análise de indicadores econômico-financeiros baseado em índices padrão de empresas do mesmo ramo de atividade.
-
-## Agradecimentos
 
 ## Tecnologias utilizadas
 
